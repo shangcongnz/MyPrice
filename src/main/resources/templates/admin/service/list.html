@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:include="include :: header('MainPage')"/>
+    <link rel="stylesheet" th:href="@{/static/admin/css/other/console1.css}"/>
+</head>
+<body class="pear-container">
+<div>
+    <div class="layui-row layui-col-space10">
+        <div class="layui-col-xs6 layui-col-md3">
+            <div class="layui-card top-panel">
+                <div class="layui-card-header">System running time</div>
+                <div class="layui-card-body">
+                    <div class="layui-row layui-col-space5">
+                        <div class="layui-col-xs8 layui-col-md8 top-panel-number" style="color: #28333E;" id="value1" th:text="${service.runTime}">
+                        </div>
+                        <div class="layui-col-xs4 layui-col-md4 top-panel-tips">
+                            <svg id="Layer_1" height="512" viewBox="0 0 48 48" width="512" xmlns="http://www.w3.org/2000/svg" data-name="Layer 1">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-xs6 layui-col-md3">
+            <div class="layui-card top-panel">
+                <div class="layui-card-header">JAVA Version</div>
+                <div class="layui-card-body">
+                    <div class="layui-row layui-col-space5">
+                        <div class="layui-col-xs8 layui-col-md8 top-panel-number" style="color: #28333E;" th:text="${service.javaInfo.Version}">
+                            0
+                        </div>
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-xs6 layui-col-md3">
+            <div class="layui-card top-panel">
+                <div class="layui-card-header">Server Info</div>
+                <div class="layui-card-body">
+                    <div class="layui-row layui-col-space5">
+                        <div class="layui-col-xs8 layui-col-md8 top-panel-number" style="color: #28333E;" th:text="${service.osInfo.Name}">
+                            0
+                        </div>
+                      
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-xs6 layui-col-md3">
+            <div class="layui-card top-panel">
+                <div class="layui-card-header">statistics</div>
+                <div class="layui-card-body">
+                    <div class="layui-row layui-col-space5">
+                        <div class="layui-col-xs8 layui-col-md8 top-panel-number" style="color: #28333E;" id="value4">
+                            0
+                        </div>
+                         
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+    <div class="layui-row layui-col-space10">
+        <div class="layui-col-xs6 layui-col-md3">
+            <div class="layui-card top-panel">
+                <div class="layui-card-header">maxMemory</div>
+                <div class="layui-card-body">
+                    <div class="layui-row layui-col-space5">
+                        <div class="layui-col-xs8 layui-col-md8 top-panel-number" style="color: #28333E;" id="value1" th:text="${service.maxMemory}">
+                        </div>
+                        <div class="layui-col-xs4 layui-col-md4 top-panel-tips">
+                        
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-xs6 layui-col-md3">
+            <div class="layui-card top-panel">
+                <div class="layui-card-header">totalMemory</div>
+                <div class="layui-card-body">
+                    <div class="layui-row layui-col-space5">
+                        <div class="layui-col-xs8 layui-col-md8 top-panel-number" style="color: #28333E;" th:text="${service.totalMemory}">
+                            0
+                        </div>
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-xs6 layui-col-md3">
+            <div class="layui-card top-panel">
+                <div class="layui-card-header">freeMemory</div>
+                <div class="layui-card-body">
+                    <div class="layui-row layui-col-space5">
+                        <div class="layui-col-xs8 layui-col-md8 top-panel-number" style="color: #28333E;" th:text="${service.freeMemory}">
+                            0
+                        </div>
+                      
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-xs6 layui-col-md3">
+            <div class="layui-card top-panel">
+                <div class="layui-card-header">usableMemory</div>
+                <div class="layui-card-body">
+                    <div class="layui-row layui-col-space5">
+                        <div class="layui-col-xs8 layui-col-md8 top-panel-number" style="color: #28333E;" id="value4" th:text="${service.usableMemory}">
+                            0
+                        </div>
+                         
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row layui-col-space10">
+        <div class="layui-col-md9">
+            <div class="layui-card">
+                <div class="layui-card-body">
+                    <div class="layui-tab custom-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+                        <div id="echarts-records" style="background-color:#ffffff;min-height:400px;padding: 10px"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-card">
+                <div class="layui-card-header">Logs</div>
+                <div class="layui-card-body">
+                    <dl class="layuiadmin-card-status">
+                        <dd th:each="list : ${sysOperLog} ">
+                            <div class="layui-status-img">
+                                <a href="javascript:;">
+                                    <img style="width: 32px;height: 32px;border-radius: 50px;" th:src="@{/static/admin/images/avatar.jpg}">
+                                </a>
+                            </div>
+                            <div>
+                                <p>[[${list.operName}]] operated 【 [[${list.title}]] 】
+                                   data: <pre class="layui-code" lay-skin="notepad">[[${list.operParam}]]</pre>
+                                </p>
+                                <span>[[${list.getOperTime()}]]</span>
+                            </div>
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-md3">
+            <div class="layui-card">
+                <div class="layui-card-header">Noticeboard</div>
+                <div class="layui-card-body">
+                    <ul class="list">
+                        <li class="list-item" th:each="list : ${sysNotices} " ><span class="title" th:text="${list.title}">优化代码格式</span><span class="footer" th:text="${list.getdate()}">XXXXXXXX</span></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="layui-card">
+                <div class="layui-card-header">
+                    links
+                </div>
+                <div class="layui-card-body">
+                    <a target="_blank" href="/doc.html" class="pear-btn pear-btn-success layui-btn-fluid"
+                       style="height: 50px;line-height: 50px;">API document</a>
+                    <br/>
+                    <a target="_blank" href="https://www.layui.com/doc/"
+                       class="pear-btn pear-btn-primary  layui-btn-fluid"
+                       style="margin-top: 8px;height: 50px;line-height: 50px;">LayUI doc</a>
+                    <br/>
+                    <a target="_blank" href="https://www.airbnb.co.nz/"
+                       class="pear-btn pear-btn-warming  layui-btn-fluid"
+                       style="margin-top: 8px;height: 50px;line-height: 50px;">Airbnb3</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<th:block th:include="include :: footer"/>
+<script>
+    layui.use(['layer', 'echarts', 'element', 'count', 'topBar','code'], function () {
+        layui.code();
+        let count = layui.count,
+            echarts = layui.echarts;
+        count.up("value4", {
+            time: 4000,
+            bit: 2,
+            num: 373.23,
+            regulator: 50
+        })
+
+        var echartsRecords = echarts.init(document.getElementById('echarts-records'), 'walden');
+
+        var option = {
+            tooltip: {
+                trigger: 'axis'
+            },
+            xAxis: [{
+                type: 'category',
+                data: ['2021-05', '2021-06', '2021-07', '2021-08', '2021-09', '2021-10'],
+                axisLine: {
+                    lineStyle: {
+                        color: "#999"
+                    }
+                }
+            }],
+            yAxis: [{
+                type: 'value',
+                splitNumber: 4,
+                splitLine: {
+                    lineStyle: {
+                        type: 'dashed',
+                        color: '#DDD'
+                    }
+                },
+                axisLine: {
+                    show: false,
+                    lineStyle: {
+                        color: "#333"
+                    },
+                },
+                nameTextStyle: {
+                    color: "#999"
+                },
+                splitArea: {
+                    show: false
+                }
+            }],
+            series: [{
+                name: 'xxyy',
+                type: 'line',
+                data: [23, 60, 20, 36, 23, 85],
+                lineStyle: {
+                    normal: {
+                        width: 8,
+                        color: {
+                            type: 'linear',
+
+                            colorStops: [{
+                                offset: 0,
+                                color: '#A9F387' // 0% 处的颜色
+                            }, {
+                                offset: 1,
+                                color: '#48D8BF' // 100% 处的颜色
+                            }],
+                            globalCoord: false // 缺省为 false
+                        },
+                        shadowColor: 'rgba(72,216,191, 0.3)',
+                        shadowBlur: 10,
+                        shadowOffsetY: 20
+                    }
+                },
+                itemStyle: {
+                    normal: {
+                        color: '#fff',
+                        borderWidth: 10,
+                        borderColor: "#A9F387"
+                    }
+                },
+                smooth: true
+            }]
+        };
+        echartsRecords.setOption(option);
+
+        window.onresize = function () {
+            echartsRecords.resize();
+        }
+
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,146 @@
+package ${parentPack}.controller.gen;
+
+import com.fc.v2.common.base.BaseController;
+import com.fc.v2.common.domain.AjaxResult;
+import com.fc.v2.common.domain.ResultTable;
+import com.fc.v2.model.custom.Tablepar;
+import ${parentPack}.model.auto.${tableInfo.javaTableName};
+import ${parentPack}.service.${tableInfo.javaTableName}Service;
+import com.github.pagehelper.PageInfo;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.*;
+
+/**
+ * ${tableInfo.tableComment}Controller
+ * @ClassName: ${tableInfo.javaTableName}Controller
+ * @author ${author}
+ * @date ${datetime}
+ */
+@Api(value = "${tableInfo.tableComment}")
+@Controller
+@RequestMapping("/${tableInfo.javaTableName}Controller")
+public class ${tableInfo.javaTableName}Controller extends BaseController{
+	
+	private String prefix = "gen/${tableInfo.javaTableName_a}";
+	
+	@Autowired
+	private ${tableInfo.javaTableName}Service ${tableInfo.javaTableName_a}Service;
+	
+	
+	/**
+	 * ${tableInfo.tableComment} display
+	 * @param model
+	 * @return String
+	 * @author ${author}
+	 */
+	@ApiOperation(value = "Page Jump", notes = "Page Jump")
+	@GetMapping("/view")
+	@RequiresPermissions("gen:${tableInfo.javaTableName_a}:view")
+    public String view(ModelMap model)
+    {
+        return prefix + "/list";
+    }
+	
+	/**
+	 * list
+	 * @param tablepar
+	 * @param searchText
+	 * @return
+	 */
+	@Log(title = "${tableInfo.tableComment}", action = "List")
+	@ApiOperation(value = "Page Jump", notes = "Page Jump")
+	@GetMapping("/list")
+	@RequiresPermissions("gen:${tableInfo.javaTableName_a}:list")
+	@ResponseBody
+	public ResultTable list(Tablepar tablepar,${tableInfo.javaTableName} ${tableInfo.javaTableName_a}){
+		PageInfo<${tableInfo.javaTableName}> page=${tableInfo.javaTableName_a}Service.list(tablepar,${tableInfo.javaTableName_a}) ; 
+		return pageTable(page.getList(),page.getTotal());
+	}
+	
+	/**
+     * 新增跳转
+     */
+	@ApiOperation(value = "Jump to add page", notes = "Jump to add page")
+    @GetMapping("/add")
+    public String add(ModelMap modelMap)
+    {
+        return prefix + "/add";
+    }
+	
+    /**
+     * 新增保存
+     * @param 
+     * @return
+     */
+	@Log(title = "${tableInfo.tableComment} Add", action = "Add")
+	@ApiOperation(value = "Add", notes = "Add")
+	@PostMapping("/add")
+	@RequiresPermissions("gen:${tableInfo.javaTableName_a}:add")
+	@ResponseBody
+	public AjaxResult add(${tableInfo.javaTableName} ${tableInfo.javaTableName_a}){
+		int b=${tableInfo.javaTableName_a}Service.insertSelective(${tableInfo.javaTableName_a});
+		if(b>0){
+			return success();
+		}else{
+			return error();
+		}
+	}
+	
+	/**
+	 * ${tableInfo.tableComment}Delete
+	 * @param ids
+	 * @return
+	 */
+	@Log(title = "${tableInfo.tableComment}Delete", action = "Delete")
+	@ApiOperation(value = "Delete", notes = "Delete")
+	@DeleteMapping("/remove")
+	@RequiresPermissions("gen:${tableInfo.javaTableName_a}:remove")
+	@ResponseBody
+	public AjaxResult remove(String ids){
+		int b=${tableInfo.javaTableName_a}Service.deleteByPrimaryKey(ids);
+		if(b>0){
+			return success();
+		}else{
+			return error();
+		}
+	}
+	
+	
+	/**
+	 * Jump to Edit page
+	 * @param id
+	 * @param mmap
+	 * @return
+	 */
+	@ApiOperation(value = "Jump to Edit page", notes = "Jump to Edit page")
+	@GetMapping("/edit/{id}")
+    public String edit(@PathVariable("id") String id, ModelMap map)
+    {
+        map.put("${tableInfo.javaTableName}", ${tableInfo.javaTableName_a}Service.selectByPrimaryKey(id));
+
+        return prefix + "/edit";
+    }
+	
+	/**
+     * Edit
+     */
+    @Log(title = "${tableInfo.tableComment} Edit", action = "Edit")
+	@ApiOperation(value = "Edit", notes = "Edit")
+    @RequiresPermissions("gen:${tableInfo.javaTableName_a}:edit")
+    @PostMapping("/edit")
+    @ResponseBody
+    public AjaxResult editSave(${tableInfo.javaTableName} ${tableInfo.javaTableName_a})
+    {
+        return toAjax(${tableInfo.javaTableName_a}Service.updateByPrimaryKeySelective(${tableInfo.javaTableName_a}));
+    }
+
+    
+    
+
+	
+}
