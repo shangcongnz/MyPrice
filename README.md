@@ -2,7 +2,19 @@
 
 - ### **INTRODUCTION**
 
+  This is a personal project. The purpose of this project is to collect price information from various online shopping websites in New Zealand. Also, monitor price information; analyse the price trend of commodities; provide shopping advice. 
 
+  **Discussions on technology, product design, business opportunity,  are big welcome.**
+
+  The project is in progress. It is being upgraded every day. The documents are on the way.
+
+  My Email: shangcong.nz@gmail.com
+
+  
+
+  
+
+  
 
 ### Development Environment.
 - JDK: 11

@@ -1,18 +1,24 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.pollix.at/thymeleaf/shiro">
 <head>
-    <th:block th:include="include :: header('${tableInfo.tableComment}列表')"/>
+    <th:block th:include="include :: header('ShopCategory列表')"/>
 </head>
 <body class="pear-container">
 <div class="layui-card">
     <div class="layui-card-body">
         <form class="layui-form" action="">
             <div class="layui-form-item">
+            /**
+            *Need to develop：
+            *1.按照商店查询
+            *2.树状展示。
+            *3.添加一键更新的按钮。
+            */
                 <label class="layui-form-label">keyword</label>
                 <div class="layui-input-inline">
                     <input type="text" name="searchText" placeholder="" class="layui-input">
                 </div>
-                <button class="pear-btn pear-btn-md pear-btn-primary" lay-submit lay-filter="${tableInfo.javaTableName_a}-query">
+                <button class="pear-btn pear-btn-md pear-btn-primary" lay-submit lay-filter="categoryOfShops-query">
                     <i class="layui-icon layui-icon-search"></i>
                    	 Search
                 </button>
@@ -26,33 +32,38 @@
 </div>
 <div class="layui-card">
     <div class="layui-card-body">
-        <table id="${tableInfo.javaTableName_a}-table" lay-filter="${tableInfo.javaTableName_a}-table"></table>
+        <table id="categoryOfShops-table" lay-filter="categoryOfShops-table"></table>
     </div>
 </div>
 </body>
 
-<script type="text/html" id="${tableInfo.javaTableName_a}-toolbar">
-    <button shiro:hasPermission="gen:${tableInfo.javaTableName_a}:add" class="pear-btn pear-btn-primary pear-btn-md" lay-event="add">
+<script type="text/html" id="categoryOfShops-toolbar">
+    <button shiro:hasPermission="gen:categoryOfShops:add" class="pear-btn pear-btn-primary pear-btn-md" lay-event="add">
         <i class="layui-icon layui-icon-add-1"></i>
 		 New
     </button>
-    <button shiro:hasPermission="gen:${tableInfo.javaTableName_a}:remove" class="pear-btn pear-btn-danger pear-btn-md" lay-event="batchRemove">
+    <button shiro:hasPermission="gen:categoryOfShops:remove" class="pear-btn pear-btn-danger pear-btn-md" lay-event="batchRemove">
         <i class="layui-icon layui-icon-delete"></i>
 		Delete
     </button>
-</script>
-
-<script type="text/html" id="${tableInfo.javaTableName_a}-bar">
-    <button shiro:hasPermission="gen:${tableInfo.javaTableName_a}:edit" class="pear-btn pear-btn-primary pear-btn-sm" lay-event="edit" title="Edit"><i class="layui-icon layui-icon-edit"></i>
-    </button>
-
-    <button shiro:hasPermission="gen:${tableInfo.javaTableName_a}:remove" class="pear-btn pear-btn-danger pear-btn-sm" lay-event="remove" title="Delete"><i class="layui-icon layui-icon-delete"></i>
+	
+	<button   class="pear-btn pear-btn-danger pear-btn-md" lay-event="update">
+         <i class="layui-icon layui-icon-add-1"></i>
+		 Update PaknSave Category Automatically
     </button>
 </script>
 
+<script type="text/html" id="categoryOfShops-bar">
+    <button shiro:hasPermission="gen:categoryOfShops:edit" class="pear-btn pear-btn-primary pear-btn-sm" lay-event="edit" title="Edit"><i class="layui-icon layui-icon-edit"></i>
+    </button>
 
-<script type="text/html" id="${tableInfo.javaTableName_a}-type">
-    {{\#if (d.dataState == '0') { }}
+    <button shiro:hasPermission="gen:categoryOfShops:remove" class="pear-btn pear-btn-danger pear-btn-sm" lay-event="remove" title="Delete"><i class="layui-icon layui-icon-delete"></i>
+    </button>
+</script>
+
+
+<script type="text/html" id="categoryOfShops-type">
+    {{#if (d.dataState == '0') { }}
     <span class="layui-badge layui-bg-orange">开启</span>
     {{# }else if(d.dataState == '-1'){ }}
     <span class="layui-badge layui-bg-blue">关闭</span>
@@ -66,29 +77,47 @@
         let form = layui.form;
         let $ = layui.jquery;
 
-        let MODULE_PATH = rootPath+"/${tableInfo.javaTableName}Controller/";
+        let MODULE_PATH = rootPath+"/CategoryOfShopsController/";
         let cols = [
             [
                 {type: 'checkbox'},
                 
-                #foreach ($column in $beanColumns)
-					{title: '${column.column_comment}', field: '${column.beanName}', align: 'center'},
+                					{title: 'ID', field: 'id', align: 'center'},
 					
-				#end
-                
-                {title: 'Operation', toolbar: '#${tableInfo.javaTableName_a}-bar', align: 'center'}
+									{title: 'Parent ID', field: 'parentId', align: 'center'},
+					
+									{title: 'Name', field: 'name', align: 'center'},
+					
+									{title: 'URL', field: 'url', align: 'center'},
+					
+									{title: 'ItemName', field: 'itemName', align: 'center'},
+					
+									{title: 'IsInMobileHeader', field: 'isInMobileHeader', align: 'center'},
+					
+									{title: 'ItemId', field: 'itemId', align: 'center'},
+					
+									{title: 'Status', field: 'status', align: 'center'},
+					
+									{title: 'Last Update Date', field: 'updateDate', align: 'center'},
+					
+									{title: 'ShopId', field: 'shopId', align: 'center'},
+					
+									{title: 'branch_id', field: 'branchId', align: 'center'},
+					
+							                
+                {title: 'Operation', toolbar: '#categoryOfShops-bar', align: 'center'}
             ]
         ]
 
         //table表单列表
         table.render({
-            elem: '#${tableInfo.javaTableName_a}-table',
+            elem: '#categoryOfShops-table',
             url: MODULE_PATH + 'list',
             page: true,
             method: 'get',
             cols: cols,
             skin: 'line',
-            toolbar: '#${tableInfo.javaTableName_a}-toolbar',
+            toolbar: '#categoryOfShops-toolbar',
             defaultToolbar: [{
                 layEvent: 'refresh',
                 icon: 'layui-icon-refresh',
@@ -96,7 +125,7 @@
         });
 
         //table图标事件绑定
-        table.on('tool(${tableInfo.javaTableName_a}-table)', function (obj) {
+        table.on('tool(categoryOfShops-table)', function (obj) {
             if (obj.event === 'remove') {
                 window.remove(obj);
             } else if (obj.event === 'edit') {
@@ -105,19 +134,22 @@
         });
 
         //table工具栏绑定
-        table.on('toolbar(${tableInfo.javaTableName_a}-table)', function (obj) {
+        table.on('toolbar(categoryOfShops-table)', function (obj) {
             if (obj.event === 'add') {
                 window.add();
             } else if (obj.event === 'refresh') {
                 window.refresh();
             } else if (obj.event === 'batchRemove') {
                 window.batchRemove(obj);
+            }else if (obj.event === 'update') {
+                window.update();
             }
+            
         });
 
         //查询按钮绑定
-        form.on('submit(${tableInfo.javaTableName_a}-query)', function (data) {
-            table.reload('${tableInfo.javaTableName_a}-table', {where: data.field})
+        form.on('submit(categoryOfShops-query)', function (data) {
+            table.reload('categoryOfShops-table', {where: data.field})
             return false;
         });
 
@@ -164,6 +196,29 @@
                 })
             });
         }
+        
+        //update
+        window.update = function (obj) {
+            layer.confirm('confirm to update', {icon: 3, title: 'delete'}, function (index) {
+                layer.close(index);
+                let loading = layer.load();
+                $.ajax({
+                    url: MODULE_PATH + "updateCategory?shopId=2",
+                    dataType: 'json',
+                    type: 'get',
+                    success: function (result) {
+                        layer.close(loading);
+                        if (result.code==200) {
+                            layer.msg(result.msg, {icon: 1, time: 1000}, function () {
+                                obj.del();
+                            });
+                        } else {
+                            layer.msg(result.msg, {icon: 2, time: 1000});
+                        }
+                    }
+                })
+            });
+        }
 
         //批量删除
         window.batchRemove = function (obj) {
@@ -188,7 +243,7 @@
                         layer.close(loading);
                         if (result.code==200) {
                             layer.msg(result.msg, {icon: 1, time: 1000}, function () {
-                                table.reload('${tableInfo.javaTableName_a}-table');
+                                table.reload('categoryOfShops-table');
                             });
                         } else {
                             layer.msg(result.msg, {icon: 2, time: 1000});
@@ -199,7 +254,7 @@
         }
         //刷新按钮
         window.refresh = function () {
-            table.reload('${tableInfo.javaTableName_a}-table');
+            table.reload('categoryOfShops-table');
         }
     })
 </script>

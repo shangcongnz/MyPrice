@@ -98,7 +98,7 @@ public class CategoryService implements BaseService<Category, CategoryExample>{
 	@Override
 	public int insertSelective(Category record) {
 				
-		record.setId(null);
+		
 		
 				
 		return categoryMapper.insertSelective(record);
