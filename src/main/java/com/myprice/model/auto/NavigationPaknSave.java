@@ -3,70 +3,65 @@ package com.myprice.model.auto;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
- 
 public class NavigationPaknSave {
-	String URL;
-	String Name;
-	String ItemName;
-	@JsonProperty("Children")
-	List<NavigationPaknSave> children = new ArrayList<NavigationPaknSave>();
 
-	public void setIsInMobileHeader(boolean isInMobileHeader) {
-		IsInMobileHeader = isInMobileHeader;
+	private String URL;
+	private String Name;
+	private String ItemName;
+	private String ItemId;
+	private Boolean IsInMobileHeader;
+	private Integer parenetID;
+	
+	public Integer getParenetID() {
+		return parenetID;
 	}
-
-	String ItemId;
-
-	boolean IsInMobileHeader;
-
+	public void setParenetID(Integer parenetID) {
+		this.parenetID = parenetID;
+	}
+	private  List<NavigationPaknSave> Children =new ArrayList<NavigationPaknSave>();
 	public String getURL() {
 		return URL;
 	}
-
 	public void setURL(String uRL) {
 		URL = uRL;
 	}
-
 	public String getName() {
 		return Name;
 	}
-
 	public void setName(String name) {
 		Name = name;
 	}
-
+	 
 	public String getItemName() {
 		return ItemName;
 	}
-
-	public void setItemName(String ItemName) {
-		this.ItemName = ItemName;
+	public void setItemName(String itemName) {
+		ItemName = itemName;
 	}
-
-	public List<NavigationPaknSave> getChildren() {
-		return children;
-	}
-
-	public void setChildren(List<NavigationPaknSave> children) {
-		this.children = children;
-	}
-
 	public String getItemId() {
 		return ItemId;
 	}
-
 	public void setItemId(String itemId) {
 		ItemId = itemId;
 	}
-
-	public boolean getIsInMobileHeader() {
+	public Boolean getIsInMobileHeader() {
 		return IsInMobileHeader;
 	}
-
-	public void addChild(NavigationPaknSave navigation) {
-		children.add(navigation);
-
+	public void setIsInMobileHeader(Boolean isInMobileHeader) {
+		IsInMobileHeader = isInMobileHeader;
 	}
-
- }
+	public List<NavigationPaknSave> getChildren() {
+		return Children;
+	}
+	public void setChildren(List<NavigationPaknSave> children) {
+		Children = children;
+	}
+	@Override
+	public String toString() {
+		return "NavigationPaknSave [URL=" + URL + ", Name=" + Name + ", itemName=" + ItemName + ", ItemId=" + ItemId
+				+ ", IsInMobileHeader=" + IsInMobileHeader + ", Children=" + Children + "]";
+	}
+	
+	
+	
+}
