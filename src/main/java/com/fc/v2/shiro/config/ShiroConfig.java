@@ -147,7 +147,7 @@ public class ShiroConfig {
 	 * @return
 	 */
 	@Bean
-	public CacheManager cacheManager() {
+	public CacheManager cacheManager2() {
 		MemoryConstrainedCacheManager cacheManager = new MemoryConstrainedCacheManager();// 使用内存缓存
 		return cacheManager;
 	}

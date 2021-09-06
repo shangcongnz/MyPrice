@@ -118,7 +118,7 @@
     </if>
   </delete>
   
-  <insert id="insert" parameterType="com.myprice.model.auto.Commodity" useGeneratedKeys="true" keyProperty="id">
+  <insert id="insert" parameterType="com.myprice.model.auto.Commodity">
     insert into u_commodity (
       	  	       id,
        	  	       creator,
@@ -145,7 +145,7 @@
        	    )
   </insert>
   
-  <insert id="insertSelective" parameterType="com.myprice.model.auto.Commodity" useGeneratedKeys="true" keyProperty="id">
+  <insert id="insertSelective" parameterType="com.myprice.model.auto.Commodity">
     insert into u_commodity
     <trim prefix="(" suffix=")" suffixOverrides=",">
           

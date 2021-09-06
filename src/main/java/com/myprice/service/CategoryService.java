@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.fc.v2.common.base.BaseService;
@@ -34,7 +35,9 @@ public class CategoryService implements BaseService<Category, CategoryExample>{
 	 * @param pageSize
 	 * @return
 	 */
+	@Cacheable(value="categoryList" )//value为存入redis的key
 	 public PageInfo<Category> list(Tablepar tablepar,Category category){
+		System.out.println("查询分类信息。。。。。。");
 	        CategoryExample testExample=new CategoryExample();
  
 			//搜索
@@ -54,7 +57,6 @@ public class CategoryService implements BaseService<Category, CategoryExample>{
 	        PageInfo<Category> pageInfo = new PageInfo<Category>(list);
 	        return  pageInfo;
 	 }
-	 
 	 public List <Category> list(Category category){
 	        CategoryExample testExample=new CategoryExample();
 	        testExample.createCriteria().andLikeQuery(category);

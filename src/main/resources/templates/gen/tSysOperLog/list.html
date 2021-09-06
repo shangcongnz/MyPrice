@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.pollix.at/thymeleaf/shiro">
 <head>
-    <th:block th:include="include :: header('Commodity列表')"/>
+    <th:block th:include="include :: header('日志记录表列表')"/>
 </head>
 <body class="pear-container">
 <div class="layui-card">
@@ -12,7 +12,7 @@
                 <div class="layui-input-inline">
                     <input type="text" name="searchText" placeholder="" class="layui-input">
                 </div>
-                <button class="pear-btn pear-btn-md pear-btn-primary" lay-submit lay-filter="commodity-query">
+                <button class="pear-btn pear-btn-md pear-btn-primary" lay-submit lay-filter="tSysOperLog-query">
                     <i class="layui-icon layui-icon-search"></i>
                    	 Search
                 </button>
@@ -26,32 +26,32 @@
 </div>
 <div class="layui-card">
     <div class="layui-card-body">
-        <table id="commodity-table" lay-filter="commodity-table"></table>
+        <table id="tSysOperLog-table" lay-filter="tSysOperLog-table"></table>
     </div>
 </div>
 </body>
 
-<script type="text/html" id="commodity-toolbar">
-    <button shiro:hasPermission="gen:commodity:add" class="pear-btn pear-btn-primary pear-btn-md" lay-event="add">
+<script type="text/html" id="tSysOperLog-toolbar">
+    <button shiro:hasPermission="gen:tSysOperLog:add" class="pear-btn pear-btn-primary pear-btn-md" lay-event="add">
         <i class="layui-icon layui-icon-add-1"></i>
 		 New
     </button>
-    <button shiro:hasPermission="gen:commodity:remove" class="pear-btn pear-btn-danger pear-btn-md" lay-event="batchRemove">
+    <button shiro:hasPermission="gen:tSysOperLog:remove" class="pear-btn pear-btn-danger pear-btn-md" lay-event="batchRemove">
         <i class="layui-icon layui-icon-delete"></i>
 		Delete
     </button>
 </script>
 
-<script type="text/html" id="commodity-bar">
-    <button shiro:hasPermission="gen:commodity:edit" class="pear-btn pear-btn-primary pear-btn-sm" lay-event="edit" title="Edit"><i class="layui-icon layui-icon-edit"></i>
+<script type="text/html" id="tSysOperLog-bar">
+    <button shiro:hasPermission="gen:tSysOperLog:edit" class="pear-btn pear-btn-primary pear-btn-sm" lay-event="edit" title="Edit"><i class="layui-icon layui-icon-edit"></i>
     </button>
 
-    <button shiro:hasPermission="gen:commodity:remove" class="pear-btn pear-btn-danger pear-btn-sm" lay-event="remove" title="Delete"><i class="layui-icon layui-icon-delete"></i>
+    <button shiro:hasPermission="gen:tSysOperLog:remove" class="pear-btn pear-btn-danger pear-btn-sm" lay-event="remove" title="Delete"><i class="layui-icon layui-icon-delete"></i>
     </button>
 </script>
 
 
-<script type="text/html" id="commodity-type">
+<script type="text/html" id="tSysOperLog-type">
     {{#if (d.dataState == '0') { }}
     <span class="layui-badge layui-bg-orange">开启</span>
     {{# }else if(d.dataState == '-1'){ }}
@@ -66,45 +66,49 @@
         let form = layui.form;
         let $ = layui.jquery;
 
-        let MODULE_PATH = rootPath+"/CommodityController/";
+        let MODULE_PATH = rootPath+"/TSysOperLogController/";
         let cols = [
             [
                 {type: 'checkbox'},
                 
-                					{title: 'ID', field: 'id', align: 'center'},
+                					{title: '', field: 'id', align: 'center'},
 					
-									{title: 'creator', field: 'creator', align: 'center'},
+									{title: 'Title', field: 'title', align: 'center'},
 					
-									{title: 'create date', field: 'createDate', align: 'center'},
+									{title: 'Method', field: 'method', align: 'center'},
 					
-									{title: 'status', field: 'status', align: 'center'},
+									{title: 'Operator Name', field: 'operName', align: 'center'},
 					
-									{title: 'category', field: 'categoryId', align: 'center'},
+									{title: 'URL', field: 'operUrl', align: 'center'},
 					
-									{title: 'Title ', field: 'title', align: 'center'},
+									{title: 'Parameters', field: 'operParam', align: 'center'},
 					
-									{title: 'Description', field: 'description', align: 'center'},
+									{title: 'Error Message', field: 'errorMsg', align: 'center'},
 					
-									{title: 'price', field: 'price', align: 'center'},
+									{title: 'Operation time', field: 'operTime', align: 'center'},
 					
-									{title: 'image', field: 'image', align: 'center'},
+									{title: 'operator', field: 'operator', align: 'center'},
 					
-									{title: 'unit', field: 'unit', align: 'center'},
+									{title: 'IP', field: 'ip', align: 'center'},
+					
+									{title: 'Action', field: 'action', align: 'center'},
+					
+									{title: 'Channel', field: 'channel', align: 'center'},
 					
 				                
-                {title: 'Operation', toolbar: '#commodity-bar', align: 'center'}
+                {title: 'Operation', toolbar: '#tSysOperLog-bar', align: 'center'}
             ]
         ]
 
         //table表单列表
         table.render({
-            elem: '#commodity-table',
+            elem: '#tSysOperLog-table',
             url: MODULE_PATH + 'list',
             page: true,
             method: 'get',
             cols: cols,
             skin: 'line',
-            toolbar: '#commodity-toolbar',
+            toolbar: '#tSysOperLog-toolbar',
             defaultToolbar: [{
                 layEvent: 'refresh',
                 icon: 'layui-icon-refresh',
@@ -112,7 +116,7 @@
         });
 
         //table图标事件绑定
-        table.on('tool(commodity-table)', function (obj) {
+        table.on('tool(tSysOperLog-table)', function (obj) {
             if (obj.event === 'remove') {
                 window.remove(obj);
             } else if (obj.event === 'edit') {
@@ -121,7 +125,7 @@
         });
 
         //table工具栏绑定
-        table.on('toolbar(commodity-table)', function (obj) {
+        table.on('toolbar(tSysOperLog-table)', function (obj) {
             if (obj.event === 'add') {
                 window.add();
             } else if (obj.event === 'refresh') {
@@ -132,8 +136,8 @@
         });
 
         //查询按钮绑定
-        form.on('submit(commodity-query)', function (data) {
-            table.reload('commodity-table', {where: data.field})
+        form.on('submit(tSysOperLog-query)', function (data) {
+            table.reload('tSysOperLog-table', {where: data.field})
             return false;
         });
 
@@ -204,7 +208,7 @@
                         layer.close(loading);
                         if (result.code==200) {
                             layer.msg(result.msg, {icon: 1, time: 1000}, function () {
-                                table.reload('commodity-table');
+                                table.reload('tSysOperLog-table');
                             });
                         } else {
                             layer.msg(result.msg, {icon: 2, time: 1000});
@@ -215,7 +219,7 @@
         }
         //刷新按钮
         window.refresh = function () {
-            table.reload('commodity-table');
+            table.reload('tSysOperLog-table');
         }
     })
 </script>
