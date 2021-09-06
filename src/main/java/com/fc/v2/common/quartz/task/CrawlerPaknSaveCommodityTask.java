@@ -8,8 +8,10 @@ import org.springframework.stereotype.Component;
 
 import com.myprice.crawler.PaknSaveCrawlerCommodityInformation;
 import com.myprice.model.auto.Category;
+import com.myprice.model.auto.CategoryOfShops;
 import com.myprice.model.auto.Commodity;
 import com.myprice.model.auto.ShopCommodity;
+import com.myprice.service.CategoryOfShopsService;
 import com.myprice.service.CategoryService;
 import com.myprice.service.CommodityService;
 import com.myprice.service.ShopCommodityService;
@@ -27,8 +29,26 @@ private CommodityService commodityService;
 	private CategoryService categoryService;
 @Autowired
 private ShopCommodityService shopCommodityService;
+@Autowired
+private CategoryOfShopsService  categoryOfShopsService;
 
 PaknSaveCrawlerCommodityInformation crawler =null;
+
+
+public void runCrawlerPaknSaveCommoditiesV2(String  storeID) {
+	 System.out.println("--------------开始抓取商品信息");
+	 
+	 //1.查詢商品分類。
+	 //2.循環處理URL
+	 //3.循環中調用抓取程序。
+	 //4.存儲商品信息。（）
+	 // 4.1 通過商品名與商品分類查詢該商品是否存在，
+	 //	4.2如果
+	  crawler = new PaknSaveCrawlerCommodityInformation();//可以传入店的编号。默认为Lower Hutt
+	 String url= "https://www.paknsave.co.nz/shop/category";
+	 
+	 //getUrlOfCommodityCategory(url,root_categoryID);//
+	}
 
 
 /**
@@ -37,8 +57,7 @@ PaknSaveCrawlerCommodityInformation crawler =null;
  */
 	public void runCrawlerPaknSaveCommodities(String  storeID) {
 	 System.out.println("--------------开始抓取商品信息");
-	 System.out.println("--------------storeID"+storeID);
-	  
+ 	  
 	  crawler = new PaknSaveCrawlerCommodityInformation();//可以传入店的编号。默认为Lower Hutt
 	 String url= "https://www.paknsave.co.nz/shop/category";
 	 int root_categoryID=62;
