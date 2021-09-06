@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.pollix.at/thymeleaf/shiro">
 <head>
-    <th:block th:include="include :: header('Commodity列表')"/>
+    <th:block th:include="include :: header('Category(PaknSave)列表')"/>
 </head>
 <body class="pear-container">
 <div class="layui-card">
     <div class="layui-card-body">
         <form class="layui-form" action="">
             <div class="layui-form-item">
-                <label class="layui-form-label">名称</label>
+                <label class="layui-form-label">keyword</label>
                 <div class="layui-input-inline">
                     <input type="text" name="searchText" placeholder="" class="layui-input">
                 </div>
-                <button class="pear-btn pear-btn-md pear-btn-primary" lay-submit lay-filter="commodity-query">
+                <button class="pear-btn pear-btn-md pear-btn-primary" lay-submit lay-filter="categoryPaknsave-query">
                     <i class="layui-icon layui-icon-search"></i>
                    	 Search
                 </button>
@@ -26,32 +26,32 @@
 </div>
 <div class="layui-card">
     <div class="layui-card-body">
-        <table id="commodity-table" lay-filter="commodity-table"></table>
+        <table id="categoryPaknsave-table" lay-filter="categoryPaknsave-table"></table>
     </div>
 </div>
 </body>
 
-<script type="text/html" id="commodity-toolbar">
-    <button shiro:hasPermission="gen:commodity:add" class="pear-btn pear-btn-primary pear-btn-md" lay-event="add">
+<script type="text/html" id="categoryPaknsave-toolbar">
+    <button shiro:hasPermission="gen:categoryPaknsave:add" class="pear-btn pear-btn-primary pear-btn-md" lay-event="add">
         <i class="layui-icon layui-icon-add-1"></i>
 		 New
     </button>
-    <button shiro:hasPermission="gen:commodity:remove" class="pear-btn pear-btn-danger pear-btn-md" lay-event="batchRemove">
+    <button shiro:hasPermission="gen:categoryPaknsave:remove" class="pear-btn pear-btn-danger pear-btn-md" lay-event="batchRemove">
         <i class="layui-icon layui-icon-delete"></i>
 		Delete
     </button>
 </script>
 
-<script type="text/html" id="commodity-bar">
-    <button shiro:hasPermission="gen:commodity:edit" class="pear-btn pear-btn-primary pear-btn-sm" lay-event="edit" title="Edit"><i class="layui-icon layui-icon-edit"></i>
+<script type="text/html" id="categoryPaknsave-bar">
+    <button shiro:hasPermission="gen:categoryPaknsave:edit" class="pear-btn pear-btn-primary pear-btn-sm" lay-event="edit" title="Edit"><i class="layui-icon layui-icon-edit"></i>
     </button>
 
-    <button shiro:hasPermission="gen:commodity:remove" class="pear-btn pear-btn-danger pear-btn-sm" lay-event="remove" title="Delete"><i class="layui-icon layui-icon-delete"></i>
+    <button shiro:hasPermission="gen:categoryPaknsave:remove" class="pear-btn pear-btn-danger pear-btn-sm" lay-event="remove" title="Delete"><i class="layui-icon layui-icon-delete"></i>
     </button>
 </script>
 
 
-<script type="text/html" id="commodity-type">
+<script type="text/html" id="categoryPaknsave-type">
     {{#if (d.dataState == '0') { }}
     <span class="layui-badge layui-bg-orange">开启</span>
     {{# }else if(d.dataState == '-1'){ }}
@@ -66,45 +66,39 @@
         let form = layui.form;
         let $ = layui.jquery;
 
-        let MODULE_PATH = rootPath+"/CommodityController/";
+        let MODULE_PATH = rootPath+"/CategoryPaknsaveController/";
         let cols = [
             [
                 {type: 'checkbox'},
                 
                 					{title: 'ID', field: 'id', align: 'center'},
 					
-									{title: 'creator', field: 'creator', align: 'center'},
+									{title: 'Parent ID', field: 'parentId', align: 'center'},
 					
-									{title: 'create date', field: 'createDate', align: 'center'},
+									{title: 'Name', field: 'name', align: 'center'},
 					
-									{title: 'status', field: 'status', align: 'center'},
+									{title: 'URL', field: 'url', align: 'center'},
 					
-									{title: 'category', field: 'categoryId', align: 'center'},
+									{title: 'ItemName', field: 'itemName', align: 'center'},
 					
-									{title: 'Title ', field: 'title', align: 'center'},
+									{title: 'IsInMobileHeader', field: 'isInMobileHeader', align: 'center'},
 					
-									{title: 'Description', field: 'description', align: 'center'},
-					
-									{title: 'price', field: 'price', align: 'center'},
-					
-									{title: 'image', field: 'image', align: 'center'},
-					
-									{title: 'unit', field: 'unit', align: 'center'},
+									{title: 'ItemId', field: 'itemId', align: 'center'},
 					
 				                
-                {title: 'Operation', toolbar: '#commodity-bar', align: 'center'}
+                {title: 'Operation', toolbar: '#categoryPaknsave-bar', align: 'center'}
             ]
         ]
 
         //table表单列表
         table.render({
-            elem: '#commodity-table',
+            elem: '#categoryPaknsave-table',
             url: MODULE_PATH + 'list',
             page: true,
             method: 'get',
             cols: cols,
             skin: 'line',
-            toolbar: '#commodity-toolbar',
+            toolbar: '#categoryPaknsave-toolbar',
             defaultToolbar: [{
                 layEvent: 'refresh',
                 icon: 'layui-icon-refresh',
@@ -112,7 +106,7 @@
         });
 
         //table图标事件绑定
-        table.on('tool(commodity-table)', function (obj) {
+        table.on('tool(categoryPaknsave-table)', function (obj) {
             if (obj.event === 'remove') {
                 window.remove(obj);
             } else if (obj.event === 'edit') {
@@ -121,7 +115,7 @@
         });
 
         //table工具栏绑定
-        table.on('toolbar(commodity-table)', function (obj) {
+        table.on('toolbar(categoryPaknsave-table)', function (obj) {
             if (obj.event === 'add') {
                 window.add();
             } else if (obj.event === 'refresh') {
@@ -132,8 +126,8 @@
         });
 
         //查询按钮绑定
-        form.on('submit(commodity-query)', function (data) {
-            table.reload('commodity-table', {where: data.field})
+        form.on('submit(categoryPaknsave-query)', function (data) {
+            table.reload('categoryPaknsave-table', {where: data.field})
             return false;
         });
 
@@ -204,7 +198,7 @@
                         layer.close(loading);
                         if (result.code==200) {
                             layer.msg(result.msg, {icon: 1, time: 1000}, function () {
-                                table.reload('commodity-table');
+                                table.reload('categoryPaknsave-table');
                             });
                         } else {
                             layer.msg(result.msg, {icon: 2, time: 1000});
@@ -215,7 +209,7 @@
         }
         //刷新按钮
         window.refresh = function () {
-            table.reload('commodity-table');
+            table.reload('categoryPaknsave-table');
         }
     })
 </script>

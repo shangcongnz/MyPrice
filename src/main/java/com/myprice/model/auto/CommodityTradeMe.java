@@ -22,7 +22,7 @@ public class CommodityTradeMe implements Serializable {
 	
 	@ApiModelProperty(value = "Creator")
 	private String creator;
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss" ,timezone="GMT+12")
 	@ApiModelProperty(value = "Create Date")
 	private Date createDate;
 	
@@ -46,7 +46,7 @@ public class CommodityTradeMe implements Serializable {
 	
 	@ApiModelProperty(value = "Starting Price")
 	private BigDecimal startingPrice;
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	@ApiModelProperty(value = "Close Date")
 	private Date closeDatetime;
 	

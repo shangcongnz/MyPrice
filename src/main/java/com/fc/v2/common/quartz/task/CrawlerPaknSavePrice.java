@@ -15,8 +15,6 @@ import com.myprice.model.auto.ShopCommodity;
 import com.myprice.service.MonitorPriceService;
 import com.myprice.service.ShopCommodityService;
 
-import net.bytebuddy.build.Plugin.Engine.PoolStrategy.Eager;
-
 /**
  
  */

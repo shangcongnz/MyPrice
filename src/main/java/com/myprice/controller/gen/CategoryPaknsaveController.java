@@ -17,38 +17,38 @@ import com.fc.v2.common.domain.ResultTable;
 import com.fc.v2.common.log.Log;
 import com.fc.v2.model.custom.Tablepar;
 import com.github.pagehelper.PageInfo;
-import com.myprice.model.auto.Commodity;
-import com.myprice.service.CommodityService;
+import com.myprice.model.auto.CategoryPaknsave;
+import com.myprice.service.CategoryPaknsaveService;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
 /**
- * CommodityController
- * @ClassName: CommodityController
+ * Category(PaknSave)Controller
+ * @ClassName: CategoryPaknsaveController
  * @author Cong
- * @date 2021-09-02 23:19:41
+ * @date 2021-09-06 17:49:35
  */
-@Api(value = "Commodity")
+@Api(value = "Category(PaknSave)")
 @Controller
-@RequestMapping("/CommodityController")
-public class CommodityController extends BaseController{
+@RequestMapping("/CategoryPaknsaveController")
+public class CategoryPaknsaveController extends BaseController{
 	
-	private String prefix = "gen/commodity";
+	private String prefix = "gen/categoryPaknsave";
 	
 	@Autowired
-	private CommodityService commodityService;
+	private CategoryPaknsaveService categoryPaknsaveService;
 	
 	
 	/**
-	 * Commodity display
+	 * Category(PaknSave) display
 	 * @param model
 	 * @return String
 	 * @author Cong
 	 */
 	@ApiOperation(value = "Page Jump", notes = "Page Jump")
 	@GetMapping("/view")
-	@RequiresPermissions("gen:commodity:view")
+	@RequiresPermissions("gen:categoryPaknsave:view")
     public String view(ModelMap model)
     {
         return prefix + "/list";
@@ -60,13 +60,13 @@ public class CommodityController extends BaseController{
 	 * @param searchText
 	 * @return
 	 */
-	@Log(title = "Commodity", action = "List")
+	@Log(title = "Category(PaknSave)", action = "List")
 	@ApiOperation(value = "Page Jump", notes = "Page Jump")
 	@GetMapping("/list")
-	@RequiresPermissions("gen:commodity:list")
+	@RequiresPermissions("gen:categoryPaknsave:list")
 	@ResponseBody
-	public ResultTable list(Tablepar tablepar,Commodity commodity){
-		PageInfo<Commodity> page=commodityService.list(tablepar,commodity) ; 
+	public ResultTable list(Tablepar tablepar,CategoryPaknsave categoryPaknsave){
+		PageInfo<CategoryPaknsave> page=categoryPaknsaveService.list(tablepar,categoryPaknsave) ; 
 		return pageTable(page.getList(),page.getTotal());
 	}
 	
@@ -85,13 +85,13 @@ public class CommodityController extends BaseController{
      * @param 
      * @return
      */
-	@Log(title = "Commodity Add", action = "Add")
+	@Log(title = "Category(PaknSave) Add", action = "Add")
 	@ApiOperation(value = "Add", notes = "Add")
 	@PostMapping("/add")
-	@RequiresPermissions("gen:commodity:add")
+	@RequiresPermissions("gen:categoryPaknsave:add")
 	@ResponseBody
-	public AjaxResult add(Commodity commodity){
-		int b=commodityService.insertSelective(commodity);
+	public AjaxResult add(CategoryPaknsave categoryPaknsave){
+		int b=categoryPaknsaveService.insertSelective(categoryPaknsave);
 		if(b>0){
 			return success();
 		}else{
@@ -100,17 +100,17 @@ public class CommodityController extends BaseController{
 	}
 	
 	/**
-	 * CommodityDelete
+	 * Category(PaknSave)Delete
 	 * @param ids
 	 * @return
 	 */
-	@Log(title = "CommodityDelete", action = "Delete")
+	@Log(title = "Category(PaknSave)Delete", action = "Delete")
 	@ApiOperation(value = "Delete", notes = "Delete")
 	@DeleteMapping("/remove")
-	@RequiresPermissions("gen:commodity:remove")
+	@RequiresPermissions("gen:categoryPaknsave:remove")
 	@ResponseBody
 	public AjaxResult remove(String ids){
-		int b=commodityService.deleteByPrimaryKey(ids);
+		int b=categoryPaknsaveService.deleteByPrimaryKey(ids);
 		if(b>0){
 			return success();
 		}else{
@@ -129,7 +129,7 @@ public class CommodityController extends BaseController{
 	@GetMapping("/edit/{id}")
     public String edit(@PathVariable("id") String id, ModelMap map)
     {
-        map.put("Commodity", commodityService.selectByPrimaryKey(id));
+        map.put("CategoryPaknsave", categoryPaknsaveService.selectByPrimaryKey(id));
 
         return prefix + "/edit";
     }
@@ -137,14 +137,14 @@ public class CommodityController extends BaseController{
 	/**
      * Edit
      */
-    @Log(title = "Commodity Edit", action = "Edit")
+    @Log(title = "Category(PaknSave) Edit", action = "Edit")
 	@ApiOperation(value = "Edit", notes = "Edit")
-    @RequiresPermissions("gen:commodity:edit")
+    @RequiresPermissions("gen:categoryPaknsave:edit")
     @PostMapping("/edit")
     @ResponseBody
-    public AjaxResult editSave(Commodity commodity)
+    public AjaxResult editSave(CategoryPaknsave categoryPaknsave)
     {
-        return toAjax(commodityService.updateByPrimaryKeySelective(commodity));
+        return toAjax(categoryPaknsaveService.updateByPrimaryKeySelective(categoryPaknsave));
     }
 
     
