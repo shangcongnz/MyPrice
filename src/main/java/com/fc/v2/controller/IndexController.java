@@ -37,9 +37,8 @@ public class IndexController extends BaseController{
 	 * @param map
 	 * @return
 	 * 
-	 * @Date 2019年11月20日 下午10:54:56
 	 */
-	@ApiOperation(value="前台",notes="前台")
+	@ApiOperation(value="front-end",notes="front_end")
 	@GetMapping("/index")
 	public String index2(ModelMap map) {
 		//直接访问后台用
