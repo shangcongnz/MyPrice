@@ -8,17 +8,17 @@
     <div class="layui-card-body">
         <form class="layui-form" action="">
             <div class="layui-form-item">
-                <label class="layui-form-label">名称</label>
+                <label class="layui-form-label">keyword</label>
                 <div class="layui-input-inline">
                     <input type="text" name="searchText" placeholder="" class="layui-input">
                 </div>
                 <button class="pear-btn pear-btn-md pear-btn-primary" lay-submit lay-filter="commodity-query">
                     <i class="layui-icon layui-icon-search"></i>
-                   	 Search
+                   	 search
                 </button>
                 <button type="reset" class="pear-btn pear-btn-md">
                     <i class="layui-icon layui-icon-refresh"></i>
-					Reset
+					reset
                 </button>
             </div>
         </form>
@@ -43,11 +43,19 @@
 </script>
 
 <script type="text/html" id="commodity-bar">
+
+    <button shiro:hasPermission="gen:shopCommodity:view" class="pear-btn pear-btn-warming pear-btn-md" lay-event="detail" title="detail"><i class="layui-icon layui-icon-search"></i>
+    </button>
+
     <button shiro:hasPermission="gen:commodity:edit" class="pear-btn pear-btn-primary pear-btn-sm" lay-event="edit" title="Edit"><i class="layui-icon layui-icon-edit"></i>
     </button>
 
     <button shiro:hasPermission="gen:commodity:remove" class="pear-btn pear-btn-danger pear-btn-sm" lay-event="remove" title="Delete"><i class="layui-icon layui-icon-delete"></i>
     </button>
+</script>
+
+<script type="text/html" id="commodity-enable">
+    <input type="checkbox" name="enable" value="{{d.id}}" lay-skin="switch" lay-text="ON|OFF" lay-filter="commodity-enable" {{d.status== 1 ? 'checked' : '' }} >
 </script>
 
 
@@ -71,27 +79,20 @@
             [
                 {type: 'checkbox'},
                 
-                					{title: 'ID', field: 'id', align: 'center'},
+				{title: 'ID', field: 'id', align: 'center'},
+				{title: 'image', field: 'image', align: 'center'},
+				
+				{title: 'Title ', field: 'title', align: 'center'},
+
+				{title: 'creator', field: 'creatorName', align: 'center'},
+
+				{title: 'create date', field: 'createDate', align: 'center'},
+				 
+				{title: 'category', field: 'categoryName', align: 'center'},
+				{title: 'unit', field: 'unit', align: 'center'},
+				 
+				{title: 'status', field: 'status', align: 'center',templet: '#commodity-enable' ,width: 100},
 					
-									{title: 'creator', field: 'creator', align: 'center'},
-					
-									{title: 'create date', field: 'createDate', align: 'center'},
-					
-									{title: 'status', field: 'status', align: 'center'},
-					
-									{title: 'category', field: 'categoryId', align: 'center'},
-					
-									{title: 'Title ', field: 'title', align: 'center'},
-					
-									{title: 'Description', field: 'description', align: 'center'},
-					
-									{title: 'price', field: 'price', align: 'center'},
-					
-									{title: 'image', field: 'image', align: 'center'},
-					
-									{title: 'unit', field: 'unit', align: 'center'},
-					
-				                
                 {title: 'Operation', toolbar: '#commodity-bar', align: 'center'}
             ]
         ]
@@ -117,6 +118,8 @@
                 window.remove(obj);
             } else if (obj.event === 'edit') {
                 window.edit(obj);
+            }else if (obj.event=='detail'){
+            	window.detail(obj);
             }
         });
 
@@ -137,12 +140,19 @@
             return false;
         });
 
+      // add shop information and URL information
+        window.detail = function (obj) {
+        	window.location.href=rootPath+"/ShopCommodityController/view?commodityId=" + obj.data['id']+"&title="+ obj.data['title'];
+        }
+      
 
+        
+        
         //添加
         window.add = function () {
             layer.open({
                 type: 2,
-                title: '新增',
+                title: 'New',
                 shade: 0.1,
                 area: ['500px', '500px'],
                 content: MODULE_PATH + 'add'
@@ -152,15 +162,15 @@
         window.edit = function (obj) {
             layer.open({
                 type: 2,
-                title: 'edit',
+                title: '修改',
                 shade: 0.1,
                 area: ['500px', '500px'],
                 content: MODULE_PATH + 'edit/' + obj.data['id']
             });
         }
-        //删除
+        //Delete
         window.remove = function (obj) {
-            layer.confirm('confirm to delete', {icon: 3, title: 'delete'}, function (index) {
+            layer.confirm('确定要删除该数据', {icon: 3, title: '提示'}, function (index) {
                 layer.close(index);
                 let loading = layer.load();
                 $.ajax({
@@ -193,7 +203,7 @@
                 ids += data[i].id + ",";
             }
             ids = ids.substr(0, ids.length - 1);
-            layer.confirm('confirm to delete'', {icon: 3, title: 'delete'}, function (index) {
+            layer.confirm('确定要删除这些数据', {icon: 3, title: '提示'}, function (index) {
                 layer.close(index);
                 let loading = layer.load();
                 $.ajax({
@@ -213,6 +223,37 @@
                 })
             });
         }
+        
+      //状态切换绑定
+        form.on('switch(commodity-enable)', function (obj) {
+            let operate;
+
+            if (obj.elem.checked) {
+                operate = 1;
+            } else {
+                operate = 0;
+            }
+
+            let loading = layer.load()
+
+            $.ajax({
+                url: MODULE_PATH+'updateVisible',
+                data: JSON.stringify({id: this.value,status:operate}),
+                dataType: 'json',
+                contentType: 'application/json',
+                type: 'put',
+                success: function (result) {
+                    layer.close(loading);
+                    if (result.code==200) {
+                        layer.msg(result.msg, {icon: 1, time: 1000}, function () {
+                        });
+                    } else {
+                        layer.msg(result.msg, {icon: 2, time: 1000});
+                    }
+                }
+            })
+        });
+      
         //刷新按钮
         window.refresh = function () {
             table.reload('commodity-table');

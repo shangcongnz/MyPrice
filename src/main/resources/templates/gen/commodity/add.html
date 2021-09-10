@@ -1,138 +1,171 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <th:block th:include="include :: header('Commodity新增')"/>
+<th:block th:include="include :: header('Commodity新增')" />
 </head>
 <body>
-<form class="layui-form">
-    <div class="mainBox">
-        <div class="main-container">
-            <div class="main-container">
+	<form class="layui-form">
+		<div class="mainBox">
+			<div class="main-container">
+				<div class="main-container">
 
-				<div class="layui-form-item">
-                    <label class="layui-form-label">creator</label>
-                    <div class="layui-input-block">
-                        <input type="text" name="creator" autocomplete="off" placeholder="creator" class="layui-input">
-                    </div>
-                </div>
+					<div class="layui-form-item">
+						<label class="layui-form-label">Title </label>
+						<div class="layui-input-block">
+							<input type="text" name="title" autocomplete="off"
+								placeholder="Title " class="layui-input">
+						</div>
+					</div>
 
+					<div class="layui-form-item">
+						<label class="layui-form-label">category</label>
+						<div class="layui-input-block">
+							<ul id="selectCategory" name="categoryId" class="dtree"
+								data-id="0"></ul>
+						</div>
+					</div>
 
-				<div class="layui-form-item">
-                    <label class="layui-form-label">create date</label>
-                    <div class="layui-input-block">
-                        <input type="text" name="createDate" autocomplete="off" placeholder="create date" class="layui-input datetime-input">
-                    </div>
-                </div>
+					<div class="layui-form-item">
+						<label class="layui-form-label">status</label>
+						<div class="layui-input-block">
+							<input type="checkbox" name="status" id="status"
+								lay-skin="switch" lay-text="ON|OFF" value="1" checked>
+						</div>
+					</div>
+					
+					<div class="layui-form-item">
+	                    <label class="layui-form-label">image</label>
+	                    <div class="layui-input-block">
+	                        <input type="text" name="image" autocomplete="off" placeholder="image" class="layui-input">
+	                    </div>
+	                </div>
+	
+	
+					<div class="layui-form-item">
+	                    <label class="layui-form-label">unit</label>
+	                    <div class="layui-input-block">
+	                        <input type="text" name="unit" autocomplete="off" placeholder="unit" class="layui-input">
+	                    </div>
+	                </div>
 
+					<div class="layui-form-item">
+						<label class="layui-form-label">Description</label>
+						<div class="layui-input-block">
+							<textarea id="description" name="description"
+								style="display: none;"></textarea>
 
-				<div class="layui-form-item">
-                    <label class="layui-form-label">status</label>
-                    <div class="layui-input-block">
-                        <input type="text" name="status" autocomplete="off" placeholder="status" class="layui-input">
-                    </div>
-                </div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	 
+		<div class="bottom">
+			<div class="button-container">
+				<button type="submit"
+					class="layui-btn layui-btn-normal layui-btn-sm" lay-submit=""
+					lay-filter="commodity-save">
+					<i class="layui-icon layui-icon-ok"></i> Submit
+				</button>
+				<button type="reset"
+					class="layui-btn layui-btn-primary layui-btn-sm">
+					<i class="layui-icon layui-icon-refresh"></i> Reset
+				</button>
+			</div>
+		</div>
+	</form>
+	<th:block th:include="include :: footer" />
+	<script>
+		layui.use([ 'form', 'laydate', 'jquery', 'dtree', 'layedit' ],
+				function() {
+					let form = layui.form;
+					let $ = layui.jquery;
+					let MODULE_PATH = rootPath + "/CommodityController";
+					let dtree = layui.dtree;
 
+					///-------------------------- -------------------------------------------------------   
+					let FILE_PATH = rootPath + "/oss";
+					let BucketName = '[[${BucketName}]]';
+					let layedite = layui.layedit;
+					layedite.set({
+						uploadImage : {
+							url : FILE_PATH + '/createObjectLayedit/'
+									+ BucketName //接口url
+							,
+							type : 'post' //默认post
+						}
+					});
+					let layeditIndex = layedite.build('description'); //建立编辑器
 
-				<div class="layui-form-item">
-                    <label class="layui-form-label">category</label>
-                    <div class="layui-input-block">
-                        <input type="text" name="categoryId" autocomplete="off" placeholder="category" class="layui-input">
-                    </div>
-                </div>
+					//-------------------------------------------   ------------------------------------------ 
+ 
+					//同时绑定多个.. 
+					lay('.datetime-input').each(function() {
+						laydate.render({
+							elem : this,
+							trigger : 'click',
+							type : 'datetime'
+						});
+					});
 
+					dtree.renderSelect({
+						elem : "#selectCategory",
+						url : rootPath + "/CategoryController/selectParent",
+						method : 'get',
+						selectInputName : {
+							nodeId : "categoryId"
+						},
+						skin : "layui",
+						dataFormat : "list",
+						response : {
+							treeId : "id",
+							parentId : "parentId",
+							title : "categoryName"
+						}, //修改response中返回数据的定义
+						selectInitVal : '1'
+					});
 
-				<div class="layui-form-item">
-                    <label class="layui-form-label">Title </label>
-                    <div class="layui-input-block">
-                        <input type="text" name="title" autocomplete="off" placeholder="Title " class="layui-input">
-                    </div>
-                </div>
+					//保存
+					form.on('submit(commodity-save)', function(data) {
 
-
-				<div class="layui-form-item">
-                    <label class="layui-form-label">Description</label>
-                    <div class="layui-input-block">
-                        <input type="text" name="description" autocomplete="off" placeholder="Description" class="layui-input">
-                    </div>
-                </div>
-
-
-				<div class="layui-form-item">
-                    <label class="layui-form-label">price</label>
-                    <div class="layui-input-block">
-                        <input type="text" name="price" autocomplete="off" placeholder="price" class="layui-input">
-                    </div>
-                </div>
-
-
-				<div class="layui-form-item">
-                    <label class="layui-form-label">image</label>
-                    <div class="layui-input-block">
-                        <input type="text" name="image" autocomplete="off" placeholder="image" class="layui-input">
-                    </div>
-                </div>
-
-
-				<div class="layui-form-item">
-                    <label class="layui-form-label">unit</label>
-                    <div class="layui-input-block">
-                        <input type="text" name="unit" autocomplete="off" placeholder="unit" class="layui-input">
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-    <div class="bottom">
-        <div class="button-container">
-            <button type="submit" class="layui-btn layui-btn-normal layui-btn-sm" lay-submit="" lay-filter="commodity-save">
-                <i class="layui-icon layui-icon-ok"></i>
-                Submit
-            </button>
-            <button type="reset" class="layui-btn layui-btn-primary layui-btn-sm">
-                <i class="layui-icon layui-icon-refresh"></i>
-                Reset
-            </button>
-        </div>
-    </div>
-</form>
-<th:block th:include="include :: footer"/>
-<script>
-    layui.use(['form','laydate','jquery'], function () {
-        let form = layui.form;
-        let $ = layui.jquery;
-        let MODULE_PATH = rootPath+"/CommodityController";
-		var laydate = layui.laydate;
-        //同时绑定多个
-        lay('.datetime-input').each(function(){
-          laydate.render({
-            elem: this
-            ,trigger: 'click'
-            ,type: 'datetime'
-          });
-        });
-        //保存
-        form.on('submit(commodity-save)', function (data) {
-            $.ajax({
-                url: MODULE_PATH+'/add',
-                data: data.field,
-                dataType: 'json',
-                contentType: 'application/x-www-form-urlencoded',
-                type: 'post',
-                success: function (result) {
-                    if (result.code==200) {
-                        layer.msg(result.msg, {icon: 1, time: 1000}, function () {
-                            parent.layer.close(parent.layer.getFrameIndex(window.name));//关闭当前页
-                            parent.layui.table.reload("commodity-table");
-                        });
-                    } else {
-                        layer.msg(result.msg, {icon: 2, time: 1000});
-                    }
-                }
-            })
-            return false;
-        });
-    })
-</script>
+						data.field['description'] = layedite.getContent(layeditIndex);
+						console.log(data.field);
+						console.log(JSON.stringify({
+							title : data.field['title'],
+							status : data.field['status'],
+							categoryId : data.field['categoryId'],
+							description : layedite.getContent(layeditIndex)
+						}));
+						$.ajax({
+							url : MODULE_PATH + '/add',
+							data : data.field,
+							//     data: JSON.stringify({title:data.field['title'],status:data.field['status'],categoryId:data.field['categoryId'],description:layedite.getContent(layeditIndex)}),
+							dataType : 'json',
+							//  contentType: 'application/json',
+							contentType : 'application/x-www-form-urlencoded',
+							type : 'post',
+							success : function(result) {
+								if (result.code == 200) {
+									layer.msg(result.msg, {
+										icon : 1,
+										time : 1000
+									}, function() {
+										parent.layer.close(parent.layer
+												.getFrameIndex(window.name));//关闭当前页
+										parent.layui.table
+												.reload("commodity-table");
+									});
+								} else {
+									layer.msg(result.msg, {
+										icon : 2,
+										time : 1000
+									});
+								}
+							}
+						})
+						return false;
+					});
+				})
+	</script>
 </body>
 </html>
