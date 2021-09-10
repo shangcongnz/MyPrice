@@ -76,7 +76,7 @@ public class CategoryController extends BaseController{
 		PageInfo<Category> page=categoryService.list(tablepar,category) ; 
 		return pageTable(page.getList(),page.getTotal());
 	}
-	
+	 
  
 	 
 	
