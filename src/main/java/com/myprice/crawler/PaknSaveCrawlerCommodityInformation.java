@@ -12,11 +12,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.alibaba.fastjson.JSON;
 import com.myprice.service.CommodityService;
 
 public class PaknSaveCrawlerCommodityInformation {
 	private static final Logger log = LoggerFactory.getLogger(PaknSaveCrawlerCommodityInformation.class);
-	Map<String, String> cookies =null;
+	Map<String, String> cookies ;
 	@Autowired
 	CommodityService commodityService; 
 	
@@ -50,6 +51,9 @@ public class PaknSaveCrawlerCommodityInformation {
   * @return
   */
 	public  java.util.List<Map<String, String>>  doCrawlerPaknSavepCommodities(String URL) {
+		for(String key: cookies.keySet()) {
+			System.out.println(key+"       "+cookies.get(key) );
+		}
 		java.util.List<Map<String, String>> list = new ArrayList<Map<String, String>>();
 		try {
 		long begin = System.currentTimeMillis();
@@ -61,6 +65,7 @@ public class PaknSaveCrawlerCommodityInformation {
 		System.out.println("--->size:"+elements.size());
  
 			for (Element element : elements) {
+				//System.out.println(element.html());
 				java.util.Map<String, String> map = new HashMap<String, String>();
 				System.out.println("---------------------------------------------------:");
 				
@@ -76,6 +81,17 @@ public class PaknSaveCrawlerCommodityInformation {
 				String unit=(element.getElementsByClass("u-p3").get(0).ownText());
 				System.out.println("unit:"+unit);
 				map.put("unit", unit);
+				
+				String productDetails=(element.getElementsByClass("js-product-card-footer fs-product-card__footer-container").get(0).attr("data-options"));
+				System.out.println("productDetails:"+productDetails);
+				java.util.Map  productDetailMap =(Map) JSON.parse(productDetails);
+				
+				String price =(String) ((Map)productDetailMap.get("ProductDetails")).get("PricePerItem");
+				
+				map.put("price", price);
+				
+				String productId =(String) productDetailMap.get("productId");
+				map.put("productId", productId);
 				list.add(map);
 				
    		}
