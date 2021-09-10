@@ -77,8 +77,6 @@ public class CategoryController extends BaseController{
 		return pageTable(page.getList(),page.getTotal());
 	}
 	 
- 
-	 
 	
 	/**
      * 新增跳转
