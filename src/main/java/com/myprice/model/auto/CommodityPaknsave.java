@@ -1,12 +1,14 @@
 package com.myprice.model.auto;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
+import java.util.Date;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import io.swagger.annotations.ApiModelProperty;
+
 import cn.hutool.core.date.DateUtil;
-import java.util.Date;
-import java.math.BigDecimal;
+import io.swagger.annotations.ApiModelProperty;
 
 public class CommodityPaknsave implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -39,16 +41,7 @@ public class CommodityPaknsave implements Serializable {
 	@ApiModelProperty(value = "URL")
 	private String url;
 	
-	private String categoryName;
 	
-	
-	public String getCategoryName() {
-		return categoryName;
-	}
-
-	public void setCategoryName(String categoryName) {
-		this.categoryName = categoryName;
-	}
 
 	@ApiModelProperty(value = "product ID")
 	private String productId;
@@ -203,6 +196,39 @@ public class CommodityPaknsave implements Serializable {
 			return DateUtil.format(date, "yyyy-MM-dd HH:mm:ss");
 		}
 		return "";
+	}
+	
+	
+	
+	
+	private String categoryName;
+	private BigDecimal latestPrice;
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
+	private Date lastPriceDate;
+	
+	
+	public String getCategoryName() {
+		return categoryName;
+	}
+
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
+	}
+
+	public BigDecimal getLatestPrice() {
+		return latestPrice;
+	}
+
+	public void setLatestPrice(BigDecimal latestPrice) {
+		this.latestPrice = latestPrice;
+	}
+
+	public Date getLastPriceDate() {
+		return lastPriceDate;
+	}
+
+	public void setLastPriceDate(Date lastPriceDate) {
+		this.lastPriceDate = lastPriceDate;
 	}
 	
 

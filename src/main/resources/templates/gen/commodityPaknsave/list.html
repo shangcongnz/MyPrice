@@ -60,6 +60,9 @@
 
     <button shiro:hasPermission="gen:commodityPaknsave:remove" class="pear-btn pear-btn-danger pear-btn-sm" lay-event="remove" title="Delete"><i class="layui-icon layui-icon-delete"></i>
     </button>
+
+ 	<button   class="pear-btn pear-btn-warming pear-btn-md" lay-event="view" title="view"><i class="layui-icon layui-icon-template"></i>
+    </button>
 </script>
 
 
@@ -88,7 +91,7 @@
 									{title: 'Title', field: 'title', align: 'left' },
 					
 					
-									{title: 'Starting price', field: 'price', align: 'center' ,width: 120},
+								//	{title: 'Starting price', field: 'price', align: 'center' ,width: 120},
 					
 									{title: 'iamge', field: 'image', align: 'center',width: 120, templet: '#commodityPaknsave-image'},
 					
@@ -98,18 +101,19 @@
 					
 									{title: 'product ID', field: 'productId', align: 'center',width: 200},
 					
-									{title: 'create_date', field: 'createDate', align: 'center',width: 250},
+									{title: 'Price update date', field: 'lastPriceDate', align: 'center',width: 250},
+									{title: 'Latest Price', field: 'latestPrice', align: 'center',width: 250},
 					
 							//		{title: 'creator', field: 'creator', align: 'center'},
 									
 									{title: 'status', field: 'status', align: 'center',templet: '#commodityPaknsave-enable' ,width: 120},
 									
-							//		{title: 'URL', field: 'url', align: 'center'},
+							 //		{title: 'URL', field: 'url', align: 'center'},
 							//		{title: 'Description', field: 'description', align: 'center'},
 
 					
 				                
-                {title: 'Operation', toolbar: '#commodityPaknsave-bar', align: 'center',width: 120}
+                {title: 'Operation', toolbar: '#commodityPaknsave-bar', align: 'center',width: 180}
             ]
         ]
 
@@ -134,6 +138,8 @@
                 window.remove(obj);
             } else if (obj.event === 'edit') {
                 window.edit(obj);
+            }else if (obj.event === 'view') {
+                window.view(obj);
             }
         });
 
@@ -154,7 +160,9 @@
             return false;
         });
 
-
+        window.view = function (obj) {
+        	   window.open(obj.data['url']);
+        }
         //添加
         window.add = function () {
             layer.open({

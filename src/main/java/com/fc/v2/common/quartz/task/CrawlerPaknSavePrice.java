@@ -8,8 +8,7 @@ import java.util.concurrent.Executors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.myprice.crawler.PaknSaveCrawlerCommodityInformation;
-import com.myprice.crawler.PaknSaveCrawlerCommodityPrice;
+import com.myprice.crawler.paknSave.PaknSaveCrawlerCommodityPrice;
 import com.myprice.model.auto.MonitorPrice;
 import com.myprice.model.auto.ShopCommodity;
 import com.myprice.service.MonitorPriceService;
@@ -28,9 +27,8 @@ private MonitorPriceService monitorPriceService;
 @Autowired 
 private ShopCommodityService shopCommodityService;
 
-PaknSaveCrawlerCommodityInformation crawler =null;
-
-PaknSaveCrawlerCommodityPrice paknSaveCrawlerCommodityPrice;
+ 
+private PaknSaveCrawlerCommodityPrice paknSaveCrawlerCommodityPrice;
 /**
  * 定时器的入口
  * @param source
@@ -69,13 +67,6 @@ PaknSaveCrawlerCommodityPrice paknSaveCrawlerCommodityPrice;
 				}else {
 					System.out.println("价额抓取失败。。。");
 				}
-				
-				
-				
-				 
-					
-				
-				
 				//monitorPriceService.insertSelective(null);
 				}catch (Exception e) {
 					e.printStackTrace();
@@ -85,8 +76,7 @@ PaknSaveCrawlerCommodityPrice paknSaveCrawlerCommodityPrice;
 		}
 		
 		
-//	  crawler = new PaknSaveCrawlerCommodityInformation(); 
-  	  
+   	  
 	}
 	
 	 

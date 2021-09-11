@@ -14,7 +14,10 @@
     <result column="product_id" jdbcType="VARCHAR" property="productId" />
     <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
     <result column="creator" jdbcType="VARCHAR" property="creator" />
-     <result column="category_name" jdbcType="VARCHAR" property="categoryName" />
+    <result column="category_name" jdbcType="VARCHAR" property="categoryName" />
+    <result column="last_price_date" jdbcType="TIMESTAMP" property="lastPriceDate" />
+    <result column="latest_price" jdbcType="DECIMAL" property="latestPrice" />
+      
   </resultMap>
    
  
@@ -33,9 +36,13 @@
 		product_id,
 		create_date,
 		creator,
-		getPankSaveCategoryName( category_id ) as category_name 
+		getPankSaveCategoryName( category_id ) as category_name ,
+		( select price  from u_price_paknsave p where p.commodity_id=c.id  order by date desc LIMIT 1   ) as latest_price ,
+		
+		( select date  from u_price_paknsave p where p.commodity_id=c.id  order by date desc LIMIT 1   ) as last_price_date 
+		
 	FROM
-		u_commodity_paknsave
+		u_commodity_paknsave c
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
