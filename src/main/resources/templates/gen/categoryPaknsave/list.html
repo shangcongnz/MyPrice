@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.pollix.at/thymeleaf/shiro">
 <head>
-    <th:block th:include="include :: header('Category(PaknSave)列表')"/>
+    <th:block th:include="include :: header('CategoryPaknsave列表')"/>
 </head>
 <body class="pear-container">
 <div class="layui-card">
@@ -30,6 +30,10 @@
     </div>
 </div>
 </body>
+<script type="text/html" id="categoryPaknsave-enable">
+    <input type="checkbox" name="enable" value="{{d.id}}" lay-skin="switch" lay-text="ON|OFF" lay-filter="categoryPaknsave-enable" {{ d.status== 1 ? 'checked' : '' }}>
+</script>
+
 
 <script type="text/html" id="categoryPaknsave-toolbar">
     <button shiro:hasPermission="gen:categoryPaknsave:add" class="pear-btn pear-btn-primary pear-btn-md" lay-event="add">
@@ -39,6 +43,11 @@
     <button shiro:hasPermission="gen:categoryPaknsave:remove" class="pear-btn pear-btn-danger pear-btn-md" lay-event="batchRemove">
         <i class="layui-icon layui-icon-delete"></i>
 		Delete
+    </button>
+
+	<button   class="pear-btn pear-btn-danger pear-btn-md" lay-event="update">
+         <i class="layui-icon layui-icon-add-1"></i>
+			 Update PaknSave Category Automatically
     </button>
 </script>
 
@@ -53,65 +62,100 @@
 
 <script type="text/html" id="categoryPaknsave-type">
     {{#if (d.dataState == '0') { }}
-    <span class="layui-badge layui-bg-orange">开启</span>
+    <span class="layui-badge layui-bg-orange">ON</span>
     {{# }else if(d.dataState == '-1'){ }}
-    <span class="layui-badge layui-bg-blue">关闭</span>
+    <span class="layui-badge layui-bg-blue">OFF</span>
     {{# } }}
 </script>
 
 <th:block th:include="include :: footer"/>
 <script>
-    layui.use(['table', 'form', 'jquery'], function () {
-        let table = layui.table;
-        let form = layui.form;
-        let $ = layui.jquery;
 
-        let MODULE_PATH = rootPath+"/CategoryPaknsaveController/";
-        let cols = [
-            [
-                {type: 'checkbox'},
-                
-                					{title: 'ID', field: 'id', align: 'center'},
-					
-									{title: 'Parent ID', field: 'parentId', align: 'center'},
-					
-									{title: 'Name', field: 'name', align: 'center'},
-					
-									{title: 'URL', field: 'url', align: 'center'},
-					
-									{title: 'ItemName', field: 'itemName', align: 'center'},
-					
-									{title: 'IsInMobileHeader', field: 'isInMobileHeader', align: 'center'},
-					
-									{title: 'ItemId', field: 'itemId', align: 'center'},
-					
-				                
-                {title: 'Operation', toolbar: '#categoryPaknsave-bar', align: 'center'}
-            ]
-        ]
 
-        //table表单列表
-        table.render({
-            elem: '#categoryPaknsave-table',
-            url: MODULE_PATH + 'list',
-            page: true,
-            method: 'get',
-            cols: cols,
+
+
+layui.use(['table', 'form', 'jquery', 'treetable'], function () {
+    let table = layui.table;
+    let form = layui.form;
+    let $ = layui.jquery;
+    let treetable = layui.treetable;
+
+    let MODULE_PATH = rootPath+"/CategoryPaknsaveController/";
+
+    window.render = function () {
+        treetable.render({
+            treeColIndex: 1,
+            treeSpid: 0,
+            treeIdName: 'id',
+            treePidName: 'parentId',
             skin: 'line',
+            method: 'get',
+            treeDefaultClose: true,
             toolbar: '#categoryPaknsave-toolbar',
-            defaultToolbar: [{
-                layEvent: 'refresh',
-                icon: 'layui-icon-refresh',
-            }, 'filter', 'print', 'exports']
+            elem: '#categoryPaknsave-table',
+            url: MODULE_PATH+'list',
+            page: false,
+            cols: [
+                [
+                    {type: 'checkbox'},
+                    {title: 'ID', field: 'id', align: 'center'},
+                	
+                    {field: 'name', minWidth: 200, title: 'name'},
+                    {title: 'item ID', field: 'itemId', align: 'center'},
+                    {title: 'URL', field: 'url', align: 'center'},
+                   
+                    {field: 'status', title: 'status',templet: '#categoryPaknsave-enable'},
+                    {title: 'ItemName', field: 'itemName', align: 'center'},
+                    {title: 'Operation', templet: '#categoryPaknsave-bar', width: 150, align: 'center'}
+                ]
+            ]
         });
+    }
 
+    render();
+    
+    
+    form.on('switch(categoryPaknsave-enable)', function (obj) {
+        let operate;
+
+        if (obj.elem.checked) {
+            operate = 1;
+        } else {
+            operate = 0;
+        }
+
+        let loading = layer.load()
+
+        $.ajax({
+            url: MODULE_PATH+'updateVisible',
+            data: JSON.stringify({id: this.value,status:operate}),
+            dataType: 'json',
+            contentType: 'application/json',
+            type: 'put',
+            success: function (result) {
+                layer.close(loading);
+                if (result.code==200) {
+                    layer.msg(result.msg, {icon: 1, time: 1000}, function () {
+                    });
+                } else {
+                    layer.msg(result.msg, {icon: 2, time: 1000});
+                }
+            }
+        })
+    });
+    
+    
+    
+    
+     
         //table图标事件绑定
         table.on('tool(categoryPaknsave-table)', function (obj) {
             if (obj.event === 'remove') {
                 window.remove(obj);
             } else if (obj.event === 'edit') {
                 window.edit(obj);
-            }
+            } 
+            
         });
 
         //table工具栏绑定
@@ -122,6 +166,8 @@
                 window.refresh();
             } else if (obj.event === 'batchRemove') {
                 window.batchRemove(obj);
+            }else if (obj.event === 'update') {
+                window.update();
             }
         });
 
@@ -187,7 +233,7 @@
                 ids += data[i].id + ",";
             }
             ids = ids.substr(0, ids.length - 1);
-            layer.confirm('confirm to delete'', {icon: 3, title: 'delete'}, function (index) {
+            layer.confirm('confirm to delete', {icon: 3, title: 'delete'}, function (index) {
                 layer.close(index);
                 let loading = layer.load();
                 $.ajax({
@@ -207,6 +253,31 @@
                 })
             });
         }
+        
+        //update
+        window.update = function (obj) {alert();
+            layer.confirm('confirm to update', {icon: 3, title: 'update'}, function (index) {
+                layer.close(index);
+                let loading = layer.load();
+                $.ajax({
+                    url: MODULE_PATH + "updateCategory",
+                    dataType: 'json',
+                    type: 'get',
+                    success: function (result) {
+                        layer.close(loading);
+                        if (result.code==200) {
+                            layer.msg(result.msg, {icon: 1, time: 1000}, function () {
+                                obj.del();
+                            });
+                        } else {
+                            layer.msg(result.msg, {icon: 2, time: 1000});
+                        }
+                    }
+                })
+            });
+        }
+        
+        
         //刷新按钮
         window.refresh = function () {
             table.reload('categoryPaknsave-table');

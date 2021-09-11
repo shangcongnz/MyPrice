@@ -54,7 +54,7 @@ public class SysPower{
     private Integer sort;
 
     /**
-     * 开启
+     * ON
      * */
     private Integer enable;
 

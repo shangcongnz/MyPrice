@@ -7,9 +7,9 @@ import cn.hutool.core.util.StrUtil;
 import java.math.BigDecimal;
 
 /**
- * Category(PaknSave) CategoryPaknsaveExample
+ * CategoryPaknsave CategoryPaknsaveExample
  * @author Cong_自动生成
- * @date 2021-09-06 17:49:35
+ * @date 2021-09-10 22:40:01
  */
 public class CategoryPaknsaveExample {
 
@@ -610,6 +610,219 @@ public class CategoryPaknsaveExample {
             return (Criteria) this;
         }
         
+				
+        public Criteria andStatusIsNull() {
+            addCriterion("status is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusIsNotNull() {
+            addCriterion("status is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusEqualTo(Integer value) {
+            addCriterion("status =", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusNotEqualTo(Integer value) {
+            addCriterion("status <>", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusGreaterThan(Integer value) {
+            addCriterion("status >", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusGreaterThanOrEqualTo(Integer value) {
+            addCriterion("status >=", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusLessThan(Integer value) {
+            addCriterion("status <", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusLessThanOrEqualTo(Integer value) {
+            addCriterion("status <=", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusLike(Integer value) {
+            addCriterion("status like", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusNotLike(Integer value) {
+            addCriterion("status not like", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusIn(List<Integer> values) {
+            addCriterion("status in", values, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusNotIn(List<Integer> values) {
+            addCriterion("status not in", values, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusBetween(Integer value1, Integer value2) {
+            addCriterion("status between", value1, value2, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusNotBetween(Integer value1, Integer value2) {
+            addCriterion("status not between", value1, value2, "status");
+            return (Criteria) this;
+        }
+        
+				
+        public Criteria andUpdateDateIsNull() {
+            addCriterion("update_date is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateDateIsNotNull() {
+            addCriterion("update_date is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateDateEqualTo(Date value) {
+            addCriterion("update_date =", value, "updateDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateDateNotEqualTo(Date value) {
+            addCriterion("update_date <>", value, "updateDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateDateGreaterThan(Date value) {
+            addCriterion("update_date >", value, "updateDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateDateGreaterThanOrEqualTo(Date value) {
+            addCriterion("update_date >=", value, "updateDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateDateLessThan(Date value) {
+            addCriterion("update_date <", value, "updateDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateDateLessThanOrEqualTo(Date value) {
+            addCriterion("update_date <=", value, "updateDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateDateLike(Date value) {
+            addCriterion("update_date like", value, "updateDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateDateNotLike(Date value) {
+            addCriterion("update_date not like", value, "updateDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateDateIn(List<Date> values) {
+            addCriterion("update_date in", values, "updateDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateDateNotIn(List<Date> values) {
+            addCriterion("update_date not in", values, "updateDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateDateBetween(Date value1, Date value2) {
+            addCriterion("update_date between", value1, value2, "updateDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateDateNotBetween(Date value1, Date value2) {
+            addCriterion("update_date not between", value1, value2, "updateDate");
+            return (Criteria) this;
+        }
+        
+				
+        public Criteria andBranchIdIsNull() {
+            addCriterion("branch_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andBranchIdIsNotNull() {
+            addCriterion("branch_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andBranchIdEqualTo(Integer value) {
+            addCriterion("branch_id =", value, "branchId");
+            return (Criteria) this;
+        }
+
+        public Criteria andBranchIdNotEqualTo(Integer value) {
+            addCriterion("branch_id <>", value, "branchId");
+            return (Criteria) this;
+        }
+
+        public Criteria andBranchIdGreaterThan(Integer value) {
+            addCriterion("branch_id >", value, "branchId");
+            return (Criteria) this;
+        }
+
+        public Criteria andBranchIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("branch_id >=", value, "branchId");
+            return (Criteria) this;
+        }
+
+        public Criteria andBranchIdLessThan(Integer value) {
+            addCriterion("branch_id <", value, "branchId");
+            return (Criteria) this;
+        }
+
+        public Criteria andBranchIdLessThanOrEqualTo(Integer value) {
+            addCriterion("branch_id <=", value, "branchId");
+            return (Criteria) this;
+        }
+
+        public Criteria andBranchIdLike(Integer value) {
+            addCriterion("branch_id like", value, "branchId");
+            return (Criteria) this;
+        }
+
+        public Criteria andBranchIdNotLike(Integer value) {
+            addCriterion("branch_id not like", value, "branchId");
+            return (Criteria) this;
+        }
+
+        public Criteria andBranchIdIn(List<Integer> values) {
+            addCriterion("branch_id in", values, "branchId");
+            return (Criteria) this;
+        }
+
+        public Criteria andBranchIdNotIn(List<Integer> values) {
+            addCriterion("branch_id not in", values, "branchId");
+            return (Criteria) this;
+        }
+
+        public Criteria andBranchIdBetween(Integer value1, Integer value2) {
+            addCriterion("branch_id between", value1, value2, "branchId");
+            return (Criteria) this;
+        }
+
+        public Criteria andBranchIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("branch_id not between", value1, value2, "branchId");
+            return (Criteria) this;
+        }
+        
 			
 		 public Criteria andLikeQuery(CategoryPaknsave record) {
 		 	List<String> list= new ArrayList<String>();
@@ -636,6 +849,15 @@ public class CategoryPaknsaveExample {
 			if(record.getItemId()!=null&&StrUtil.isNotEmpty(record.getItemId().toString())) {
     			 list.add("ifnull(item_id,'')");
     		}
+			if(record.getStatus()!=null&&StrUtil.isNotEmpty(record.getStatus().toString())) {
+    			 list.add("ifnull(status,'')");
+    		}
+			if(record.getUpdateDate()!=null&&StrUtil.isNotEmpty(record.getUpdateDate().toString())) {
+    			 list.add("ifnull(update_date,'')");
+    		}
+			if(record.getBranchId()!=null&&StrUtil.isNotEmpty(record.getBranchId().toString())) {
+    			 list.add("ifnull(branch_id,'')");
+    		}
 			if(record.getId()!=null&&StrUtil.isNotEmpty(record.getId().toString())) {
     			list2.add("'%"+record.getId()+"%'");
     		}
@@ -656,6 +878,15 @@ public class CategoryPaknsaveExample {
     		}
 			if(record.getItemId()!=null&&StrUtil.isNotEmpty(record.getItemId().toString())) {
     			list2.add("'%"+record.getItemId()+"%'");
+    		}
+			if(record.getStatus()!=null&&StrUtil.isNotEmpty(record.getStatus().toString())) {
+    			list2.add("'%"+record.getStatus()+"%'");
+    		}
+			if(record.getUpdateDate()!=null&&StrUtil.isNotEmpty(record.getUpdateDate().toString())) {
+    			list2.add("'%"+record.getUpdateDate()+"%'");
+    		}
+			if(record.getBranchId()!=null&&StrUtil.isNotEmpty(record.getBranchId().toString())) {
+    			list2.add("'%"+record.getBranchId()+"%'");
     		}
         	buffer.append(" CONCAT(");
 	        buffer.append(StrUtil.join(",",list));
@@ -679,6 +910,9 @@ public class CategoryPaknsaveExample {
     		list.add("ifnull(item_name,'')");
     		list.add("ifnull(is_in_mobile_header,'')");
     		list.add("ifnull(item_id,'')");
+    		list.add("ifnull(status,'')");
+    		list.add("ifnull(update_date,'')");
+    		list.add("ifnull(branch_id,'')");
         	buffer.append(" CONCAT(");
 	        buffer.append(StrUtil.join(",",list));
         	buffer.append(")");

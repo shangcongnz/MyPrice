@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <th:block th:include="include :: header('Category(PaknSave) Add')"/>
+    <th:block th:include="include :: header('CategoryPaknsave Add')"/>
 </head>
 <body>
 <form class="layui-form">
@@ -56,6 +56,30 @@
                     </div>
                 </div>
 
+
+				<div class="layui-form-item">
+                    <label class="layui-form-label">Status</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="status" autocomplete="off" placeholder="Status" class="layui-input">
+                    </div>
+                </div>
+
+
+				<div class="layui-form-item">
+                    <label class="layui-form-label">Last Update Date</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="updateDate" autocomplete="off" placeholder="Last Update Date" class="layui-input datetime-input">
+                    </div>
+                </div>
+
+
+				<div class="layui-form-item">
+                    <label class="layui-form-label">branch_id</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="branchId" autocomplete="off" placeholder="branch_id" class="layui-input">
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
@@ -78,6 +102,15 @@
         let form = layui.form;
         let $ = layui.jquery;
         let MODULE_PATH = rootPath+"/CategoryPaknsaveController";
+		var laydate = layui.laydate;
+        //同时绑定多个
+        lay('.datetime-input').each(function(){
+          laydate.render({
+            elem: this
+            ,trigger: 'click'
+            ,type: 'datetime'
+          });
+        });
         //保存
         form.on('submit(categoryPaknsave-save)', function (data) {
             $.ajax({

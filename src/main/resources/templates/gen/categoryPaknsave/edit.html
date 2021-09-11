@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <th:block th:include="include :: header('Category(PaknSave)修改')"/>
+    <th:block th:include="include :: header('CategoryPaknsave修改')"/>
 </head>
 <body>
 <form class="layui-form" action=""  th:object="${CategoryPaknsave}">
@@ -57,6 +57,27 @@
                         <input th:value="*{itemId}" type="text" name="itemId" autocomplete="off" placeholder="ItemId" class="layui-input">
                     </div>
                 </div>
+
+				<div class="layui-form-item">
+                    <label class="layui-form-label">Status</label>
+                    <div class="layui-input-block">
+                        <input th:value="*{status}" type="text" name="status" autocomplete="off" placeholder="Status" class="layui-input">
+                    </div>
+                </div>
+
+				<div class="layui-form-item">
+                    <label class="layui-form-label">Last Update Date</label>
+                    <div class="layui-input-block">
+                        <input th:value="${CategoryPaknsave.dateToStringConvert(CategoryPaknsave.updateDate)}" type="text" name="updateDate" autocomplete="off" placeholder="Last Update Date" class="layui-input datetime-input">
+                    </div>
+                </div>
+
+				<div class="layui-form-item">
+                    <label class="layui-form-label">branch_id</label>
+                    <div class="layui-input-block">
+                        <input th:value="*{branchId}" type="text" name="branchId" autocomplete="off" placeholder="branch_id" class="layui-input">
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -81,6 +102,15 @@
         let $ = layui.jquery;
         let MODULE_PATH = rootPath+"/CategoryPaknsaveController";
 		
+		var laydate = layui.laydate;
+        //同时绑定多个
+        lay('.datetime-input').each(function(){
+          laydate.render({
+            elem: this
+            ,trigger: 'click'
+            ,type: 'datetime'
+          });
+        });
         form.on('submit(categoryPaknsave-update)', function (data) {
             $.ajax({
                 url: MODULE_PATH+'/edit',

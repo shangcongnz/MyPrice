@@ -9,6 +9,9 @@
     <result column="item_name" jdbcType="VARCHAR" property="itemName" />
     <result column="is_in_mobile_header" jdbcType="VARCHAR" property="isInMobileHeader" />
     <result column="item_id" jdbcType="VARCHAR" property="itemId" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
+    <result column="branch_id" jdbcType="INTEGER" property="branchId" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -76,7 +79,10 @@
        	  	      	url,
        	  	      	item_name,
        	  	      	is_in_mobile_header,
-       	  	    	  	item_id
+       	  	      	item_id,
+       	  	      	status,
+       	  	      	update_date,
+       	  	    	  	branch_id
        	  	
   </sql>
   
@@ -112,7 +118,7 @@
     </if>
   </delete>
   
-  <insert id="insert" parameterType="com.myprice.model.auto.CategoryPaknsave">
+  <insert id="insert" parameterType="com.myprice.model.auto.CategoryPaknsave" useGeneratedKeys="true" keyProperty="id">
     insert into u_category_paknsave (
       	  	       id,
        	  	       parent_id,
@@ -120,7 +126,10 @@
        	  	       url,
        	  	       item_name,
        	  	       is_in_mobile_header,
-       	  	    	  item_id
+       	  	       item_id,
+       	  	       status,
+       	  	       update_date,
+       	  	    	  branch_id
        	    )
     values (
 	  	  	      	#{id,jdbcType=INTEGER},
@@ -129,11 +138,14 @@
        	  	      	#{url,jdbcType=VARCHAR},
        	  	      	#{itemName,jdbcType=VARCHAR},
        	  	      	#{isInMobileHeader,jdbcType=VARCHAR},
-       	  	    	  #{itemId,jdbcType=VARCHAR}
+       	  	      	#{itemId,jdbcType=VARCHAR},
+       	  	      	#{status,jdbcType=INTEGER},
+       	  	      	#{updateDate,jdbcType=TIMESTAMP},
+       	  	    	  #{branchId,jdbcType=INTEGER}
        	    )
   </insert>
   
-  <insert id="insertSelective" parameterType="com.myprice.model.auto.CategoryPaknsave">
+  <insert id="insertSelective" parameterType="com.myprice.model.auto.CategoryPaknsave" useGeneratedKeys="true" keyProperty="id">
     insert into u_category_paknsave
     <trim prefix="(" suffix=")" suffixOverrides=",">
           
@@ -164,6 +176,18 @@
       <if test="itemId != null">
         item_id,
       </if>
+         
+      <if test="status != null">
+        status,
+      </if>
+         
+      <if test="updateDate != null">
+        update_date,
+      </if>
+         
+      <if test="branchId != null">
+        branch_id,
+      </if>
          </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
           <if test="id != null">
@@ -186,6 +210,15 @@
       </if>
           <if test="itemId != null">
         #{itemId,jdbcType=VARCHAR},
+      </if>
+          <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+          <if test="updateDate != null">
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+          <if test="branchId != null">
+        #{branchId,jdbcType=INTEGER},
       </if>
         </trim>
   </insert>
@@ -221,6 +254,15 @@
           <if test="record.itemId != null">
         item_id = #{record.itemId,jdbcType=VARCHAR},
       </if>
+          <if test="record.status != null">
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+          <if test="record.updateDate != null">
+        update_date = #{record.updateDate,jdbcType=TIMESTAMP},
+      </if>
+          <if test="record.branchId != null">
+        branch_id = #{record.branchId,jdbcType=INTEGER},
+      </if>
          
     </set>
     <if test="_parameter != null">
@@ -245,7 +287,13 @@
     	         	     	 
     	 is_in_mobile_header = #{record.isInMobileHeader,jdbcType=VARCHAR},
     	         	     	 
-    	 item_id = #{record.itemId,jdbcType=VARCHAR}
+    	 item_id = #{record.itemId,jdbcType=VARCHAR},
+    	         	     	 
+    	 status = #{record.status,jdbcType=INTEGER},
+    	         	     	 
+    	 update_date = #{record.updateDate,jdbcType=TIMESTAMP},
+    	         	     	 
+    	 branch_id = #{record.branchId,jdbcType=INTEGER}
     	         
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -280,15 +328,27 @@
       <if test="itemId != null">
         item_id = #{itemId,jdbcType=VARCHAR},
       </if>
+                      
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+                      
+      <if test="updateDate != null">
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+                      
+      <if test="branchId != null">
+        branch_id = #{branchId,jdbcType=INTEGER},
+      </if>
               </set>
     
     where 
             
     id = #{id,jdbcType=INTEGER}
-                                                          
+                                                                                  
   </update>
 
-      	      	   	      	   	      	   	      	   	      	   	      	   	      	
+      	      	   	      	   	      	   	      	   	      	   	      	   	      	   	      	   	      	   	      	
 
   <update id="updateByPrimaryKey" parameterType="com.myprice.model.auto.CategoryPaknsave">
     update u_category_paknsave
@@ -303,14 +363,20 @@
 		item_name = #{itemName,jdbcType=VARCHAR},
 	  	 		 	  	  
 		is_in_mobile_header = #{isInMobileHeader,jdbcType=VARCHAR},
+	  	 		 	  	  
+		item_id = #{itemId,jdbcType=VARCHAR},
+	  	 		 	  	  
+		status = #{status,jdbcType=INTEGER},
+	  	 		 	  	  
+		update_date = #{updateDate,jdbcType=TIMESTAMP},
 	  	 		 	  		
-		item_id = #{itemId,jdbcType=VARCHAR}
+		branch_id = #{branchId,jdbcType=INTEGER}
 	  	 		
     where 
             
     id = #{id,jdbcType=INTEGER}
-                                                            
+                                                                                    
   </update>
   
-                                       
+                                                      
 </mapper>

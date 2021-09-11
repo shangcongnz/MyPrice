@@ -35,6 +35,12 @@
         <table id="categoryOfShops-table" lay-filter="categoryOfShops-table"></table>
     </div>
 </div>
+
+<script type="text/html" id="categoryOfShops-enable">
+    <input type="checkbox" name="enable" value="{{d.id}}" lay-skin="switch" lay-text="ON|OFF" lay-filter="categoryOfShops-enable" {{ d.status== 1 ? 'checked' : '' }}>
+</script>
+
+
 </body>
 
 <script type="text/html" id="categoryOfShops-toolbar">
@@ -64,14 +70,88 @@
 
 <script type="text/html" id="categoryOfShops-type">
     {{#if (d.dataState == '0') { }}
-    <span class="layui-badge layui-bg-orange">开启</span>
+    <span class="layui-badge layui-bg-orange">ON</span>
     {{# }else if(d.dataState == '-1'){ }}
-    <span class="layui-badge layui-bg-blue">关闭</span>
+    <span class="layui-badge layui-bg-blue">OFF</span>
     {{# } }}
 </script>
 
 <th:block th:include="include :: footer"/>
 <script>
+
+
+
+layui.use(['table', 'form', 'jquery', 'treetable'], function () {
+    let table = layui.table;
+    let form = layui.form;
+    let $ = layui.jquery;
+    let treetable = layui.treetable;
+
+    let MODULE_PATH = rootPath+"/CategoryOfShopsController/";
+
+    window.render = function () {
+        treetable.render({
+            treeColIndex: 1,
+            treeSpid: 0,
+            treeIdName: 'id',
+            treePidName: 'parentId',
+            skin: 'line',
+            method: 'get',
+            treeDefaultClose: true,
+            toolbar: '#categoryOfShops-toolbar',
+            elem: '#categoryOfShops-table',
+            url: MODULE_PATH+'list',
+            page: false,
+            cols: [
+                [
+                    {type: 'checkbox'},
+                    {title: 'ID', field: 'id', align: 'center'},
+                	{title: 'ItemName', field: 'itemName', align: 'center'},
+                    {field: 'name', minWidth: 200, title: 'name'},
+                    {title: 'URL', field: 'url', align: 'center'},
+                    {title: 'ShopId', field: 'shopId', align: 'center'},
+                    {field: 'status', title: 'status',templet: '#categoryOfShops-enable'},
+                    {title: 'Operation', templet: '#categoryOfShops-bar', width: 150, align: 'center'}
+                ]
+            ]
+        });
+    }
+
+    render();
+    
+    
+    form.on('switch(categoryOfShops-enable)', function (obj) {
+        let operate;
+
+        if (obj.elem.checked) {
+            operate = 1;
+        } else {
+            operate = 0;
+        }
+
+        let loading = layer.load()
+
+        $.ajax({
+            url: MODULE_PATH+'updateVisible',
+            data: JSON.stringify({id: this.value,status:operate}),
+            dataType: 'json',
+            contentType: 'application/json',
+            type: 'put',
+            success: function (result) {
+                layer.close(loading);
+                if (result.code==200) {
+                    layer.msg(result.msg, {icon: 1, time: 1000}, function () {
+                    });
+                } else {
+                    layer.msg(result.msg, {icon: 2, time: 1000});
+                }
+            }
+        })
+    });
+    
+    
+    /*
+
     layui.use(['table', 'form', 'jquery'], function () {
         let table = layui.table;
         let form = layui.form;
@@ -123,7 +203,7 @@
                 icon: 'layui-icon-refresh',
             }, 'filter', 'print', 'exports']
         });
-
+*/
         //table图标事件绑定
         table.on('tool(categoryOfShops-table)', function (obj) {
             if (obj.event === 'remove') {

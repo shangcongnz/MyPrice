@@ -51,9 +51,9 @@ public class PaknSaveCrawlerCommodityInformation {
   * @return
   */
 	public  java.util.List<Map<String, String>>  doCrawlerPaknSavepCommodities(String URL) {
-		for(String key: cookies.keySet()) {
-			System.out.println(key+"       "+cookies.get(key) );
-		}
+//		for(String key: cookies.keySet()) {
+//			System.out.println(key+"       "+cookies.get(key) );
+//		}
 		java.util.List<Map<String, String>> list = new ArrayList<Map<String, String>>();
 		try {
 		long begin = System.currentTimeMillis();

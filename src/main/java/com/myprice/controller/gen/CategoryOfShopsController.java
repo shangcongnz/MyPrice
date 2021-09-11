@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -17,6 +19,7 @@ import com.fc.v2.common.domain.ResultTable;
 import com.fc.v2.common.log.Log;
 import com.fc.v2.model.custom.Tablepar;
 import com.github.pagehelper.PageInfo;
+import com.myprice.model.auto.Category;
 import com.myprice.model.auto.CategoryOfShops;
 import com.myprice.service.CategoryOfShopsService;
 
@@ -168,6 +171,17 @@ public class CategoryOfShopsController extends BaseController{
     }
 
     
+	/**
+	 * 修改状态
+	 * @param record
+	 * @return
+	 */
+    @PutMapping("/updateVisible")
+	@ResponseBody
+    public AjaxResult updateVisible(@RequestBody CategoryOfShops record){
+		int i=categoryOfShopsService.updateByPrimaryKeySelective(record);
+		 return toAjax(i);
+	}
     
 
 	

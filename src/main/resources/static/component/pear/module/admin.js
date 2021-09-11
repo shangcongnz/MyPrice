@@ -376,7 +376,7 @@ layui.define(['message','jquery', 'yaml','form', 'tab', 'menu', 'frame', 'theme'
 		});
 
 		function bottomTool(){
-			return "<button id='closeTheme' style='position: absolute;bottom: 20px;left: 20px;' class='pear-btn'>关闭</button>"
+			return "<button id='closeTheme' style='position: absolute;bottom: 20px;left: 20px;' class='pear-btn'>OFF</button>"
 		}
 
 		body.on('click', '[data-select-bgcolor]', function() {

@@ -6,13 +6,13 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 /**
- * Category(PaknSave) CategoryPaknsaveMapper
+ * CategoryPaknsave CategoryPaknsaveMapper
  * @author Cong_自动生成
  * @email ${email}
- * @date 2021-09-06 17:49:35
+ * @date 2021-09-10 22:40:01
  */
 public interface CategoryPaknsaveMapper {
-      	   	      	      	      	      	      	      	      
+      	   	      	      	      	      	      	      	      	      	      	      
     long countByExample(CategoryPaknsaveExample example);
 
     int deleteByExample(CategoryPaknsaveExample example);
