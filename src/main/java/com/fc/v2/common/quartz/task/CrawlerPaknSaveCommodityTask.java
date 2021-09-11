@@ -72,7 +72,7 @@ private void saveCommoditsByCategory( CategoryPaknsave categoryPaknsave) {
 			CommodityPaknsave paknsave = new CommodityPaknsave();
 			
 		 
-			paknsave.setCategoryId(Integer.toString(categoryPaknsave.getId())  );
+			paknsave.setCategoryId(categoryPaknsave.getId()  );
 			 
 			paknsave.setCreator("1");
 			paknsave.setImage(map.get("image"));

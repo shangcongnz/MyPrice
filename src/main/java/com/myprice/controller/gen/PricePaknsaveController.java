@@ -59,6 +59,7 @@ public class PricePaknsaveController extends BaseController{
 	@RequiresPermissions("gen:pricePaknsave:list")
 	@ResponseBody
 	public ResultTable list(Tablepar tablepar,PricePaknsave pricePaknsave){
+		System.out.println("pricePaknsave.getCommodityId()--------------"+pricePaknsave.getCommodityId());
 		PageInfo<PricePaknsave> page=pricePaknsaveService.list(tablepar,pricePaknsave) ; 
 		return pageTable(page.getList(),page.getTotal());
 	}
@@ -141,7 +142,16 @@ public class PricePaknsaveController extends BaseController{
     }
 
     
-    
+	@ApiOperation(value = "", notes = "")
+	@GetMapping("/priceListView")
+    public String priceListView(@RequestParam(value="commodityId", required = true) String commodityId,ModelMap model)
+    {
+		System.out.println("commodityId===="+commodityId);
+		model.addAttribute("commodityId",commodityId);
+//		model.put("PricePaknsave", pricePaknsaveService.selectByPrimaryKey(id));
+        return prefix + "/priceList";
+    }
+	
 
 	
 }

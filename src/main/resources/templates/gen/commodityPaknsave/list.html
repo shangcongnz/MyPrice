@@ -55,6 +55,9 @@
 </script>
 
 <script type="text/html" id="commodityPaknsave-bar">
+
+	<button   class="pear-btn pear-btn-warming pear-btn-md" lay-event="priceList" title="priceList"><i class="layui-icon layui-icon-chart"></i>
+    </button>
     <button shiro:hasPermission="gen:commodityPaknsave:edit" class="pear-btn pear-btn-primary pear-btn-sm" lay-event="edit" title="Edit"><i class="layui-icon layui-icon-edit"></i>
     </button>
 
@@ -93,27 +96,27 @@
 					
 								//	{title: 'Starting price', field: 'price', align: 'center' ,width: 120},
 					
-									{title: 'iamge', field: 'image', align: 'center',width: 120, templet: '#commodityPaknsave-image'},
+									{title: 'iamge', field: 'image', align: 'center',width: 80, templet: '#commodityPaknsave-image'},
 					
-									{title: 'Unit', field: 'unit', align: 'center',width: 120},
+									{title: 'Unit', field: 'unit', align: 'center',width: 80},
 					
 									{title: 'Category', field: 'categoryName', align: 'left'},
 					
 									{title: 'product ID', field: 'productId', align: 'center',width: 200},
 					
-									{title: 'Price update date', field: 'lastPriceDate', align: 'center',width: 250},
-									{title: 'Latest Price', field: 'latestPrice', align: 'center',width: 250},
+									{title: 'Price update date', field: 'lastPriceDate', align: 'center',width: 160},
+									{title: 'Latest Price', field: 'latestPrice', align: 'center',width: 100},
 					
 							//		{title: 'creator', field: 'creator', align: 'center'},
 									
-									{title: 'status', field: 'status', align: 'center',templet: '#commodityPaknsave-enable' ,width: 120},
+									{title: 'status', field: 'status', align: 'center',templet: '#commodityPaknsave-enable' ,width: 90},
 									
 							 //		{title: 'URL', field: 'url', align: 'center'},
 							//		{title: 'Description', field: 'description', align: 'center'},
 
 					
 				                
-                {title: 'Operation', toolbar: '#commodityPaknsave-bar', align: 'center',width: 180}
+                {title: 'Operation', toolbar: '#commodityPaknsave-bar', align: 'center',width: 200}
             ]
         ]
 
@@ -140,6 +143,8 @@
                 window.edit(obj);
             }else if (obj.event === 'view') {
                 window.view(obj);
+            }else if (obj.event === 'priceList') {
+                window.priceList(obj);
             }
         });
 
@@ -162,6 +167,16 @@
 
         window.view = function (obj) {
         	   window.open(obj.data['url']);
+        }
+        // shwo price history.
+        window.priceList = function (obj) {
+            layer.open({
+                type: 2,
+                title: 'priceList',
+                shade: 0.1,
+                area: ['700px', '700px'],
+                content: rootPath+'/PricePaknsaveController/priceListView?commodityId='+obj.data['id']
+            });
         }
         //添加
         window.add = function () {

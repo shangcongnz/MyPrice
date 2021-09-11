@@ -33,7 +33,7 @@ public class CommodityPaknsave implements Serializable {
 	private String unit;
 	
 	@ApiModelProperty(value = "Category")
-	private String categoryId;
+	private Integer categoryId;
 	
 	@ApiModelProperty(value = "status")
 	private Integer status;
@@ -101,11 +101,11 @@ public class CommodityPaknsave implements Serializable {
 		this.unit =  unit;
 	}
 	@JsonProperty("categoryId")
-	public String getCategoryId() {
+	public Integer getCategoryId() {
 		return categoryId;
 	}
 
-	public void setCategoryId(String categoryId) {
+	public void setCategoryId(Integer categoryId) {
 		this.categoryId =  categoryId;
 	}
 	@JsonProperty("status")
@@ -150,7 +150,7 @@ public class CommodityPaknsave implements Serializable {
 	}
 
 																								
-	public CommodityPaknsave(Integer id,String title,String description,BigDecimal price,String image,String unit,String categoryId,Integer status,String url,String productId,Date createDate,String creator) {
+	public CommodityPaknsave(Integer id,String title,String description,BigDecimal price,String image,String unit,Integer categoryId,Integer status,String url,String productId,Date createDate,String creator) {
 				
 		this.id = id;
 				

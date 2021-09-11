@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <th:block th:include="include :: header('PricePaknsave列表')"/>
+</head>
+<body class="pear-container">
+<div class="layui-card">
+    <div class="layui-card-body">
+        <form class="layui-form" action="">
+            <div class="layui-form-item" >
+	<p th:text="${param.commodityId}"></p>
+</div> 
+               
+        </form>
+    </div>
+</div>
+<div class="layui-card">
+    <div class="layui-card-body">
+        <table id="pricePaknsave-table" lay-filter="pricePaknsave-table"></table>
+    </div>
+</div>
+</body>
+
+ 
+
+<th:block th:include="include :: footer"/>
+<script>
+    layui.use(['table', 'form', 'jquery'], function () {
+        let table = layui.table;
+        let form = layui.form;
+        let $ = layui.jquery;
+        let commodityId= '[[${commodityId}]]';
+        
+
+        let MODULE_PATH = rootPath+"/PricePaknsaveController/";
+        let cols = [
+            [
+            {type: 'checkbox'},
+                
+          	{title: 'ID', field: 'id', align: 'center'},
+
+			{title: 'Title', field: 'commodityId', align: 'center'},
+
+			{title: 'Category', field: 'categoryId', align: 'center'},
+
+			{title: 'Date', field: 'date', align: 'center'},
+
+			{title: 'Price', field: 'price', align: 'center'},
+
+			{title: 'Branch', field: 'branchId', align: 'center'}
+            ]
+        ]
+
+        //table表单列表
+        table.render({
+            elem: '#pricePaknsave-table',
+            url: MODULE_PATH + 'list?commodityId='+commodityId,
+            page: true,
+            method: 'get',
+            cols: cols,
+            skin: 'line',
+            toolbar: '#pricePaknsave-toolbar',
+            defaultToolbar: [{
+                layEvent: 'refresh',
+                icon: 'layui-icon-refresh',
+            },  'print', 'exports']
+        });
+
+       
+
+        
+        
+       
+       
+    })
+</script>
+</html>

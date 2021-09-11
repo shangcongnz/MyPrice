@@ -82,20 +82,20 @@ public class PaknSaveCrawlerCommodityInformation {
 				System.out.println("---------------------------------------------------:");
 				
 				String url="https://www.paknsave.co.nz/"+element.getElementsByTag("a").get(0).attr("href");
-				System.out.println("URL:"+url);
+//				System.out.println("URL:"+url);
 				map.put("url", url);
 				String title=element.getElementsByClass("u-p2").get(0).ownText();
-				System.out.println("title:"+title);
+//				System.out.println("title:"+title);
 				map.put("title", title);
 				String image= (element.getElementsByClass("fs-product-card__product-image").get(0).attr("data-src-s"));
-				System.out.println("image:"+image);
+//				System.out.println("image:"+image);
 				map.put("image", image);
 				String unit=(element.getElementsByClass("u-p3").get(0).ownText());
-				System.out.println("unit:"+unit);
+//				System.out.println("unit:"+unit);
 				map.put("unit", unit);
 				
 				String productDetails=(element.getElementsByClass("js-product-card-footer fs-product-card__footer-container").get(0).attr("data-options"));
-				System.out.println("productDetails:"+productDetails);
+//				System.out.println("productDetails:"+productDetails);
 				java.util.Map  productDetailMap =(Map) JSON.parse(productDetails);
 				
 				String price =(String) ((Map)productDetailMap.get("ProductDetails")).get("PricePerItem");
@@ -108,7 +108,7 @@ public class PaknSaveCrawlerCommodityInformation {
 				
    		}
 		 
-		System.out.println("duration :" + (System.currentTimeMillis() - begin));
+		System.out.println("抓取一次耗时：" + (System.currentTimeMillis() - begin)+"ms");
 		
 	
 		}catch (Exception e) {

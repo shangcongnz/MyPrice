@@ -76,7 +76,7 @@ public class AdminController extends BaseController {
 			if ((null != SecurityUtils.getSubject() && SecurityUtils.getSubject().isAuthenticated()) || SecurityUtils.getSubject().isRemembered()) {
 				return "redirect:/" + prefix + "/index";
 			} else {
-				System.out.println("--进行登录验证..验证开始");
+				System.out.println("Login....");
 				modelMap.put("RollVerification", v2Config.getRollVerification());
 				System.out.println("V2Config.getRollVerification()>>>" + v2Config.getRollVerification());
 				return "login";
