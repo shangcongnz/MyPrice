@@ -1,77 +1,139 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.pollix.at/thymeleaf/shiro">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.pollix.at/thymeleaf/shiro">
 <head>
-    <th:block th:include="include :: header('PricePaknsave列表')"/>
+<th:block th:include="include :: header('PricePaknsave列表')" />
 </head>
 <body class="pear-container">
-<div class="layui-card">
-    <div class="layui-card-body">
-        <form class="layui-form" action="">
-            <div class="layui-form-item" >
-	<p th:text="${param.commodityId}"></p>
-</div> 
-               
-        </form>
-    </div>
-</div>
-<div class="layui-card">
-    <div class="layui-card-body">
-        <table id="pricePaknsave-table" lay-filter="pricePaknsave-table"></table>
-    </div>
-</div>
+	<div class="layui-card">
+		<div class="layui-card-body">
+			<form class="layui-form" action="" th:object="${CommodityPaknsave}">
+				<div class="layui-form-item" id="chart_div">
+ 				</div>
+				
+				<div style="text-align: center;">
+                      <p th:text="*{title}"  class="layui-font-18  layui-font-orange">
+                </div>
+                <div  style="text-align: center;">
+ 					 <div class="layui-anim layui-inline" style='align:center' data-anim="layui-anim-down"> 
+					 	<img id='myImage' style='width:200px; height:200px' />
+					 </div>
+                </div>
+                
+                <div class="layui-card">
+					<div class="layui-card-body">
+						<table id="pricePaknsave-table" lay-filter="pricePaknsave-table"></table>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+
 </body>
 
- 
 
-<th:block th:include="include :: footer"/>
+
+<th:block th:include="include :: footer" />
 <script>
     layui.use(['table', 'form', 'jquery'], function () {
         let table = layui.table;
         let form = layui.form;
         let $ = layui.jquery;
         let commodityId= '[[${commodityId}]]';
-        
-
-        let MODULE_PATH = rootPath+"/PricePaknsaveController/";
+        let title = '[[${CommodityPaknsave.title}]]';
+        let image= '[[${CommodityPaknsave.image}]]';
+         $("#myImage").attr({src:image});
+         
+         let MODULE_PATH = rootPath+"/PricePaknsaveController/";
         let cols = [
-            [
-            {type: 'checkbox'},
-                
-          	{title: 'ID', field: 'id', align: 'center'},
+			            [
+				      //      {type: 'checkbox'},
+				      //    	{title: 'ID', field: 'id', align: 'center'},
+					//		{title: 'Title', field: 'commodityId', align: 'center'},
+					//		{title: 'Category', field: 'categoryId', align: 'center'},
+							{title: 'Date', field: 'date', align: 'center'},
+							{title: 'Price', field: 'price', align: 'center'},
+							{title: 'Branch', field: 'branchId', align: 'center'}
+			            ]
+			        ]
 
-			{title: 'Title', field: 'commodityId', align: 'center'},
-
-			{title: 'Category', field: 'categoryId', align: 'center'},
-
-			{title: 'Date', field: 'date', align: 'center'},
-
-			{title: 'Price', field: 'price', align: 'center'},
-
-			{title: 'Branch', field: 'branchId', align: 'center'}
-            ]
-        ]
-
-        //table表单列表
-        table.render({
-            elem: '#pricePaknsave-table',
-            url: MODULE_PATH + 'list?commodityId='+commodityId,
-            page: true,
-            method: 'get',
-            cols: cols,
-            skin: 'line',
-            toolbar: '#pricePaknsave-toolbar',
-            defaultToolbar: [{
-                layEvent: 'refresh',
-                icon: 'layui-icon-refresh',
-            },  'print', 'exports']
-        });
-
-       
-
+		        //table表单列表
+		        table.render({
+		            elem: '#pricePaknsave-table',
+		            url: MODULE_PATH + 'list?commodityId='+commodityId,
+		            page: true,
+		            method: 'get',
+		            title: title,
+		            cols: cols,
+		            skin: 'line',
+		            toolbar: '#pricePaknsave-toolbar'
+		      //      ,
+		      //      defaultToolbar: [{
+		      //          layEvent: 'refresh',
+		      //          icon: 'layui-icon-refresh',
+		      //      },  'print', 'exports']
+		        });
         
         
+        //给ESC加添关闭弹窗事件。用esc关闭弹窗
+        window.onkeyup=function(ev){
+            var key=ev.keyCode||ev.which;
+            if(key==27){ //按下Escape
+                layer.closeAll(); // 
+                if(parent){
+                    parent.layer.closeAll();
+                }
+            }
+        }
+     //------------------------------------------------------Chart------------------------------------------------------------    
+        google.charts.load('current', {'packages':['annotationchart']});
+ 		google.charts.setOnLoadCallback(drawChart);
+
+  	function drawChart() {
+	  	let commodityId= '[[${commodityId}]]';
+	    var data = new google.visualization.DataTable();
+	    data.addColumn('date', 'Date');
+	    data.addColumn('number', 'Price');
+	    data.addColumn('string', '');
+	    data.addColumn('string', '');
+    
+
        
-       
-    })
+
+    $.ajax({
+        url: rootPath+"/PricePaknsaveController/" + "priceListByCommodityId?commodityId="+commodityId,
+        dataType: 'json',
+        type: 'get',
+        success: function (result) {
+        	console.log(result);
+	            for (const res of result.data) {
+	                data.addRow([new Date(res.date),res.price,null, null]);
+	                var chart = new google.visualization.AnnotationChart(document.getElementById('chart_div'));
+	        	    var options = {
+	        	      displayAnnotations: false,
+	        	      height: 300,
+	        	    };
+ 	        	    chart.draw(data, options);
+	            }
+	        },
+	        error: function(){
+	        	 layer.msg(result.msg, {icon: 2, time: 1000});
+	        }
+	    });
+	  };
+        
+        
+        
+})
+    
+    
+    
+   
+     
+  
+  
+  
+  
+
 </script>
 </html>

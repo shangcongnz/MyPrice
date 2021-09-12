@@ -1,20 +1,32 @@
 package com.myprice.controller.gen;
 
-import com.fc.v2.common.base.BaseController;
-import com.fc.v2.common.domain.AjaxResult;
-import com.fc.v2.common.domain.ResultTable;
-import com.fc.v2.model.custom.Tablepar;
-import com.myprice.model.auto.PricePaknsave;
-import com.myprice.service.PricePaknsaveService;
-import com.github.pagehelper.PageInfo;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import java.util.List;
+
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.fc.v2.common.base.BaseController;
+import com.fc.v2.common.domain.AjaxResult;
+import com.fc.v2.common.domain.ResultTable;
 import com.fc.v2.common.log.Log;
+import com.fc.v2.model.custom.Tablepar;
+import com.github.pagehelper.PageInfo;
+import com.myprice.model.auto.PricePaknsave;
+import com.myprice.model.auto.PricePaknsaveExample;
+import com.myprice.service.CommodityPaknsaveService;
+import com.myprice.service.PricePaknsaveService;
+
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 
 /**
  * PricePaknsaveController
@@ -31,6 +43,8 @@ public class PricePaknsaveController extends BaseController{
 	
 	@Autowired
 	private PricePaknsaveService pricePaknsaveService;
+	@Autowired
+	private CommodityPaknsaveService commodityPaknsaveService;
 	
 	
 	/**
@@ -146,12 +160,30 @@ public class PricePaknsaveController extends BaseController{
 	@GetMapping("/priceListView")
     public String priceListView(@RequestParam(value="commodityId", required = true) String commodityId,ModelMap model)
     {
+		model.put("CommodityPaknsave", commodityPaknsaveService.selectByPrimaryKey(commodityId));
 		System.out.println("commodityId===="+commodityId);
 		model.addAttribute("commodityId",commodityId);
 //		model.put("PricePaknsave", pricePaknsaveService.selectByPrimaryKey(id));
         return prefix + "/priceList";
     }
 	
+	
+	
+	
+	
+	 
+	@Log(title = "PricePaknsave", action = "priceListByCommodityId")
+	@ApiOperation(value = "", notes = "")
+	@GetMapping("/priceListByCommodityId")
+	//@RequiresPermissions("gen:pricePaknsave:list")
+	@ResponseBody
+	public AjaxResult  priceListByCommodityId(PricePaknsave pricePaknsave){
+		System.out.println("pricePaknsave.getCommodityId()--------------"+pricePaknsave.getCommodityId());
+		PricePaknsaveExample example = new PricePaknsaveExample ();
+		example.createCriteria().andCommodityIdEqualTo(pricePaknsave.getCommodityId());
+		List<PricePaknsave> priceList=pricePaknsaveService.selectByExample(example) ; 
+		return retobject(200,priceList);
+	}
 
 	
 }

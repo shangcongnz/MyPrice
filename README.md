@@ -78,7 +78,9 @@ Power BI
 
  
 
+Historical Price
 
+![Commodity](src/main/resources/doc/price.png)
 
 ## Database Model
 

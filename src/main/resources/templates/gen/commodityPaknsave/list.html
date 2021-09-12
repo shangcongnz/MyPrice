@@ -86,13 +86,12 @@
 
         let MODULE_PATH = rootPath+"/CommodityPaknsaveController/";
         let cols = [
-            [
-                {type: 'checkbox'},
+           			 [
+               				 {type: 'checkbox'},
                 
                 					{title: 'ID', field: 'id', align: 'center', width: 80},
 					
 									{title: 'Title', field: 'title', align: 'left' },
-					
 					
 								//	{title: 'Starting price', field: 'price', align: 'center' ,width: 120},
 					
@@ -105,6 +104,7 @@
 									{title: 'product ID', field: 'productId', align: 'center',width: 200},
 					
 									{title: 'Price update date', field: 'lastPriceDate', align: 'center',width: 160},
+									
 									{title: 'Latest Price', field: 'latestPrice', align: 'center',width: 100},
 					
 							//		{title: 'creator', field: 'creator', align: 'center'},
@@ -113,12 +113,10 @@
 									
 							 //		{title: 'URL', field: 'url', align: 'center'},
 							//		{title: 'Description', field: 'description', align: 'center'},
-
-					
 				                
-                {title: 'Operation', toolbar: '#commodityPaknsave-bar', align: 'center',width: 200}
-            ]
-        ]
+                			{title: 'Operation', toolbar: '#commodityPaknsave-bar', align: 'center',width: 200}
+			            ]
+			        ]
 
         //table表单列表
         table.render({
@@ -172,7 +170,9 @@
         window.priceList = function (obj) {
             layer.open({
                 type: 2,
-                title: 'priceList',
+                title: 'Historical Price List',
+                resize: true,
+                scrollbar: true,
                 shade: 0.1,
                 area: ['700px', '700px'],
                 content: rootPath+'/PricePaknsaveController/priceListView?commodityId='+obj.data['id']
@@ -290,5 +290,19 @@
             table.reload('commodityPaknsave-table');
         }
     })
+    
+ //   $(document).ready().keydown( function (e) { if (e.which === 27) {  layer.closeAll();   } });
+    
+    
+    //给ESC加添关闭弹窗事件。用esc关闭弹窗
+    window.onkeyup=function(ev){
+        var key=ev.keyCode||ev.which;
+        if(key==27){ //按下Escape
+            layer.closeAll(); // 
+            if(parent){
+                parent.layer.closeAll();
+            }
+        }
+    }
 </script>
 </html>
