@@ -14,25 +14,28 @@
 
   
 
-  
+  ****
 
 ### Development Environment.
 - JDK: 11
 - MySQL: 8
 - Redis: 6.2
 - Eclipse Version: 2021-03 (4.19.0)
+- Visual Studio Code version: 1.60
+- Operation System (TEST): Red Hat Enterprise Linux 7.6
+- Operation System (DEV) : Windows 11
 - Docker version: 20.10.1
+- XShell version: 7
 - Maven: 3.6.2
-- Testing Operation System: Red Hat Enterprise Linux 7.6
 - Version Control : GIT 
 - RabbitMQ: 3
 - Thymeleaf: 3
 - Jenkins: 2.263.1
-- Apache Shiro
-- MyBatis Generator
-- PageHelper
+- Security: Apache Shiro
+- MyBatis 
 - velocity
 - Connection Pool: druid
+- ~~NodeJS: 14.16~~
 
 
 
@@ -44,9 +47,11 @@ LayUI
 
 React
 
+Google Chart
 
 
-Power BI
+
+- [x] ~~Power BI~~
 
 
 ### STEP 
