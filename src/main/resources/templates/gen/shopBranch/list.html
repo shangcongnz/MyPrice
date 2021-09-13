@@ -40,6 +40,12 @@
         <i class="layui-icon layui-icon-delete"></i>
 		Delete
     </button>
+
+
+	<button   class="pear-btn pear-btn-danger pear-btn-md" lay-event="updatePaknsaveBranch">
+         <i class="layui-icon layui-icon-add-1"></i>
+			 Update PaknSave Branch Automatically
+    </button>
 </script>
 
 <script type="text/html" id="shopBranch-bar">
@@ -84,24 +90,23 @@
             [
                 {type: 'checkbox'},
                 
-				{title: 'ID', field: 'id', align: 'center'},
+				{title: 'ID', field: 'id', align: 'left', width: 80},
 
-				{title: 'Shop', field: 'shopName', align: 'center'},
-
-				{title: 'Hotline', field: 'hotline', align: 'center'},
-
-				{title: 'Strore ID', field: 'storeId', align: 'center'},
-
-				{title: 'Branch Name', field: 'branchName', align: 'center'},
+				{title: 'Shop', field: 'shopName', align: 'left', width: 160},
 				
-				{title: 'Address', field: 'address', align: 'center'},
+				{title: 'Branch Name', field: 'branchName', align: 'left', width: 200},
+				
+				{title: 'Strore ID', field: 'storeId', align: 'left',width: 330},
 
-				{title: 'Status', field: 'status', align: 'center',toolbar: '#shopBranch-enable'},
+				{title: 'Hotline', field: 'hotline', align: 'left', width: 160},
+				
+				{title: 'Address', field: 'address', align: 'left'},
 
-				{title: 'Is Default', field: 'isDefault', align: 'center',toolbar: '#shopBranch-isDefault'},
-					
+				{title: 'Status', field: 'status', align: 'left',toolbar: '#shopBranch-enable', width: 90},
+
+				{title: 'Is Default', field: 'isDefault', align: 'left',toolbar: '#shopBranch-isDefault', width: 90},
 				                
-                {title: 'Operation', toolbar: '#shopBranch-bar', align: 'center'}
+                {title: 'Operation', toolbar: '#shopBranch-bar', align: 'cenleftter',width: 160}
             ]
         ]
 
@@ -137,6 +142,8 @@
                 window.refresh();
             } else if (obj.event === 'batchRemove') {
                 window.batchRemove(obj);
+            }else if (obj.event === 'updatePaknsaveBranch') {
+                window.updatePaknsaveBranch(obj);
             }
         });
 
@@ -227,6 +234,29 @@
             table.reload('shopBranch-table');
         }
         
+        
+        //update
+        window.updatePaknsaveBranch = function (obj) {
+            layer.confirm('confirm to update All Branch of PaknSave', {icon: 3, title: 'update'}, function (index) {
+                layer.close(index);
+                let loading = layer.load();
+                $.ajax({
+                    url: MODULE_PATH + "updateBranchPaknsave",
+                    dataType: 'json',
+                    type: 'get',
+                    success: function (result) {
+                        layer.close(loading);
+                        if (result.code==200) {
+                            layer.msg(result.msg, {icon: 1, time: 1000}, function () {
+                                obj.del();
+                            });
+                        } else {
+                            layer.msg(result.msg, {icon: 2, time: 1000});
+                        }
+                    }
+                })
+            });
+        }
         
         //状态切换绑定
         form.on('switch(shopBranch-isDefault)', function (obj) {

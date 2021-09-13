@@ -172,4 +172,19 @@ public class ShopBranchController extends BaseController{
 
 
 	
+	
+	@GetMapping("/updateBranchPaknsave")
+	@ResponseBody
+	public AjaxResult updateBranchPaknsave(){
+		int b=shopBranchService.updateBranchPaknsave();
+
+		if(b>0){
+			return success();
+		}else{
+			return error();
+		}
+	}
+	
+
+	
 }

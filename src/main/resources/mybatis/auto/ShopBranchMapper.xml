@@ -3,14 +3,24 @@
 <mapper namespace="com.myprice.mapper.auto.ShopBranchMapper">
   <resultMap id="BaseResultMap" type="com.myprice.model.auto.ShopBranch">
     <result column="id" jdbcType="INTEGER" property="id" />
-    <result column="address" jdbcType="VARCHAR" property="address" />
-    <result column="hotline" jdbcType="VARCHAR" property="hotline" />
-    <result column="shop_id" jdbcType="INTEGER" property="shopId" />
-    <result column="store_id" jdbcType="VARCHAR" property="storeId" />
     <result column="branch_name" jdbcType="VARCHAR" property="branchName" />
-    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="store_id" jdbcType="VARCHAR" property="storeId" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="latitude" jdbcType="VARCHAR" property="latitude" />
+    <result column="longitude" jdbcType="VARCHAR" property="longitude" />
+    <result column="opening_hours" jdbcType="VARCHAR" property="openingHours" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="region_name" jdbcType="VARCHAR" property="regionName" />
+    <result column="region_code" jdbcType="VARCHAR" property="regionCode" />
+    <result column="is_catering_available" jdbcType="INTEGER" property="isCateringAvailable" />
     <result column="is_default" jdbcType="INTEGER" property="isDefault" />
+    <result column="hotline" jdbcType="VARCHAR" property="hotline" />
     <result column="cookie" jdbcType="VARCHAR" property="cookie" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="shop_id" jdbcType="INTEGER" property="shopId" />
+    <result column="ecom_store_id" jdbcType="VARCHAR" property="ecomStoreId" />
+    <result column="not_same_store_as_in_ecom" jdbcType="INTEGER" property="notSameStoreAsInEcom" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -73,14 +83,24 @@
   <sql id="Base_Column_List">
   
 	  	  	      	id,
-       	  	      	address,
-       	  	      	hotline,
-       	  	      	shop_id,
-       	  	      	store_id,
        	  	      	branch_name,
-       	  	      	status,
+       	  	      	store_id,
+       	  	      	address,
+       	  	      	latitude,
+       	  	      	longitude,
+       	  	      	opening_hours,
+       	  	      	url,
+       	  	      	region_name,
+       	  	      	region_code,
+       	  	      	is_catering_available,
        	  	      	is_default,
-       	  	    	  	cookie
+       	  	      	hotline,
+       	  	      	cookie,
+       	  	      	status,
+       	  	      	shop_id,
+       	  	      	ecom_store_id,
+       	  	      	not_same_store_as_in_ecom,
+       	  	    	  	create_date
        	  	
   </sql>
   
@@ -119,25 +139,45 @@
   <insert id="insert" parameterType="com.myprice.model.auto.ShopBranch">
     insert into u_shop_branch (
       	  	       id,
-       	  	       address,
-       	  	       hotline,
-       	  	       shop_id,
-       	  	       store_id,
        	  	       branch_name,
-       	  	       status,
+       	  	       store_id,
+       	  	       address,
+       	  	       latitude,
+       	  	       longitude,
+       	  	       opening_hours,
+       	  	       url,
+       	  	       region_name,
+       	  	       region_code,
+       	  	       is_catering_available,
        	  	       is_default,
-       	  	    	  cookie
+       	  	       hotline,
+       	  	       cookie,
+       	  	       status,
+       	  	       shop_id,
+       	  	       ecom_store_id,
+       	  	       not_same_store_as_in_ecom,
+       	  	    	  create_date
        	    )
     values (
 	  	  	      	#{id,jdbcType=INTEGER},
-       	  	      	#{address,jdbcType=VARCHAR},
-       	  	      	#{hotline,jdbcType=VARCHAR},
-       	  	      	#{shopId,jdbcType=INTEGER},
-       	  	      	#{storeId,jdbcType=VARCHAR},
        	  	      	#{branchName,jdbcType=VARCHAR},
-       	  	      	#{status,jdbcType=INTEGER},
+       	  	      	#{storeId,jdbcType=VARCHAR},
+       	  	      	#{address,jdbcType=VARCHAR},
+       	  	      	#{latitude,jdbcType=VARCHAR},
+       	  	      	#{longitude,jdbcType=VARCHAR},
+       	  	      	#{openingHours,jdbcType=VARCHAR},
+       	  	      	#{url,jdbcType=VARCHAR},
+       	  	      	#{regionName,jdbcType=VARCHAR},
+       	  	      	#{regionCode,jdbcType=VARCHAR},
+       	  	      	#{isCateringAvailable,jdbcType=INTEGER},
        	  	      	#{isDefault,jdbcType=INTEGER},
-       	  	    	  #{cookie,jdbcType=VARCHAR}
+       	  	      	#{hotline,jdbcType=VARCHAR},
+       	  	      	#{cookie,jdbcType=VARCHAR},
+       	  	      	#{status,jdbcType=INTEGER},
+       	  	      	#{shopId,jdbcType=INTEGER},
+       	  	      	#{ecomStoreId,jdbcType=VARCHAR},
+       	  	      	#{notSameStoreAsInEcom,jdbcType=INTEGER},
+       	  	    	  #{createDate,jdbcType=TIMESTAMP}
        	    )
   </insert>
   
@@ -149,65 +189,135 @@
         id,
       </if>
          
-      <if test="address != null">
-        address,
-      </if>
-         
-      <if test="hotline != null">
-        hotline,
-      </if>
-         
-      <if test="shopId != null">
-        shop_id,
+      <if test="branchName != null">
+        branch_name,
       </if>
          
       <if test="storeId != null">
         store_id,
       </if>
          
-      <if test="branchName != null">
-        branch_name,
+      <if test="address != null">
+        address,
       </if>
          
-      <if test="status != null">
-        status,
+      <if test="latitude != null">
+        latitude,
+      </if>
+         
+      <if test="longitude != null">
+        longitude,
+      </if>
+         
+      <if test="openingHours != null">
+        opening_hours,
+      </if>
+         
+      <if test="url != null">
+        url,
+      </if>
+         
+      <if test="regionName != null">
+        region_name,
+      </if>
+         
+      <if test="regionCode != null">
+        region_code,
+      </if>
+         
+      <if test="isCateringAvailable != null">
+        is_catering_available,
       </if>
          
       <if test="isDefault != null">
         is_default,
       </if>
          
+      <if test="hotline != null">
+        hotline,
+      </if>
+         
       <if test="cookie != null">
         cookie,
+      </if>
+         
+      <if test="status != null">
+        status,
+      </if>
+         
+      <if test="shopId != null">
+        shop_id,
+      </if>
+         
+      <if test="ecomStoreId != null">
+        ecom_store_id,
+      </if>
+         
+      <if test="notSameStoreAsInEcom != null">
+        not_same_store_as_in_ecom,
+      </if>
+         
+      <if test="createDate != null">
+        create_date,
       </if>
          </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
           <if test="id != null">
         #{id,jdbcType=INTEGER},
       </if>
-          <if test="address != null">
-        #{address,jdbcType=VARCHAR},
-      </if>
-          <if test="hotline != null">
-        #{hotline,jdbcType=VARCHAR},
-      </if>
-          <if test="shopId != null">
-        #{shopId,jdbcType=INTEGER},
+          <if test="branchName != null">
+        #{branchName,jdbcType=VARCHAR},
       </if>
           <if test="storeId != null">
         #{storeId,jdbcType=VARCHAR},
       </if>
-          <if test="branchName != null">
-        #{branchName,jdbcType=VARCHAR},
+          <if test="address != null">
+        #{address,jdbcType=VARCHAR},
       </if>
-          <if test="status != null">
-        #{status,jdbcType=INTEGER},
+          <if test="latitude != null">
+        #{latitude,jdbcType=VARCHAR},
+      </if>
+          <if test="longitude != null">
+        #{longitude,jdbcType=VARCHAR},
+      </if>
+          <if test="openingHours != null">
+        #{openingHours,jdbcType=VARCHAR},
+      </if>
+          <if test="url != null">
+        #{url,jdbcType=VARCHAR},
+      </if>
+          <if test="regionName != null">
+        #{regionName,jdbcType=VARCHAR},
+      </if>
+          <if test="regionCode != null">
+        #{regionCode,jdbcType=VARCHAR},
+      </if>
+          <if test="isCateringAvailable != null">
+        #{isCateringAvailable,jdbcType=INTEGER},
       </if>
           <if test="isDefault != null">
         #{isDefault,jdbcType=INTEGER},
       </if>
+          <if test="hotline != null">
+        #{hotline,jdbcType=VARCHAR},
+      </if>
           <if test="cookie != null">
         #{cookie,jdbcType=VARCHAR},
+      </if>
+          <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+          <if test="shopId != null">
+        #{shopId,jdbcType=INTEGER},
+      </if>
+          <if test="ecomStoreId != null">
+        #{ecomStoreId,jdbcType=VARCHAR},
+      </if>
+          <if test="notSameStoreAsInEcom != null">
+        #{notSameStoreAsInEcom,jdbcType=INTEGER},
+      </if>
+          <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
       </if>
         </trim>
   </insert>
@@ -225,29 +335,59 @@
           <if test="record.id != null">
         id = #{record.id,jdbcType=INTEGER},
       </if>
-          <if test="record.address != null">
-        address = #{record.address,jdbcType=VARCHAR},
-      </if>
-          <if test="record.hotline != null">
-        hotline = #{record.hotline,jdbcType=VARCHAR},
-      </if>
-          <if test="record.shopId != null">
-        shop_id = #{record.shopId,jdbcType=INTEGER},
+          <if test="record.branchName != null">
+        branch_name = #{record.branchName,jdbcType=VARCHAR},
       </if>
           <if test="record.storeId != null">
         store_id = #{record.storeId,jdbcType=VARCHAR},
       </if>
-          <if test="record.branchName != null">
-        branch_name = #{record.branchName,jdbcType=VARCHAR},
+          <if test="record.address != null">
+        address = #{record.address,jdbcType=VARCHAR},
       </if>
-          <if test="record.status != null">
-        status = #{record.status,jdbcType=INTEGER},
+          <if test="record.latitude != null">
+        latitude = #{record.latitude,jdbcType=VARCHAR},
+      </if>
+          <if test="record.longitude != null">
+        longitude = #{record.longitude,jdbcType=VARCHAR},
+      </if>
+          <if test="record.openingHours != null">
+        opening_hours = #{record.openingHours,jdbcType=VARCHAR},
+      </if>
+          <if test="record.url != null">
+        url = #{record.url,jdbcType=VARCHAR},
+      </if>
+          <if test="record.regionName != null">
+        region_name = #{record.regionName,jdbcType=VARCHAR},
+      </if>
+          <if test="record.regionCode != null">
+        region_code = #{record.regionCode,jdbcType=VARCHAR},
+      </if>
+          <if test="record.isCateringAvailable != null">
+        is_catering_available = #{record.isCateringAvailable,jdbcType=INTEGER},
       </if>
           <if test="record.isDefault != null">
         is_default = #{record.isDefault,jdbcType=INTEGER},
       </if>
+          <if test="record.hotline != null">
+        hotline = #{record.hotline,jdbcType=VARCHAR},
+      </if>
           <if test="record.cookie != null">
         cookie = #{record.cookie,jdbcType=VARCHAR},
+      </if>
+          <if test="record.status != null">
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+          <if test="record.shopId != null">
+        shop_id = #{record.shopId,jdbcType=INTEGER},
+      </if>
+          <if test="record.ecomStoreId != null">
+        ecom_store_id = #{record.ecomStoreId,jdbcType=VARCHAR},
+      </if>
+          <if test="record.notSameStoreAsInEcom != null">
+        not_same_store_as_in_ecom = #{record.notSameStoreAsInEcom,jdbcType=INTEGER},
+      </if>
+          <if test="record.createDate != null">
+        create_date = #{record.createDate,jdbcType=TIMESTAMP},
       </if>
          
     </set>
@@ -263,21 +403,41 @@
             	     	 
     	 id = #{record.id,jdbcType=INTEGER},
     	         	     	 
-    	 address = #{record.address,jdbcType=VARCHAR},
-    	         	     	 
-    	 hotline = #{record.hotline,jdbcType=VARCHAR},
-    	         	     	 
-    	 shop_id = #{record.shopId,jdbcType=INTEGER},
+    	 branch_name = #{record.branchName,jdbcType=VARCHAR},
     	         	     	 
     	 store_id = #{record.storeId,jdbcType=VARCHAR},
     	         	     	 
-    	 branch_name = #{record.branchName,jdbcType=VARCHAR},
+    	 address = #{record.address,jdbcType=VARCHAR},
     	         	     	 
-    	 status = #{record.status,jdbcType=INTEGER},
+    	 latitude = #{record.latitude,jdbcType=VARCHAR},
+    	         	     	 
+    	 longitude = #{record.longitude,jdbcType=VARCHAR},
+    	         	     	 
+    	 opening_hours = #{record.openingHours,jdbcType=VARCHAR},
+    	         	     	 
+    	 url = #{record.url,jdbcType=VARCHAR},
+    	         	     	 
+    	 region_name = #{record.regionName,jdbcType=VARCHAR},
+    	         	     	 
+    	 region_code = #{record.regionCode,jdbcType=VARCHAR},
+    	         	     	 
+    	 is_catering_available = #{record.isCateringAvailable,jdbcType=INTEGER},
     	         	     	 
     	 is_default = #{record.isDefault,jdbcType=INTEGER},
     	         	     	 
-    	 cookie = #{record.cookie,jdbcType=VARCHAR}
+    	 hotline = #{record.hotline,jdbcType=VARCHAR},
+    	         	     	 
+    	 cookie = #{record.cookie,jdbcType=VARCHAR},
+    	         	     	 
+    	 status = #{record.status,jdbcType=INTEGER},
+    	         	     	 
+    	 shop_id = #{record.shopId,jdbcType=INTEGER},
+    	         	     	 
+    	 ecom_store_id = #{record.ecomStoreId,jdbcType=VARCHAR},
+    	         	     	 
+    	 not_same_store_as_in_ecom = #{record.notSameStoreAsInEcom,jdbcType=INTEGER},
+    	         	     	 
+    	 create_date = #{record.createDate,jdbcType=TIMESTAMP}
     	         
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -289,72 +449,132 @@
     update u_shop_branch
     <set>
                           
-      <if test="address != null">
-        address = #{address,jdbcType=VARCHAR},
-      </if>
-                      
-      <if test="hotline != null">
-        hotline = #{hotline,jdbcType=VARCHAR},
-      </if>
-                      
-      <if test="shopId != null">
-        shop_id = #{shopId,jdbcType=INTEGER},
+      <if test="branchName != null">
+        branch_name = #{branchName,jdbcType=VARCHAR},
       </if>
                       
       <if test="storeId != null">
         store_id = #{storeId,jdbcType=VARCHAR},
       </if>
                       
-      <if test="branchName != null">
-        branch_name = #{branchName,jdbcType=VARCHAR},
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
       </if>
                       
-      <if test="status != null">
-        status = #{status,jdbcType=INTEGER},
+      <if test="latitude != null">
+        latitude = #{latitude,jdbcType=VARCHAR},
+      </if>
+                      
+      <if test="longitude != null">
+        longitude = #{longitude,jdbcType=VARCHAR},
+      </if>
+                      
+      <if test="openingHours != null">
+        opening_hours = #{openingHours,jdbcType=VARCHAR},
+      </if>
+                      
+      <if test="url != null">
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+                      
+      <if test="regionName != null">
+        region_name = #{regionName,jdbcType=VARCHAR},
+      </if>
+                      
+      <if test="regionCode != null">
+        region_code = #{regionCode,jdbcType=VARCHAR},
+      </if>
+                      
+      <if test="isCateringAvailable != null">
+        is_catering_available = #{isCateringAvailable,jdbcType=INTEGER},
       </if>
                       
       <if test="isDefault != null">
         is_default = #{isDefault,jdbcType=INTEGER},
       </if>
                       
+      <if test="hotline != null">
+        hotline = #{hotline,jdbcType=VARCHAR},
+      </if>
+                      
       <if test="cookie != null">
         cookie = #{cookie,jdbcType=VARCHAR},
+      </if>
+                      
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+                      
+      <if test="shopId != null">
+        shop_id = #{shopId,jdbcType=INTEGER},
+      </if>
+                      
+      <if test="ecomStoreId != null">
+        ecom_store_id = #{ecomStoreId,jdbcType=VARCHAR},
+      </if>
+                      
+      <if test="notSameStoreAsInEcom != null">
+        not_same_store_as_in_ecom = #{notSameStoreAsInEcom,jdbcType=INTEGER},
+      </if>
+                      
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=TIMESTAMP},
       </if>
               </set>
     
     where 
             
     id = #{id,jdbcType=INTEGER}
-                                                                          
+                                                                                                                                                          
   </update>
 
-      	      	   	      	   	      	   	      	   	      	   	      	   	      	   	      	   	      	
+      	      	   	      	   	      	   	      	   	      	   	      	   	      	   	      	   	      	   	      	   	      	   	      	   	      	   	      	   	      	   	      	   	      	   	      	   	      	
 
   <update id="updateByPrimaryKey" parameterType="com.myprice.model.auto.ShopBranch">
     update u_shop_branch
     set 
     		 		 	  	  
-		address = #{address,jdbcType=VARCHAR},
-	  	 		 	  	  
-		hotline = #{hotline,jdbcType=VARCHAR},
-	  	 		 	  	  
-		shop_id = #{shopId,jdbcType=INTEGER},
+		branch_name = #{branchName,jdbcType=VARCHAR},
 	  	 		 	  	  
 		store_id = #{storeId,jdbcType=VARCHAR},
 	  	 		 	  	  
-		branch_name = #{branchName,jdbcType=VARCHAR},
+		address = #{address,jdbcType=VARCHAR},
+	  	 		 	  	  
+		latitude = #{latitude,jdbcType=VARCHAR},
+	  	 		 	  	  
+		longitude = #{longitude,jdbcType=VARCHAR},
+	  	 		 	  	  
+		opening_hours = #{openingHours,jdbcType=VARCHAR},
+	  	 		 	  	  
+		url = #{url,jdbcType=VARCHAR},
+	  	 		 	  	  
+		region_name = #{regionName,jdbcType=VARCHAR},
+	  	 		 	  	  
+		region_code = #{regionCode,jdbcType=VARCHAR},
+	  	 		 	  	  
+		is_catering_available = #{isCateringAvailable,jdbcType=INTEGER},
+	  	 		 	  	  
+		is_default = #{isDefault,jdbcType=INTEGER},
+	  	 		 	  	  
+		hotline = #{hotline,jdbcType=VARCHAR},
+	  	 		 	  	  
+		cookie = #{cookie,jdbcType=VARCHAR},
 	  	 		 	  	  
 		status = #{status,jdbcType=INTEGER},
 	  	 		 	  	  
-		is_default = #{isDefault,jdbcType=INTEGER},
+		shop_id = #{shopId,jdbcType=INTEGER},
+	  	 		 	  	  
+		ecom_store_id = #{ecomStoreId,jdbcType=VARCHAR},
+	  	 		 	  	  
+		not_same_store_as_in_ecom = #{notSameStoreAsInEcom,jdbcType=INTEGER},
 	  	 		 	  		
-		cookie = #{cookie,jdbcType=VARCHAR}
+		create_date = #{createDate,jdbcType=TIMESTAMP}
 	  	 		
     where 
             
     id = #{id,jdbcType=INTEGER}
-                                                                            
+                                                                                                                                                            
   </update>
   
-                                                 
+                                                                                                   
 </mapper>

@@ -3,42 +3,63 @@
 <mapper namespace="com.myprice.mapper.auto.ShopBranchMapper">
   <resultMap id="BaseResultMap2" type="com.myprice.model.auto.ShopBranch">
     <result column="id" jdbcType="INTEGER" property="id" />
-    <result column="address" jdbcType="VARCHAR" property="address" />
-    <result column="hotline" jdbcType="VARCHAR" property="hotline" />
-    <result column="shop_id" jdbcType="INTEGER" property="shopId" />
-    <result column="store_id" jdbcType="VARCHAR" property="storeId" />
     <result column="branch_name" jdbcType="VARCHAR" property="branchName" />
-    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="store_id" jdbcType="VARCHAR" property="storeId" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="latitude" jdbcType="VARCHAR" property="latitude" />
+    <result column="longitude" jdbcType="VARCHAR" property="longitude" />
+    <result column="opening_hours" jdbcType="VARCHAR" property="openingHours" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="region_name" jdbcType="VARCHAR" property="regionName" />
+    <result column="region_code" jdbcType="VARCHAR" property="regionCode" />
+    <result column="is_catering_available" jdbcType="INTEGER" property="isCateringAvailable" />
     <result column="is_default" jdbcType="INTEGER" property="isDefault" />
+    <result column="hotline" jdbcType="VARCHAR" property="hotline" />
     <result column="cookie" jdbcType="VARCHAR" property="cookie" />
-    <result column="shop_name" jdbcType="VARCHAR" property="shopName" />
-  </resultMap>
- 
-  
-  <select id="selectByExample2" parameterType="com.myprice.model.auto.ShopBranchExample" resultMap="BaseResultMap2">
-    select
-    <if test="distinct">
-      distinct
-    </if>
-    	id,
-       	  	      	address,
-       	  	      	hotline,
-       	  	      	shop_id,
-       	  	      	store_id,
-       	  	      	branch_name,
-       	  	      	status,
-       	  	      	is_default,
-       	  	      ( SELECT s.shop_name FROM u_shop s WHERE s.id = sb.shop_id ) AS shop_name ,
-       	  	    	 cookie
-    from u_shop_branch sb
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
-  </select>
-   
-  
-                                                 
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="shop_id" jdbcType="INTEGER" property="shopId" />
+    <result column="ecom_store_id" jdbcType="VARCHAR" property="ecomStoreId" />
+    <result column="not_same_store_as_in_ecom" jdbcType="INTEGER" property="notSameStoreAsInEcom" />
+
+	<result column="shop_name" jdbcType="VARCHAR"	property="shopName" />
+	</resultMap>
+
+
+	<select id="selectByExample2"
+		parameterType="com.myprice.model.auto.ShopBranchExample"
+		resultMap="BaseResultMap2">
+		select
+		<if test="distinct">
+			distinct
+		</if>
+		id,
+		branch_name,
+		store_id,
+		ecom_store_id,
+		address,
+		latitude,
+		longitude,
+		opening_hours,
+		url,
+		region_name,
+		region_code,
+		is_catering_available,
+		is_default,
+		hotline,
+		cookie,
+		status,
+		shop_id ,
+		( SELECT s.shop_name FROM u_shop s WHERE s.id = sb.shop_id ) AS	shop_name
+
+		from u_shop_branch sb
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+	</select>
+
+
+
 </mapper>
