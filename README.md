@@ -1,6 +1,8 @@
 # Price Monitor and Analyse  System ( My Price V1.0) 
 
-- ### **INTRODUCTION**
+![](src/main/resources/doc/Logo.png)
+
+- **INTRODUCTION**
 
   This is a personal project. The purpose of this project is to collect price information from various online shopping websites in New Zealand. Also, monitor price information; analyse the price trend of commodities; provide shopping advice. 
 

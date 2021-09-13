@@ -50,7 +50,7 @@
         </div>
         <div class="layui-col-xs6 layui-col-md3">
             <div class="layui-card top-panel">
-                <div class="layui-card-header">statistics</div>
+                <div class="layui-card-header">Statistics</div>
                 <div class="layui-card-body">
                     <div class="layui-row layui-col-space5">
                         <div class="layui-col-xs8 layui-col-md8 top-panel-number" style="color: #28333E;" id="value4">
@@ -67,7 +67,7 @@
     <div class="layui-row layui-col-space10">
         <div class="layui-col-xs6 layui-col-md3">
             <div class="layui-card top-panel">
-                <div class="layui-card-header">maxMemory</div>
+                <div class="layui-card-header">Max Memory</div>
                 <div class="layui-card-body">
                     <div class="layui-row layui-col-space5">
                         <div class="layui-col-xs8 layui-col-md8 top-panel-number" style="color: #28333E;" id="value1" th:text="${service.maxMemory}">
@@ -81,7 +81,7 @@
         </div>
         <div class="layui-col-xs6 layui-col-md3">
             <div class="layui-card top-panel">
-                <div class="layui-card-header">totalMemory</div>
+                <div class="layui-card-header">Total Memory</div>
                 <div class="layui-card-body">
                     <div class="layui-row layui-col-space5">
                         <div class="layui-col-xs8 layui-col-md8 top-panel-number" style="color: #28333E;" th:text="${service.totalMemory}">
@@ -94,10 +94,10 @@
         </div>
         <div class="layui-col-xs6 layui-col-md3">
             <div class="layui-card top-panel">
-                <div class="layui-card-header">freeMemory</div>
+                <div class="layui-card-header">Free Memory</div>
                 <div class="layui-card-body">
                     <div class="layui-row layui-col-space5">
-                        <div class="layui-col-xs8 layui-col-md8 top-panel-number" style="color: #28333E;" th:text="${service.freeMemory}">
+                        <div class="layui-col-maxMemoryxs8 layui-col-md8 top-panel-number" style="color: #28333E;" th:text="${service.freeMemory}">
                             0
                         </div>
                       
@@ -107,7 +107,7 @@
         </div>
         <div class="layui-col-xs6 layui-col-md3">
             <div class="layui-card top-panel">
-                <div class="layui-card-header">usableMemory</div>
+                <div class="layui-card-header">Usable Memory</div>
                 <div class="layui-card-body">
                     <div class="layui-row layui-col-space5">
                         <div class="layui-col-xs8 layui-col-md8 top-panel-number" style="color: #28333E;" id="value4" th:text="${service.usableMemory}">
