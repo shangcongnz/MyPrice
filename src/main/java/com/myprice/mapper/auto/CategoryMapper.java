@@ -8,9 +8,8 @@ import com.myprice.model.auto.Category;
 import com.myprice.model.auto.CategoryExample;
 
 /**
- * 产品分类  
- * _自动生成
- * @email ${email}
+ 
+ * @email  
  * @date 2021-06-26 14:52:52
  */
 public interface CategoryMapper {

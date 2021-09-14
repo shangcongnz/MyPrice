@@ -30,12 +30,12 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
 /**
- * 产品分类Controller
+ * Category Controller
  * @ClassName: CategoryController
  * 
  * @date 2021-06-26 14:52:52
  */
-@Api(value = "产品分类")
+@Api(value = "Category")
 @Controller
 @RequestMapping("/CategoryController")
 public class CategoryController extends BaseController{
@@ -48,12 +48,11 @@ public class CategoryController extends BaseController{
 //	private RedisService redis;
 	
 	/**
-	 * 产品分类页面展示
-	 * @param model
+ 	 * @param model
 	 * @return String
 	 * 
 	 */
-	@ApiOperation(value = "分页跳转", notes = "分页跳转")
+	@ApiOperation(value = "Jump page", notes = "")
 	@GetMapping("/view")
 	@RequiresPermissions("gen:category:view")
     public String view(ModelMap model)
@@ -62,13 +61,13 @@ public class CategoryController extends BaseController{
     }
 	
 	/**
-	 * list集合
+	 * list 
 	 * @param tablepar
 	 * @param searchText
 	 * @return
 	 */
-	//@Log(title = "产品分类", action = "111")
-	@ApiOperation(value = "分页跳转", notes = "分页跳转")
+	@Log(title = "Category List", action = "Search")
+	@ApiOperation(value = "Category List", notes = "Category query")
 	@GetMapping("/list")
 	@RequiresPermissions("gen:category:list")
 	@ResponseBody
@@ -81,7 +80,7 @@ public class CategoryController extends BaseController{
 	/**
      * 新增跳转
      */
-	@ApiOperation(value = "新增跳转", notes = "新增跳转")
+	@ApiOperation(value = "Jump to category add page", notes = "Jump to category add page")
     @GetMapping("/add")
     public String add(ModelMap modelMap)
     {

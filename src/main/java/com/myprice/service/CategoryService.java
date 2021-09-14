@@ -3,6 +3,8 @@ package com.myprice.service;
 import java.util.Arrays;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -19,7 +21,6 @@ import com.myprice.model.auto.CategoryExample;
 import cn.hutool.core.util.StrUtil;
 
 /**
- * _自动生成
  * @email ${email}
  * @date 2021-06-26 14:52:52  
  **/
@@ -27,31 +28,25 @@ import cn.hutool.core.util.StrUtil;
 public class CategoryService implements BaseService<Category, CategoryExample>{
 	@Autowired
 	private CategoryMapper categoryMapper;
-	
+	private static final Logger log = LoggerFactory.getLogger(CategoryService.class);
       	   	      	      	      	      	      	
 	/**
-	 * 分页查询
+	 * 
 	 * @param pageNum
 	 * @param pageSize
 	 * @return
 	 */
-	@Cacheable(value="categoryList" )//value为存入redis的key
+	@Cacheable(value="categoryList" )//value
 	 public PageInfo<Category> list(Tablepar tablepar,Category category){
-		System.out.println("查询分类信息。。。。。。");
+		log.debug("Searching....");
 	        CategoryExample testExample=new CategoryExample();
  
-			//搜索
-			if(StrUtil.isNotEmpty(tablepar.getSearchText())) {//小窗体
+			if(StrUtil.isNotEmpty(tablepar.getSearchText())) {// 
 	        	testExample.createCriteria().andLikeQuery2(tablepar.getSearchText());
-	        }else {//大搜索
+	        }else {// 
 	        	testExample.createCriteria().andLikeQuery(category);
 	        }
-			//表格排序
-			//if(StrUtil.isNotEmpty(tablepar.getOrderByColumn())) {
-	        //	testExample.setOrderByClause(StringUtils.toUnderScoreCase(tablepar.getOrderByColumn()) +" "+tablepar.getIsAsc());
-	        //}else{
-	        //	testExample.setOrderByClause("id ASC");
-	        //}
+ 
 	        PageHelper.startPage(tablepar.getPage(), tablepar.getLimit());
 	        List<Category> list= categoryMapper.selectByExample(testExample);
 	        PageInfo<Category> pageInfo = new PageInfo<Category>(list);

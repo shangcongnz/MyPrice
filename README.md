@@ -1,4 +1,4 @@
-# Price Monitor and Analyse  System ( My Price V1.0) 
+# Price Monitoring and Analysis  System ( My Price V1.0) 
 
 ![](src/main/resources/doc/Logo.png)
 
@@ -6,13 +6,11 @@
 
   This is a personal project. The purpose of this project is to collect price information from various online shopping websites in New Zealand. Also, monitor price information; analyse the price trend of commodities; provide shopping advice. 
 
-  **Discussions on technology, product design, business opportunity,  are big welcome.**
+  **Discussions on technology, product design, business opportunity are big welcome.**
 
   The project is in progress. It is being upgraded every day. The documents are on the way.
 
   My Email: shangcong.nz@gmail.com
-
-  
 
   
 
@@ -30,12 +28,13 @@
 - XShell version: 7
 - Maven: 3.6.2
 - Version Control : GIT 
-- RabbitMQ: 3
+- ~~RabbitMQ: 3~~
 - Thymeleaf: 3
 - Jenkins: 2.263.1
 - Security: Apache Shiro
+- Quartz: 2.3.2
 - MyBatis 
-- velocity
+- velocity: 1.7
 - Connection Pool: druid
 - ~~NodeJS: 14.16~~
 
@@ -70,9 +69,7 @@ Google Chart
 | :------------------ | --------------------------------- | --------------------------------- |
 | Home Page           | http://localhost:8080             |                                   |
 | Management Platform | http://localhost:8080/admin/login | Username:admin    Password: admin |
-|                     |                                   |                                   |
 | swagger             | http://localhost:8080/doc.html    |                                   |
-|                     |                                   |                                   |
 
 
 ###  Preview:
@@ -87,8 +84,14 @@ Google Chart
 
 Historical Price
 
+![Commodity](src/main/resources/doc/PriceMoniting.png)
+
 ![Commodity](src/main/resources/doc/price.png)
 
 ## Database Model
 
 ![Commodity](src/main/resources/doc/ER_v1.png)
+
+Code Style
+
+![Commodity](src/main/resources/doc/Code Style.png)
