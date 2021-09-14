@@ -1,6 +1,6 @@
 # Price Monitoring and Analysis  System ( My Price V1.0) 
 
-![](src/main/resources/doc/Logo.png)
+![](doc/Logo.png)
 
 - **INTRODUCTION**
 
@@ -56,7 +56,7 @@ Google Chart
 
 
 ### STEP 
-1. Import initial database script from  /resource/sql/MyPrice2.sql into your MYSQL database
+1. Import initial database script from  /doc/sql/MyPrice2.sql into your MYSQL database
 2. Check MYSQL version. in pom.xml 
 3. Check  Database version and database connection address in application-dev.yml.
 4. Run Application.java  or WebInitializer.java
@@ -74,24 +74,24 @@ Google Chart
 
 ###  Preview:
 
-### ![Category](src/main/resources/doc/Category.png)
+### ![Category](doc/Category.png)
 
 
 
-![Commodity](src/main/resources/doc/productList.png)
+![Commodity](doc/productList.png)
 
  
 
 Historical Price
 
-![Commodity](src/main/resources/doc/PriceMoniting.png)
+![Commodity](doc/PriceMoniting.png)
 
-![Commodity](src/main/resources/doc/price.png)
+![Commodity](doc/price.png)
 
 ## Database Model
 
-![Commodity](src/main/resources/doc/ER_v1.png)
+![Commodity](doc/ER_v1.png)
 
 Code Style
 
-![Commodity](src/main/resources/doc/Code Style.png)
+![Commodity](doc/Code Style.png)
