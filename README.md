@@ -68,11 +68,11 @@
 
 ## Applications URL
 
-| Application         | URL                               |                                   |
-| :------------------ | --------------------------------- | --------------------------------- |
-| Home Page           | http://localhost:8080             |                                   |
-| Management Platform | http://localhost:8080/admin/login | Username:admin    Password: admin |
-| swagger             | http://localhost:8080/doc.html    |                                   |
+| Application         | URL                               |                                    |
+| :------------------ | --------------------------------- | ---------------------------------- |
+| Home Page           | http://localhost:8080             | Developing                         |
+| Management Platform | http://localhost:8080/admin/login | Username: admin    Password: admin |
+| Open API            | http://localhost:8080/doc.html    |                                    |
 
 
 ###  Preview:
