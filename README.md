@@ -1,6 +1,6 @@
 # Price Monitoring and Analysis  System ( My Price V1.0) 
 
-![](doc/Logo.png)
+![](doc/09_Marketing/91_Screenshots/Logo.png)
 
 - **INTRODUCTION**
 
@@ -29,8 +29,12 @@
 - Maven: 3.6.2
 - Version Control : GIT 
 - ~~RabbitMQ: 3~~
-- Thymeleaf: 3
 - Jenkins: 2.263.1
+
+### Black End
+
+- Spring boot: 2.4.3
+- Thymeleaf: 3
 - Security: Apache Shiro
 - Quartz: 2.3.2
 - MyBatis 
@@ -38,17 +42,16 @@
 - Connection Pool: druid
 - ~~NodeJS: 14.16~~
 
-
-
 ### Front End
 
-jQuery
+- JQuery
 
-LayUI
+- LayUI
 
-React
+- React
 
-Google Chart
+- Google Chart
+
 
 
 
@@ -56,7 +59,7 @@ Google Chart
 
 
 ### STEP 
-1. Import initial database script from  /doc/sql/MyPrice2.sql into your MYSQL database
+1. Import initial database script from  /doc/06_Maintenance/01_Initial Data/MyPrice.sql into your MYSQL database
 2. Check MYSQL version. in pom.xml 
 3. Check  Database version and database connection address in application-dev.yml.
 4. Run Application.java  or WebInitializer.java
@@ -74,24 +77,24 @@ Google Chart
 
 ###  Preview:
 
-### ![Category](doc/Category.png)
+### ![Category](doc/09_Marketing/91_Screenshots/Category.png)
 
 
 
-![Commodity](doc/productList.png)
+![Commodity](doc/09_Marketing/91_Screenshots/productList.png)
 
  
 
 Historical Price
 
-![Commodity](doc/PriceMoniting.png)
+![Commodity](doc/09_Marketing/91_Screenshots/PriceMoniting.png)
 
-![Commodity](doc/price.png)
+![Commodity](doc/09_Marketing/91_Screenshots/price.png)
 
 ## Database Model
 
-![Commodity](doc/ER_v1.png)
+![Commodity](doc/09_Marketing/91_Screenshots/ER_v1.png)
 
 Code Style
 
-![Commodity](doc/Code Style.png)
+![Commodity](doc/09_Marketing/91_Screenshots/Code.png)
