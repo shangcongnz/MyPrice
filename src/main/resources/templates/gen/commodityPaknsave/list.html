@@ -37,7 +37,7 @@
 </script>
 
 <script type="text/html" id="commodityPaknsave-image">
- <img width='45'  hight='45'  src='{{d.image}}'/>
+ <a href="#"><img width='45'  hight='45'  src='{{d.image}}' lay-event="showPicture"/></a>
 </script>
 
 
@@ -89,21 +89,21 @@
            			 [
                				 {type: 'checkbox'},
                 
-                					{title: 'ID', field: 'id', align: 'center', width: 80},
+                					{title: 'ID', field: 'id', align: 'center', width: 80,sort: true, event:'showPicture'},
 					
-									{title: 'Title', field: 'title', align: 'left' },
+									{title: 'Title', field: 'title', align: 'left' ,sort: true,event:'showPicture'},
 					
 								//	{title: 'Starting price', field: 'price', align: 'center' ,width: 120},
 					
 									{title: 'iamge', field: 'image', align: 'center',width: 80, templet: '#commodityPaknsave-image'},
 					
-									{title: 'Unit', field: 'unit', align: 'center',width: 80},
+									{title: 'Unit', field: 'unit', align: 'center',width: 80,sort: true},
 					
-									{title: 'Category', field: 'categoryName', align: 'left'},
+									{title: 'Category', field: 'categoryName', align: 'left',sort: true},
 					
 									{title: 'product ID', field: 'productId', align: 'center',width: 200},
 					
-									{title: 'Price update date', field: 'lastPriceDate', align: 'center',width: 160},
+									{title: 'Price update date', field: 'lastPriceDate', align: 'center',width: 160,sort: true},
 									
 									{title: 'Latest Price', field: 'latestPrice', align: 'center',width: 100},
 					
@@ -143,6 +143,8 @@
                 window.view(obj);
             }else if (obj.event === 'priceList') {
                 window.priceList(obj);
+            }if (obj.event === 'showPicture') {
+                window.showPicture(obj);
             }
         });
 
@@ -155,6 +157,10 @@
             } else if (obj.event === 'batchRemove') {
                 window.batchRemove(obj);
             }
+        });
+        
+        table.on('row(commodityPaknsave-table)',function(obj){
+         	 //行事件。暂时不适用。
         });
 
         //查询按钮绑定
@@ -178,11 +184,24 @@
                 content: rootPath+'/PricePaknsaveController/priceListView?commodityId='+obj.data['id']
             });
         }
+        
+        window.showPicture = function (obj) {
+        	var src = "<img src='"+obj.data['image']+"' style='width:100%; height:100%' />";
+            layer.open({
+                type: 1,
+                title: 'Show picture',
+                resize: true,
+                scrollbar: true,
+                shade: 0.1,
+                area: ['500px', '500px'],
+                content: src
+            });
+        }
         //添加
         window.add = function () {
             layer.open({
                 type: 2,
-                title: '新增',
+                title: 'add',
                 shade: 0.1,
                 area: ['500px', '500px'],
                 content: MODULE_PATH + 'add'

@@ -41,6 +41,7 @@ public class PricePaknsaveService implements BaseService<PricePaknsave, PricePak
 	 */
 	 public PageInfo<PricePaknsave> list(Tablepar tablepar,PricePaknsave pricePaknsave){
 	        PricePaknsaveExample testExample=new PricePaknsaveExample();
+	        testExample.setOrderByClause(" date desc");
 			//搜索
 			if(StrUtil.isNotEmpty(tablepar.getSearchText())) {//小窗体
 	        	testExample.createCriteria().andLikeQuery2(tablepar.getSearchText());
