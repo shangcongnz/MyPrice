@@ -1,17 +1,19 @@
 package com.fc.v2.common.conf.redis;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.BoundSetOperations;
-import org.springframework.data.redis.core.HashOperations;
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.ValueOperations;
-import org.springframework.stereotype.Component;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.connection.DataType;
+import org.springframework.data.redis.core.BoundSetOperations;
+import org.springframework.data.redis.core.HashOperations;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
+import org.springframework.stereotype.Component;
 
 
 @SuppressWarnings(value =  {"unchecked", "rawtypes"})
@@ -68,6 +70,10 @@ public class RedisService {
         final TimeUnit unit) {
         return redisTemplate.expire(key, timeout, unit);
     }
+    
+    public Long getExpire(String key) {
+		return redisTemplate.getExpire(key);
+	}
 
     /**
      * 获得缓存的基本对象。
@@ -229,4 +235,40 @@ public class RedisService {
     public Collection<String> keys(final String pattern) {
         return redisTemplate.keys(pattern);
     }
+    
+    public Integer append(String key, String value) {
+    	return redisTemplate.opsForValue().append(key, value);
+    	}
+    
+    
+    
+    
+   // exists key Judge a certain key Whether there is
+    public Boolean hasKey(String key) {
+    return redisTemplate.hasKey(key);
+    }
+
+    public DataType type(String key) {
+    	return redisTemplate.type(key);
+    	}
+    
+    //String
+    public void set(String key, String value) {
+    	redisTemplate.opsForValue().set(key, value);
+    	}
+    public boolean setIfAbsent(String key, String value) {
+    	return redisTemplate.opsForValue().setIfAbsent(key, value);
+    	}
+    
+    public boolean setIfPresent(String key, String value) {
+    	return redisTemplate.opsForValue().setIfPresent(key, value);
+    	}
+
+    public void setExpire(String key, String value, long timeout, TimeUnit unit) {
+    	redisTemplate.opsForValue().set(key, value, timeout, unit);
+    	}
+
+     
+
+    
 }
