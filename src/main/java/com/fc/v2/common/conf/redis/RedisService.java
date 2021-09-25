@@ -1,5 +1,7 @@
 package com.fc.v2.common.conf.redis;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
@@ -269,6 +271,14 @@ public class RedisService {
     	}
 
      
+    public void setMaxVistInTime(String key, long timeout, int visitTimes) {
+    	Object t=getCacheObject(key);
+    	if(t!=null) {
+    		redisTemplate.opsForValue().increment(key);
+    	}else {
+    		redisTemplate.opsForValue().set(key, (new BigDecimal("9223372036854775807").subtract(new BigDecimal(visitTimes))), timeout, TimeUnit.SECONDS);
+    	}
+    }
 
     
 }

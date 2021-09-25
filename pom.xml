@@ -26,14 +26,24 @@
     <!-- https://mvnrepository.com/ 查找jar网站 -->
 	<dependencies>
 	
+	
+		<!-- connect to redis database-->
 		<dependency>
 		    <groupId>org.springframework.boot</groupId>
 		    <artifactId>spring-boot-starter-data-redis</artifactId>
 		</dependency>
+		
+		<!-- connect to redis database for testing-->
+		<dependency>
+		    <groupId>redis.clients</groupId>
+		    <artifactId>jedis</artifactId>
+		</dependency>
+		
 		<dependency>
 		  <groupId>org.apache.commons</groupId>
 		  <artifactId>commons-pool2</artifactId>
 		</dependency>
+		
 		
 		<!-- SpringBoot Web容器 -->
 		<dependency>

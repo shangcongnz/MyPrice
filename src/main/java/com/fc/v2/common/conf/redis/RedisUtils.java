@@ -1,6 +1,7 @@
 package com.fc.v2.common.conf.redis;
 
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -22,6 +23,7 @@ public class RedisUtils {
 	 * keys * View all of the current library key ( matching ：keys *1) dbsize Check
 	 * the... Of the current database key The number of
 	 */
+
 	public java.util.Set<String> keys(String pattern) {
 		return redisTemplate.keys(pattern);
 	}
@@ -29,6 +31,9 @@ public class RedisUtils {
 	/*
 	 * exists key Judge a certain key Whether there is
 	 */
+	public Boolean exists(String key) {
+		return redisTemplate.hasKey(key);
+	}
 	public Boolean hasKey(String key) {
 		return redisTemplate.hasKey(key);
 	}
@@ -43,8 +48,11 @@ public class RedisUtils {
 	/*
 	 * del key Delete specified key data
 	 */
-	public void delete(String key) {
+	public void del(String key) {
 		redisTemplate.delete(key);
+	}
+	public void delete(String key) {
+		del(key);
 	}
 
 	/*
@@ -62,13 +70,45 @@ public class RedisUtils {
 	public Boolean expire(String key, long timeout, TimeUnit unit) {
 		return redisTemplate.expire(key, timeout, unit);
 	}
+	//设置过期事件。
+	public Boolean expireat(String key, Date date) {
+		return redisTemplate.expireAt(key, date);
+	}
 
 	/*
 	 * ttl key See how many seconds are left to expire ,-1 Never expire ,-2
 	 * Indicates that it has expired
+	 * 如果返回值是-1：未设置过期时间
+	 * 如果返回值是-2：已经过期。
 	 */
-	public Long getExpire(String key) {
+	public Long ttl(String key) {
+		
 		return redisTemplate.getExpire(key);
+	}
+	
+	public Long getExpire (String key) {
+		return ttl(key);
+	}
+	
+	
+	/*
+	 * 取消key的有效时间限制
+	 */
+	public Boolean persist(String key) {
+		return redisTemplate.persist(key);
+	}
+	
+	/*
+	 * 改Key的值
+	 */
+	public void rename(String key,String newKey) {
+		 redisTemplate.rename(key,newKey);
+	}
+	/*
+	 * 改Key的值,如果存在。
+	 */
+	public void renamenx(String key,String newKey) {
+		 redisTemplate.renameIfAbsent(key,newKey);
 	}
 
 	/*
@@ -698,5 +738,8 @@ public class RedisUtils {
 	}
 	
 
+	public void save() {
+ 	}
+	
 
 }

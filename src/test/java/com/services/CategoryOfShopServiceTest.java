@@ -34,8 +34,10 @@ private RedisService redis;
 	List<CategoryOfShops> categoryList= categoryOfShopsService.selectByExample(testExample);
 	List<CategoryOfShops> resultList= categoryOfShopsService.getAllLeafNodes(categoryList);
 	System.out.println(resultList.size());
+	Object o=redis.getCacheObject("dddddd");
 	
-	redis.setCacheObject("test", "test01");
+	System.out.println(o);
+	
 	 
 	
 	assertNotNull(categoryList);
