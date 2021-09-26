@@ -124,6 +124,7 @@ public class RedisUtils {
 	 * set <key><value> Add key value pair
 	 */
 	public void set(String key, String value) {
+		
 		redisTemplate.opsForValue().set(key, value);
 	}
 
@@ -740,6 +741,38 @@ public class RedisUtils {
 
 	public void save() {
  	}
+	/*
+	 * 开启事务
+	 */
+	public void multi() {
+		redisTemplate.multi();
+ 	}
+	/*
+	 * 取消事务
+	 */
+	public void discard() {
+		redisTemplate.discard();
+ 	}
+	/*
+	 * 执行事务
+	 */
+	public void exec() {
+		redisTemplate.exec();
+ 	}	
+	public void watch(String key) {
+		redisTemplate.watch(key);
+ 	}
+	public <T> void watch(Collection<T> keys) {
+		redisTemplate.watch(keys);
+ 	}
+	
+ 
+	
+//	public void setnx(String key) {
+//		redisTemplate(key);
+// 	}
+ 
+	
 	
 
 }
