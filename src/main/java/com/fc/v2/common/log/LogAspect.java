@@ -18,6 +18,7 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.stereotype.Component;
 
+import com.fc.v2.common.conf.redis.RedisUtils;
 import com.fc.v2.model.auto.TsysOperLog;
 import com.fc.v2.model.auto.TsysUser;
 import com.fc.v2.service.SysOperLogService;
@@ -40,6 +41,8 @@ public class LogAspect
 
     @Autowired
     private SysOperLogService operLogService;
+    @Autowired
+    private RedisUtils redisUtils;
 
     // 配置织入点
     @Pointcut("@annotation(com.fc.v2.common.log.Log)")
@@ -115,6 +118,14 @@ public class LogAspect
             getControllerMethodDescription(controllerLog, operLog);
             // 保存数据库
             operLogService.insertSelective(operLog);
+            String redisOperationKey=operLog.getTitle()+"#"+operLog.getAction();
+            if(redisUtils.exists(redisOperationKey)) {
+            	//如果key存在，则增加1.
+            	redisUtils.incr(redisOperationKey);
+            	
+            }else {
+            	redisUtils.set(redisOperationKey, 0);
+            }
         }
         catch (Exception exp)
         {

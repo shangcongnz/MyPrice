@@ -123,7 +123,7 @@ public class RedisUtils {
 	/*
 	 * set <key><value> Add key value pair
 	 */
-	public void set(String key, String value) {
+	public void set(String key, Object value) {
 		
 		redisTemplate.opsForValue().set(key, value);
 	}
