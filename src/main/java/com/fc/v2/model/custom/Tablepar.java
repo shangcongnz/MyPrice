@@ -47,4 +47,11 @@ public class Tablepar {
 		this.searchText = searchText;
 	}
 
+	@Override
+	public String toString() {
+		return "Tablepar [page=" + page + ", limit=" + limit + ", orderByColumn=" + orderByColumn + ", isAsc=" + isAsc
+				+ ", searchText=" + searchText + "]";
+	}
+	
+
 }

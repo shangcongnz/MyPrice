@@ -1,0 +1,866 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.myprice.mapper.auto.CommodityWarehouseMapper">
+  <resultMap id="BaseResultMap" type="com.myprice.model.auto.CommodityWarehouse">
+    <result column="id" jdbcType="INTEGER" property="id" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="variation_product_id" jdbcType="VARCHAR" property="variationProductId" />
+    <result column="brand" jdbcType="VARCHAR" property="brand" />
+    <result column="EAN_product" jdbcType="VARCHAR" property="eANProduct" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="product_merchandise_category" jdbcType="VARCHAR" property="productMerchandiseCategory" />
+    <result column="product_badges" jdbcType="VARCHAR" property="productBadges" />
+    <result column="product_rating" jdbcType="VARCHAR" property="productRating" />
+    <result column="product_online_stock_status" jdbcType="VARCHAR" property="productOnlineStockStatus" />
+    <result column="custom_dimension" jdbcType="VARCHAR" property="customDimension" />
+    <result column="promotion_call_out_message" jdbcType="VARCHAR" property="promotionCallOutMessage" />
+    <result column="category" jdbcType="VARCHAR" property="category" />
+    <result column="product_category_level1" jdbcType="VARCHAR" property="productCategoryLevel1" />
+    <result column="product_category_level2" jdbcType="VARCHAR" property="productCategoryLevel2" />
+    <result column="product_category_level3" jdbcType="VARCHAR" property="productCategoryLevel3" />
+    <result column="product_category_level4" jdbcType="VARCHAR" property="productCategoryLevel4" />
+    <result column="product_category_level5" jdbcType="VARCHAR" property="productCategoryLevel5" />
+    <result column="product_category_level6" jdbcType="VARCHAR" property="productCategoryLevel6" />
+    <result column="product_category_level7" jdbcType="VARCHAR" property="productCategoryLevel7" />
+    <result column="product_secondary_navigation_category" jdbcType="VARCHAR" property="productSecondaryNavigationCategory" />
+    <result column="price" jdbcType="DECIMAL" property="price" />
+    <result column="product_then_price" jdbcType="DECIMAL" property="productThenPrice" />
+    <result column="list" jdbcType="VARCHAR" property="list" />
+    <result column="image" jdbcType="VARCHAR" property="image" />
+    <result column="unit" jdbcType="VARCHAR" property="unit" />
+    <result column="category_id" jdbcType="INTEGER" property="categoryId" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="product_id" jdbcType="VARCHAR" property="productId" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="creator" jdbcType="VARCHAR" property="creator" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+  
+	  	  	      	id,
+       	  	      	title,
+       	  	      	variation_product_id,
+       	  	      	brand,
+       	  	      	EAN_product,
+       	  	      	description,
+       	  	      	product_merchandise_category,
+       	  	      	product_badges,
+       	  	      	product_rating,
+       	  	      	product_online_stock_status,
+       	  	      	custom_dimension,
+       	  	      	promotion_call_out_message,
+       	  	      	category,
+       	  	      	product_category_level1,
+       	  	      	product_category_level2,
+       	  	      	product_category_level3,
+       	  	      	product_category_level4,
+       	  	      	product_category_level5,
+       	  	      	product_category_level6,
+       	  	      	product_category_level7,
+       	  	      	product_secondary_navigation_category,
+       	  	      	price,
+       	  	      	product_then_price,
+       	  	      	list,
+       	  	      	image,
+       	  	      	unit,
+       	  	      	category_id,
+       	  	      	status,
+       	  	      	url,
+       	  	      	product_id,
+       	  	      	create_date,
+       	  	    	  	creator
+       	  	
+  </sql>
+  
+  <select id="selectByExample" parameterType="com.myprice.model.auto.CommodityWarehouseExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from u_commodity_warehouse
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from u_commodity_warehouse
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from u_commodity_warehouse
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.myprice.model.auto.CommodityWarehouseExample">
+    delete from u_commodity_warehouse
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  
+  <insert id="insert" parameterType="com.myprice.model.auto.CommodityWarehouse">
+    insert into u_commodity_warehouse (
+      	  	       id,
+       	  	       title,
+       	  	       variation_product_id,
+       	  	       brand,
+       	  	       EAN_product,
+       	  	       description,
+       	  	       product_merchandise_category,
+       	  	       product_badges,
+       	  	       product_rating,
+       	  	       product_online_stock_status,
+       	  	       custom_dimension,
+       	  	       promotion_call_out_message,
+       	  	       category,
+       	  	       product_category_level1,
+       	  	       product_category_level2,
+       	  	       product_category_level3,
+       	  	       product_category_level4,
+       	  	       product_category_level5,
+       	  	       product_category_level6,
+       	  	       product_category_level7,
+       	  	       product_secondary_navigation_category,
+       	  	       price,
+       	  	       product_then_price,
+       	  	       list,
+       	  	       image,
+       	  	       unit,
+       	  	       category_id,
+       	  	       status,
+       	  	       url,
+       	  	       product_id,
+       	  	       create_date,
+       	  	    	  creator
+       	    )
+    values (
+	  	  	      	#{id,jdbcType=INTEGER},
+       	  	      	#{title,jdbcType=VARCHAR},
+       	  	      	#{variationProductId,jdbcType=VARCHAR},
+       	  	      	#{brand,jdbcType=VARCHAR},
+       	  	      	#{eANProduct,jdbcType=VARCHAR},
+       	  	      	#{description,jdbcType=VARCHAR},
+       	  	      	#{productMerchandiseCategory,jdbcType=VARCHAR},
+       	  	      	#{productBadges,jdbcType=VARCHAR},
+       	  	      	#{productRating,jdbcType=VARCHAR},
+       	  	      	#{productOnlineStockStatus,jdbcType=VARCHAR},
+       	  	      	#{customDimension,jdbcType=VARCHAR},
+       	  	      	#{promotionCallOutMessage,jdbcType=VARCHAR},
+       	  	      	#{category,jdbcType=VARCHAR},
+       	  	      	#{productCategoryLevel1,jdbcType=VARCHAR},
+       	  	      	#{productCategoryLevel2,jdbcType=VARCHAR},
+       	  	      	#{productCategoryLevel3,jdbcType=VARCHAR},
+       	  	      	#{productCategoryLevel4,jdbcType=VARCHAR},
+       	  	      	#{productCategoryLevel5,jdbcType=VARCHAR},
+       	  	      	#{productCategoryLevel6,jdbcType=VARCHAR},
+       	  	      	#{productCategoryLevel7,jdbcType=VARCHAR},
+       	  	      	#{productSecondaryNavigationCategory,jdbcType=VARCHAR},
+       	  	      	#{price,jdbcType=DECIMAL},
+       	  	      	#{productThenPrice,jdbcType=DECIMAL},
+       	  	      	#{list,jdbcType=VARCHAR},
+       	  	      	#{image,jdbcType=VARCHAR},
+       	  	      	#{unit,jdbcType=VARCHAR},
+       	  	      	#{categoryId,jdbcType=INTEGER},
+       	  	      	#{status,jdbcType=INTEGER},
+       	  	      	#{url,jdbcType=VARCHAR},
+       	  	      	#{productId,jdbcType=VARCHAR},
+       	  	      	#{createDate,jdbcType=TIMESTAMP},
+       	  	    	  #{creator,jdbcType=VARCHAR}
+       	    )
+  </insert>
+  
+  <insert id="insertSelective" parameterType="com.myprice.model.auto.CommodityWarehouse">
+    insert into u_commodity_warehouse
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+          
+      <if test="id != null">
+        id,
+      </if>
+         
+      <if test="title != null">
+        title,
+      </if>
+         
+      <if test="variationProductId != null">
+        variation_product_id,
+      </if>
+         
+      <if test="brand != null">
+        brand,
+      </if>
+         
+      <if test="eANProduct != null">
+        EAN_product,
+      </if>
+         
+      <if test="description != null">
+        description,
+      </if>
+         
+      <if test="productMerchandiseCategory != null">
+        product_merchandise_category,
+      </if>
+         
+      <if test="productBadges != null">
+        product_badges,
+      </if>
+         
+      <if test="productRating != null">
+        product_rating,
+      </if>
+         
+      <if test="productOnlineStockStatus != null">
+        product_online_stock_status,
+      </if>
+         
+      <if test="customDimension != null">
+        custom_dimension,
+      </if>
+         
+      <if test="promotionCallOutMessage != null">
+        promotion_call_out_message,
+      </if>
+         
+      <if test="category != null">
+        category,
+      </if>
+         
+      <if test="productCategoryLevel1 != null">
+        product_category_level1,
+      </if>
+         
+      <if test="productCategoryLevel2 != null">
+        product_category_level2,
+      </if>
+         
+      <if test="productCategoryLevel3 != null">
+        product_category_level3,
+      </if>
+         
+      <if test="productCategoryLevel4 != null">
+        product_category_level4,
+      </if>
+         
+      <if test="productCategoryLevel5 != null">
+        product_category_level5,
+      </if>
+         
+      <if test="productCategoryLevel6 != null">
+        product_category_level6,
+      </if>
+         
+      <if test="productCategoryLevel7 != null">
+        product_category_level7,
+      </if>
+         
+      <if test="productSecondaryNavigationCategory != null">
+        product_secondary_navigation_category,
+      </if>
+         
+      <if test="price != null">
+        price,
+      </if>
+         
+      <if test="productThenPrice != null">
+        product_then_price,
+      </if>
+         
+      <if test="list != null">
+        list,
+      </if>
+         
+      <if test="image != null">
+        image,
+      </if>
+         
+      <if test="unit != null">
+        unit,
+      </if>
+         
+      <if test="categoryId != null">
+        category_id,
+      </if>
+         
+      <if test="status != null">
+        status,
+      </if>
+         
+      <if test="url != null">
+        url,
+      </if>
+         
+      <if test="productId != null">
+        product_id,
+      </if>
+         
+      <if test="createDate != null">
+        create_date,
+      </if>
+         
+      <if test="creator != null">
+        creator,
+      </if>
+         </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+          <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+          <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+          <if test="variationProductId != null">
+        #{variationProductId,jdbcType=VARCHAR},
+      </if>
+          <if test="brand != null">
+        #{brand,jdbcType=VARCHAR},
+      </if>
+          <if test="eANProduct != null">
+        #{eANProduct,jdbcType=VARCHAR},
+      </if>
+          <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+          <if test="productMerchandiseCategory != null">
+        #{productMerchandiseCategory,jdbcType=VARCHAR},
+      </if>
+          <if test="productBadges != null">
+        #{productBadges,jdbcType=VARCHAR},
+      </if>
+          <if test="productRating != null">
+        #{productRating,jdbcType=VARCHAR},
+      </if>
+          <if test="productOnlineStockStatus != null">
+        #{productOnlineStockStatus,jdbcType=VARCHAR},
+      </if>
+          <if test="customDimension != null">
+        #{customDimension,jdbcType=VARCHAR},
+      </if>
+          <if test="promotionCallOutMessage != null">
+        #{promotionCallOutMessage,jdbcType=VARCHAR},
+      </if>
+          <if test="category != null">
+        #{category,jdbcType=VARCHAR},
+      </if>
+          <if test="productCategoryLevel1 != null">
+        #{productCategoryLevel1,jdbcType=VARCHAR},
+      </if>
+          <if test="productCategoryLevel2 != null">
+        #{productCategoryLevel2,jdbcType=VARCHAR},
+      </if>
+          <if test="productCategoryLevel3 != null">
+        #{productCategoryLevel3,jdbcType=VARCHAR},
+      </if>
+          <if test="productCategoryLevel4 != null">
+        #{productCategoryLevel4,jdbcType=VARCHAR},
+      </if>
+          <if test="productCategoryLevel5 != null">
+        #{productCategoryLevel5,jdbcType=VARCHAR},
+      </if>
+          <if test="productCategoryLevel6 != null">
+        #{productCategoryLevel6,jdbcType=VARCHAR},
+      </if>
+          <if test="productCategoryLevel7 != null">
+        #{productCategoryLevel7,jdbcType=VARCHAR},
+      </if>
+          <if test="productSecondaryNavigationCategory != null">
+        #{productSecondaryNavigationCategory,jdbcType=VARCHAR},
+      </if>
+          <if test="price != null">
+        #{price,jdbcType=DECIMAL},
+      </if>
+          <if test="productThenPrice != null">
+        #{productThenPrice,jdbcType=DECIMAL},
+      </if>
+          <if test="list != null">
+        #{list,jdbcType=VARCHAR},
+      </if>
+          <if test="image != null">
+        #{image,jdbcType=VARCHAR},
+      </if>
+          <if test="unit != null">
+        #{unit,jdbcType=VARCHAR},
+      </if>
+          <if test="categoryId != null">
+        #{categoryId,jdbcType=INTEGER},
+      </if>
+          <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+          <if test="url != null">
+        #{url,jdbcType=VARCHAR},
+      </if>
+          <if test="productId != null">
+        #{productId,jdbcType=VARCHAR},
+      </if>
+          <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+          <if test="creator != null">
+        #{creator,jdbcType=VARCHAR},
+      </if>
+        </trim>
+  </insert>
+  
+  <select id="countByExample" parameterType="com.myprice.model.auto.CommodityWarehouseExample" resultType="java.lang.Long">
+    select count(*) from u_commodity_warehouse
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  
+  <update id="updateByExampleSelective" parameterType="map">
+    update u_commodity_warehouse
+    <set>
+          <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+          <if test="record.title != null">
+        title = #{record.title,jdbcType=VARCHAR},
+      </if>
+          <if test="record.variationProductId != null">
+        variation_product_id = #{record.variationProductId,jdbcType=VARCHAR},
+      </if>
+          <if test="record.brand != null">
+        brand = #{record.brand,jdbcType=VARCHAR},
+      </if>
+          <if test="record.eANProduct != null">
+        EAN_product = #{record.eANProduct,jdbcType=VARCHAR},
+      </if>
+          <if test="record.description != null">
+        description = #{record.description,jdbcType=VARCHAR},
+      </if>
+          <if test="record.productMerchandiseCategory != null">
+        product_merchandise_category = #{record.productMerchandiseCategory,jdbcType=VARCHAR},
+      </if>
+          <if test="record.productBadges != null">
+        product_badges = #{record.productBadges,jdbcType=VARCHAR},
+      </if>
+          <if test="record.productRating != null">
+        product_rating = #{record.productRating,jdbcType=VARCHAR},
+      </if>
+          <if test="record.productOnlineStockStatus != null">
+        product_online_stock_status = #{record.productOnlineStockStatus,jdbcType=VARCHAR},
+      </if>
+          <if test="record.customDimension != null">
+        custom_dimension = #{record.customDimension,jdbcType=VARCHAR},
+      </if>
+          <if test="record.promotionCallOutMessage != null">
+        promotion_call_out_message = #{record.promotionCallOutMessage,jdbcType=VARCHAR},
+      </if>
+          <if test="record.category != null">
+        category = #{record.category,jdbcType=VARCHAR},
+      </if>
+          <if test="record.productCategoryLevel1 != null">
+        product_category_level1 = #{record.productCategoryLevel1,jdbcType=VARCHAR},
+      </if>
+          <if test="record.productCategoryLevel2 != null">
+        product_category_level2 = #{record.productCategoryLevel2,jdbcType=VARCHAR},
+      </if>
+          <if test="record.productCategoryLevel3 != null">
+        product_category_level3 = #{record.productCategoryLevel3,jdbcType=VARCHAR},
+      </if>
+          <if test="record.productCategoryLevel4 != null">
+        product_category_level4 = #{record.productCategoryLevel4,jdbcType=VARCHAR},
+      </if>
+          <if test="record.productCategoryLevel5 != null">
+        product_category_level5 = #{record.productCategoryLevel5,jdbcType=VARCHAR},
+      </if>
+          <if test="record.productCategoryLevel6 != null">
+        product_category_level6 = #{record.productCategoryLevel6,jdbcType=VARCHAR},
+      </if>
+          <if test="record.productCategoryLevel7 != null">
+        product_category_level7 = #{record.productCategoryLevel7,jdbcType=VARCHAR},
+      </if>
+          <if test="record.productSecondaryNavigationCategory != null">
+        product_secondary_navigation_category = #{record.productSecondaryNavigationCategory,jdbcType=VARCHAR},
+      </if>
+          <if test="record.price != null">
+        price = #{record.price,jdbcType=DECIMAL},
+      </if>
+          <if test="record.productThenPrice != null">
+        product_then_price = #{record.productThenPrice,jdbcType=DECIMAL},
+      </if>
+          <if test="record.list != null">
+        list = #{record.list,jdbcType=VARCHAR},
+      </if>
+          <if test="record.image != null">
+        image = #{record.image,jdbcType=VARCHAR},
+      </if>
+          <if test="record.unit != null">
+        unit = #{record.unit,jdbcType=VARCHAR},
+      </if>
+          <if test="record.categoryId != null">
+        category_id = #{record.categoryId,jdbcType=INTEGER},
+      </if>
+          <if test="record.status != null">
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+          <if test="record.url != null">
+        url = #{record.url,jdbcType=VARCHAR},
+      </if>
+          <if test="record.productId != null">
+        product_id = #{record.productId,jdbcType=VARCHAR},
+      </if>
+          <if test="record.createDate != null">
+        create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+          <if test="record.creator != null">
+        creator = #{record.creator,jdbcType=VARCHAR},
+      </if>
+         
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  
+  
+  <update id="updateByExample" parameterType="map">
+    update u_commodity_warehouse
+    set
+            	     	 
+    	 id = #{record.id,jdbcType=INTEGER},
+    	         	     	 
+    	 title = #{record.title,jdbcType=VARCHAR},
+    	         	     	 
+    	 variation_product_id = #{record.variationProductId,jdbcType=VARCHAR},
+    	         	     	 
+    	 brand = #{record.brand,jdbcType=VARCHAR},
+    	         	     	 
+    	 EAN_product = #{record.eANProduct,jdbcType=VARCHAR},
+    	         	     	 
+    	 description = #{record.description,jdbcType=VARCHAR},
+    	         	     	 
+    	 product_merchandise_category = #{record.productMerchandiseCategory,jdbcType=VARCHAR},
+    	         	     	 
+    	 product_badges = #{record.productBadges,jdbcType=VARCHAR},
+    	         	     	 
+    	 product_rating = #{record.productRating,jdbcType=VARCHAR},
+    	         	     	 
+    	 product_online_stock_status = #{record.productOnlineStockStatus,jdbcType=VARCHAR},
+    	         	     	 
+    	 custom_dimension = #{record.customDimension,jdbcType=VARCHAR},
+    	         	     	 
+    	 promotion_call_out_message = #{record.promotionCallOutMessage,jdbcType=VARCHAR},
+    	         	     	 
+    	 category = #{record.category,jdbcType=VARCHAR},
+    	         	     	 
+    	 product_category_level1 = #{record.productCategoryLevel1,jdbcType=VARCHAR},
+    	         	     	 
+    	 product_category_level2 = #{record.productCategoryLevel2,jdbcType=VARCHAR},
+    	         	     	 
+    	 product_category_level3 = #{record.productCategoryLevel3,jdbcType=VARCHAR},
+    	         	     	 
+    	 product_category_level4 = #{record.productCategoryLevel4,jdbcType=VARCHAR},
+    	         	     	 
+    	 product_category_level5 = #{record.productCategoryLevel5,jdbcType=VARCHAR},
+    	         	     	 
+    	 product_category_level6 = #{record.productCategoryLevel6,jdbcType=VARCHAR},
+    	         	     	 
+    	 product_category_level7 = #{record.productCategoryLevel7,jdbcType=VARCHAR},
+    	         	     	 
+    	 product_secondary_navigation_category = #{record.productSecondaryNavigationCategory,jdbcType=VARCHAR},
+    	         	     	 
+    	 price = #{record.price,jdbcType=DECIMAL},
+    	         	     	 
+    	 product_then_price = #{record.productThenPrice,jdbcType=DECIMAL},
+    	         	     	 
+    	 list = #{record.list,jdbcType=VARCHAR},
+    	         	     	 
+    	 image = #{record.image,jdbcType=VARCHAR},
+    	         	     	 
+    	 unit = #{record.unit,jdbcType=VARCHAR},
+    	         	     	 
+    	 category_id = #{record.categoryId,jdbcType=INTEGER},
+    	         	     	 
+    	 status = #{record.status,jdbcType=INTEGER},
+    	         	     	 
+    	 url = #{record.url,jdbcType=VARCHAR},
+    	         	     	 
+    	 product_id = #{record.productId,jdbcType=VARCHAR},
+    	         	     	 
+    	 create_date = #{record.createDate,jdbcType=TIMESTAMP},
+    	         	     	 
+    	 creator = #{record.creator,jdbcType=VARCHAR}
+    	         
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  
+  
+      <update id="updateByPrimaryKeySelective" parameterType="com.myprice.model.auto.CommodityWarehouse">
+    update u_commodity_warehouse
+    <set>
+                          
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+                      
+      <if test="variationProductId != null">
+        variation_product_id = #{variationProductId,jdbcType=VARCHAR},
+      </if>
+                      
+      <if test="brand != null">
+        brand = #{brand,jdbcType=VARCHAR},
+      </if>
+                      
+      <if test="eANProduct != null">
+        EAN_product = #{eANProduct,jdbcType=VARCHAR},
+      </if>
+                      
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+                      
+      <if test="productMerchandiseCategory != null">
+        product_merchandise_category = #{productMerchandiseCategory,jdbcType=VARCHAR},
+      </if>
+                      
+      <if test="productBadges != null">
+        product_badges = #{productBadges,jdbcType=VARCHAR},
+      </if>
+                      
+      <if test="productRating != null">
+        product_rating = #{productRating,jdbcType=VARCHAR},
+      </if>
+                      
+      <if test="productOnlineStockStatus != null">
+        product_online_stock_status = #{productOnlineStockStatus,jdbcType=VARCHAR},
+      </if>
+                      
+      <if test="customDimension != null">
+        custom_dimension = #{customDimension,jdbcType=VARCHAR},
+      </if>
+                      
+      <if test="promotionCallOutMessage != null">
+        promotion_call_out_message = #{promotionCallOutMessage,jdbcType=VARCHAR},
+      </if>
+                      
+      <if test="category != null">
+        category = #{category,jdbcType=VARCHAR},
+      </if>
+                      
+      <if test="productCategoryLevel1 != null">
+        product_category_level1 = #{productCategoryLevel1,jdbcType=VARCHAR},
+      </if>
+                      
+      <if test="productCategoryLevel2 != null">
+        product_category_level2 = #{productCategoryLevel2,jdbcType=VARCHAR},
+      </if>
+                      
+      <if test="productCategoryLevel3 != null">
+        product_category_level3 = #{productCategoryLevel3,jdbcType=VARCHAR},
+      </if>
+                      
+      <if test="productCategoryLevel4 != null">
+        product_category_level4 = #{productCategoryLevel4,jdbcType=VARCHAR},
+      </if>
+                      
+      <if test="productCategoryLevel5 != null">
+        product_category_level5 = #{productCategoryLevel5,jdbcType=VARCHAR},
+      </if>
+                      
+      <if test="productCategoryLevel6 != null">
+        product_category_level6 = #{productCategoryLevel6,jdbcType=VARCHAR},
+      </if>
+                      
+      <if test="productCategoryLevel7 != null">
+        product_category_level7 = #{productCategoryLevel7,jdbcType=VARCHAR},
+      </if>
+                      
+      <if test="productSecondaryNavigationCategory != null">
+        product_secondary_navigation_category = #{productSecondaryNavigationCategory,jdbcType=VARCHAR},
+      </if>
+                      
+      <if test="price != null">
+        price = #{price,jdbcType=DECIMAL},
+      </if>
+                      
+      <if test="productThenPrice != null">
+        product_then_price = #{productThenPrice,jdbcType=DECIMAL},
+      </if>
+                      
+      <if test="list != null">
+        list = #{list,jdbcType=VARCHAR},
+      </if>
+                      
+      <if test="image != null">
+        image = #{image,jdbcType=VARCHAR},
+      </if>
+                      
+      <if test="unit != null">
+        unit = #{unit,jdbcType=VARCHAR},
+      </if>
+                      
+      <if test="categoryId != null">
+        category_id = #{categoryId,jdbcType=INTEGER},
+      </if>
+                      
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+                      
+      <if test="url != null">
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+                      
+      <if test="productId != null">
+        product_id = #{productId,jdbcType=VARCHAR},
+      </if>
+                      
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+                      
+      <if test="creator != null">
+        creator = #{creator,jdbcType=VARCHAR},
+      </if>
+              </set>
+    
+    where 
+            
+    id = #{id,jdbcType=INTEGER}
+                                                                                                                                                                                                                                                                  
+  </update>
+
+      	      	   	      	   	      	   	      	   	      	   	      	   	      	   	      	   	      	   	      	   	      	   	      	   	      	   	      	   	      	   	      	   	      	   	      	   	      	   	      	   	      	   	      	   	      	   	      	   	      	   	      	   	      	   	      	   	      	   	      	   	      	   	      	
+
+  <update id="updateByPrimaryKey" parameterType="com.myprice.model.auto.CommodityWarehouse">
+    update u_commodity_warehouse
+    set 
+    		 		 	  	  
+		title = #{title,jdbcType=VARCHAR},
+	  	 		 	  	  
+		variation_product_id = #{variationProductId,jdbcType=VARCHAR},
+	  	 		 	  	  
+		brand = #{brand,jdbcType=VARCHAR},
+	  	 		 	  	  
+		EAN_product = #{eANProduct,jdbcType=VARCHAR},
+	  	 		 	  	  
+		description = #{description,jdbcType=VARCHAR},
+	  	 		 	  	  
+		product_merchandise_category = #{productMerchandiseCategory,jdbcType=VARCHAR},
+	  	 		 	  	  
+		product_badges = #{productBadges,jdbcType=VARCHAR},
+	  	 		 	  	  
+		product_rating = #{productRating,jdbcType=VARCHAR},
+	  	 		 	  	  
+		product_online_stock_status = #{productOnlineStockStatus,jdbcType=VARCHAR},
+	  	 		 	  	  
+		custom_dimension = #{customDimension,jdbcType=VARCHAR},
+	  	 		 	  	  
+		promotion_call_out_message = #{promotionCallOutMessage,jdbcType=VARCHAR},
+	  	 		 	  	  
+		category = #{category,jdbcType=VARCHAR},
+	  	 		 	  	  
+		product_category_level1 = #{productCategoryLevel1,jdbcType=VARCHAR},
+	  	 		 	  	  
+		product_category_level2 = #{productCategoryLevel2,jdbcType=VARCHAR},
+	  	 		 	  	  
+		product_category_level3 = #{productCategoryLevel3,jdbcType=VARCHAR},
+	  	 		 	  	  
+		product_category_level4 = #{productCategoryLevel4,jdbcType=VARCHAR},
+	  	 		 	  	  
+		product_category_level5 = #{productCategoryLevel5,jdbcType=VARCHAR},
+	  	 		 	  	  
+		product_category_level6 = #{productCategoryLevel6,jdbcType=VARCHAR},
+	  	 		 	  	  
+		product_category_level7 = #{productCategoryLevel7,jdbcType=VARCHAR},
+	  	 		 	  	  
+		product_secondary_navigation_category = #{productSecondaryNavigationCategory,jdbcType=VARCHAR},
+	  	 		 	  	  
+		price = #{price,jdbcType=DECIMAL},
+	  	 		 	  	  
+		product_then_price = #{productThenPrice,jdbcType=DECIMAL},
+	  	 		 	  	  
+		list = #{list,jdbcType=VARCHAR},
+	  	 		 	  	  
+		image = #{image,jdbcType=VARCHAR},
+	  	 		 	  	  
+		unit = #{unit,jdbcType=VARCHAR},
+	  	 		 	  	  
+		category_id = #{categoryId,jdbcType=INTEGER},
+	  	 		 	  	  
+		status = #{status,jdbcType=INTEGER},
+	  	 		 	  	  
+		url = #{url,jdbcType=VARCHAR},
+	  	 		 	  	  
+		product_id = #{productId,jdbcType=VARCHAR},
+	  	 		 	  	  
+		create_date = #{createDate,jdbcType=TIMESTAMP},
+	  	 		 	  		
+		creator = #{creator,jdbcType=VARCHAR}
+	  	 		
+    where 
+            
+    id = #{id,jdbcType=INTEGER}
+                                                                                                                                                                                                                                                                    
+  </update>
+  
+                                                                                                                                                                    
+</mapper>

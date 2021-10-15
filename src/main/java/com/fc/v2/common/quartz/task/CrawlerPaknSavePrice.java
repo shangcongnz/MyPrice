@@ -33,6 +33,10 @@ private PaknSaveCrawlerCommodityPrice paknSaveCrawlerCommodityPrice;
  * 定时器的入口
  * @param source
  */
+/*
+*在商品列表中，通过每一个商品进行数据抓取。此种方法效率低，暂时停用，请使用定时器CrawlerPaknSaveCommodityTask.runCrawlerPaknSaveCommoditiesV2
+*/
+
 	public void runCrawlerPaknSavePrice(String  storeID) {
 		ShopCommodity shopCommodity = new ShopCommodity();
 		//状态为正常的。

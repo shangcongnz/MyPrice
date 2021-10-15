@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:include="include :: header('Commodity(Warehouse)修改')"/>
+</head>
+<body>
+<form class="layui-form" action=""  th:object="${CommodityWarehouse}">
+    <div class="mainBox">
+        <div class="main-container">
+            <div class="main-container">
+				<div class="layui-form-item layui-hide">
+                    <label class="layui-form-label">ID</label>
+                    <div class="layui-input-block">
+                        <input type="text" th:value="*{id}" name="id" lay-verify="title"
+                               autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+
+				<div class="layui-form-item">
+                    <label class="layui-form-label">Title</label>
+                    <div class="layui-input-block">
+                        <input th:value="*{title}" type="text" name="title" autocomplete="off" placeholder="Title" class="layui-input">
+                    </div>
+                </div>
+
+				<div class="layui-form-item">
+                    <label class="layui-form-label">variationProductId</label>
+                 <div class="layui-input-block">
+                        <input th:value="*{variationProductId}" type="text" name="variationProductId" autocomplete="off" placeholder="variationProductId" class="layui-input">
+                    </div>
+                </div>
+
+				<div class="layui-form-item">
+                    <label class="layui-form-label">Brand</label>
+                    <div class="layui-input-block">
+                        <input th:value="*{brand}" type="text" name="brand" autocomplete="off" placeholder="Brand" class="layui-input">
+                    </div>
+                </div>
+
+				<div class="layui-form-item">
+                    <label class="layui-form-label">EAN_product</label>
+                    <div class="layui-input-block">
+                        <input th:value="*{eANProduct}" type="text" name="eANProduct" autocomplete="off" placeholder="EAN_product" class="layui-input">
+                    </div>
+                </div>
+
+				<div class="layui-form-item">
+                    <label class="layui-form-label">Description</label>
+                    <div class="layui-input-block">
+                        <input th:value="*{description}" type="text" name="description" autocomplete="off" placeholder="Description" class="layui-input">
+                    </div>
+                </div>
+
+				<div class="layui-form-item">
+                    <label class="layui-form-label">productMerchandiseCategory</label>
+                    <div class="layui-input-block">
+                        <input th:value="*{productMerchandiseCategory}" type="text" name="productMerchandiseCategory" autocomplete="off" placeholder="productMerchandiseCategory" class="layui-input">
+                    </div>
+                </div>
+
+				<div class="layui-form-item">
+                    <label class="layui-form-label">productBadges</label>
+                    <div class="layui-input-block">
+                        <input th:value="*{productBadges}" type="text" name="productBadges" autocomplete="off" placeholder="productBadges" class="layui-input">
+                    </div>
+                </div>
+
+				<div class="layui-form-item">
+                    <label class="layui-form-label">productRating</label>
+                    <div class="layui-input-block">
+                        <input th:value="*{productRating}" type="text" name="productRating" autocomplete="off" placeholder="productRating" class="layui-input">
+                    </div>
+                </div>
+
+				<div class="layui-form-item">
+                    <label class="layui-form-label">productOnlineStockStatus</label>
+                    <div class="layui-input-block">
+                        <input th:value="*{productOnlineStockStatus}" type="text" name="productOnlineStockStatus" autocomplete="off" placeholder="productOnlineStockStatus" class="layui-input">
+                    </div>
+                </div>
+
+				<div class="layui-form-item">
+                    <label class="layui-form-label">customDimension1</label>
+                    <div class="layui-input-block">
+                        <input th:value="*{customDimension}" type="text" name="customDimension" autocomplete="off" placeholder="customDimension1" class="layui-input">
+                    </div>
+                </div>
+
+				<div class="layui-form-item">
+                    <label class="layui-form-label">promotionCallOutMessage</label>
+                    <div class="layui-input-block">
+                        <input th:value="*{promotionCallOutMessage}" type="text" name="promotionCallOutMessage" autocomplete="off" placeholder="promotionCallOutMessage" class="layui-input">
+                    </div>
+                </div>
+
+				<div class="layui-form-item">
+                    <label class="layui-form-label">category</label>
+                    <div class="layui-input-block">
+                        <input th:value="*{category}" type="text" name="category" autocomplete="off" placeholder="category" class="layui-input">
+                    </div>
+                </div>
+
+				<div class="layui-form-item">
+                    <label class="layui-form-label">productCategoryLevel1</label>
+                    <div class="layui-input-block">
+                        <input th:value="*{productCategoryLevel1}" type="text" name="productCategoryLevel1" autocomplete="off" placeholder="productCategoryLevel1" class="layui-input">
+                    </div>
+                </div>
+
+				<div class="layui-form-item">
+                    <label class="layui-form-label">productCategoryLevel2</label>
+                    <div class="layui-input-block">
+                        <input th:value="*{productCategoryLevel2}" type="text" name="productCategoryLevel2" autocomplete="off" placeholder="productCategoryLevel2" class="layui-input">
+                    </div>
+                </div>
+
+				<div class="layui-form-item">
+                    <label class="layui-form-label">productCategoryLevel3</label>
+                    <div class="layui-input-block">
+                        <input th:value="*{productCategoryLevel3}" type="text" name="productCategoryLevel3" autocomplete="off" placeholder="productCategoryLevel3" class="layui-input">
+                    </div>
+                </div>
+
+				<div class="layui-form-item">
+                    <label class="layui-form-label">productCategoryLevel4</label>
+                    <div class="layui-input-block">
+                        <input th:value="*{productCategoryLevel4}" type="text" name="productCategoryLevel4" autocomplete="off" placeholder="productCategoryLevel4" class="layui-input">
+                    </div>
+                </div>
+
+				<div class="layui-form-item">
+                    <label class="layui-form-label">productCategoryLevel5</label>
+                    <div class="layui-input-block">
+                        <input th:value="*{productCategoryLevel5}" type="text" name="productCategoryLevel5" autocomplete="off" placeholder="productCategoryLevel5" class="layui-input">
+                    </div>
+                </div>
+
+				<div class="layui-form-item">
+                    <label class="layui-form-label">productCategoryLevel6</label>
+                    <div class="layui-input-block">
+                        <input th:value="*{productCategoryLevel6}" type="text" name="productCategoryLevel6" autocomplete="off" placeholder="productCategoryLevel6" class="layui-input">
+                    </div>
+                </div>
+
+				<div class="layui-form-item">
+                    <label class="layui-form-label">productCategoryLevel7</label>
+                    <div class="layui-input-block">
+                        <input th:value="*{productCategoryLevel7}" type="text" name="productCategoryLevel7" autocomplete="off" placeholder="productCategoryLevel7" class="layui-input">
+                    </div>
+                </div>
+
+				<div class="layui-form-item">
+                    <label class="layui-form-label">productSecondaryNavigationCategory</label>
+                    <div class="layui-input-block">
+                        <input th:value="*{productSecondaryNavigationCategory}" type="text" name="productSecondaryNavigationCategory" autocomplete="off" placeholder="productSecondaryNavigationCategory" class="layui-input">
+                    </div>
+                </div>
+
+				<div class="layui-form-item">
+                    <label class="layui-form-label">Starting price</label>
+                    <div class="layui-input-block">
+                        <input th:value="*{price}" type="text" name="price" autocomplete="off" placeholder="Starting price" class="layui-input">
+                    </div>
+                </div>
+
+				<div class="layui-form-item">
+                    <label class="layui-form-label">productThenPrice</label>
+                    <div class="layui-input-block">
+                        <input th:value="*{productThenPrice}" type="text" name="productThenPrice" autocomplete="off" placeholder="productThenPrice" class="layui-input">
+                    </div>
+                </div>
+
+				<div class="layui-form-item">
+                    <label class="layui-form-label">list</label>
+                    <div class="layui-input-block">
+                        <input th:value="*{list}" type="text" name="list" autocomplete="off" placeholder="list" class="layui-input">
+                    </div>
+                </div>
+
+				<div class="layui-form-item">
+                    <label class="layui-form-label">iamge</label>
+                    <div class="layui-input-block">
+                        <input th:value="*{image}" type="text" name="image" autocomplete="off" placeholder="iamge" class="layui-input">
+                    </div>
+                </div>
+
+				<div class="layui-form-item">
+                    <label class="layui-form-label">Unit</label>
+                    <div class="layui-input-block">
+                        <input th:value="*{unit}" type="text" name="unit" autocomplete="off" placeholder="Unit" class="layui-input">
+                    </div>
+                </div>
+
+				<div class="layui-form-item">
+                    <label class="layui-form-label">Category</label>
+                    <div class="layui-input-block">
+                        <input th:value="*{categoryId}" type="text" name="categoryId" autocomplete="off" placeholder="Category" class="layui-input">
+                    </div>
+                </div>
+
+				<div class="layui-form-item">
+                    <label class="layui-form-label">status</label>
+                    <div class="layui-input-block">
+                        <input th:value="*{status}" type="text" name="status" autocomplete="off" placeholder="status" class="layui-input">
+                    </div>
+                </div>
+
+				<div class="layui-form-item">
+                    <label class="layui-form-label">URL</label>
+                    <div class="layui-input-block">
+                        <input th:value="*{url}" type="text" name="url" autocomplete="off" placeholder="URL" class="layui-input">
+                    </div>
+                </div>
+
+				<div class="layui-form-item">
+                    <label class="layui-form-label">product ID</label>
+                    <div class="layui-input-block">
+                        <input th:value="*{productId}" type="text" name="productId" autocomplete="off" placeholder="product ID" class="layui-input">
+                    </div>
+                </div>
+
+				<div class="layui-form-item">
+                    <label class="layui-form-label">create_date</label>
+                    <div class="layui-input-block">
+                        <input th:value="${CommodityWarehouse.dateToStringConvert(CommodityWarehouse.createDate)}" type="text" name="createDate" autocomplete="off" placeholder="create_date" class="layui-input datetime-input">
+                    </div>
+                </div>
+
+				<div class="layui-form-item">
+                    <label class="layui-form-label">creator</label>
+                    <div class="layui-input-block">
+                        <input th:value="*{creator}" type="text" name="creator" autocomplete="off" placeholder="creator" class="layui-input">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="bottom">
+        <div class="button-container">
+            <button type="submit" class="layui-btn layui-btn-normal layui-btn-sm" lay-submit=""
+                    lay-filter="commodityWarehouse-update">
+                <i class="layui-icon layui-icon-ok"></i>
+				Submit
+            </button>
+            <button type="reset" class="layui-btn layui-btn-primary layui-btn-sm">
+                <i class="layui-icon layui-icon-refresh"></i>
+				Reset
+            </button>
+        </div>
+    </div>
+</form>
+<th:block th:include="include :: footer"/>
+<script>
+    layui.use(['form','laydate','jquery'], function () {
+        let form = layui.form;
+        let $ = layui.jquery;
+        let MODULE_PATH = rootPath+"/CommodityWarehouseController";
+		
+		var laydate = layui.laydate;
+        //同时绑定多个
+        lay('.datetime-input').each(function(){
+          laydate.render({
+            elem: this
+            ,trigger: 'click'
+            ,type: 'datetime'
+          });
+        });
+        form.on('submit(commodityWarehouse-update)', function (data) {
+            $.ajax({
+                url: MODULE_PATH+'/edit',
+                data: data.field,
+                dataType: 'json',
+                contentType: 'application/x-www-form-urlencoded',
+                type: 'post',
+                success: function (result) {
+                    if (result.code==200) {
+                        layer.msg(result.msg, {icon: 1, time: 1000}, function () {
+                            parent.layer.close(parent.layer.getFrameIndex(window.name));//关闭当前页
+                            parent.layui.table.reload("commodityWarehouse-table");
+                        });
+                    } else {
+                        layer.msg(result.msg, {icon: 2, time: 1000});
+                    }
+                }
+            })
+            return false;
+        });
+    })
+</script>
+<script>
+</script>
+</body>
+</html>

@@ -1,6 +1,6 @@
-INSERT INTO `t_sys_permission` VALUES ('596301190610948096', 'PricePaknsave管理', 'PricePaknsave展示', '/PricePaknsaveController/view','0', '596234702315196416', 'gen:pricePaknsave:view', 1, 'layui-icon layui-icon-face-smile', NULL,0)
-,('596301190610948097', 'PricePaknsave集合', 'PricePaknsave集合', '/PricePaknsaveController/list','0', '596301190610948096', 'gen:pricePaknsave:list', 2, '', NULL,0)
-,('596301190610948098', 'PricePaknsave添加', 'PricePaknsave添加', '/PricePaknsaveController/add','0', '596301190610948096', 'gen:pricePaknsave:add', 2, 'layui-icon layui-icon-add-1', NULL,0)
-,('596301190610948099', 'PricePaknsave删除', 'PricePaknsave删除', '/PricePaknsaveController/remove','0', '596301190610948096', 'gen:pricePaknsave:remove', 2, 'layui-icon layui-icon-delete', NULL,0)
-,('596301190610948100', 'PricePaknsave修改', 'PricePaknsave修改', '/PricePaknsaveController/edit','0', '596301190610948096', 'gen:pricePaknsave:edit', 2, 'layui-icon layui-icon-edit', NULL,0);
+INSERT INTO `t_sys_permission` VALUES ('603178525926756352', 'Commodity(Warehouse)管理', 'Commodity(Warehouse)展示', '/CommodityWarehouseController/view','0', '596231292538982400', 'gen:commodityWarehouse:view', 1, 'layui-icon layui-icon-face-smile', NULL,0)
+,('603178525926756353', 'Commodity(Warehouse)集合', 'Commodity(Warehouse)集合', '/CommodityWarehouseController/list','0', '603178525926756352', 'gen:commodityWarehouse:list', 2, '', NULL,0)
+,('603178525926756354', 'Commodity(Warehouse)添加', 'Commodity(Warehouse)添加', '/CommodityWarehouseController/add','0', '603178525926756352', 'gen:commodityWarehouse:add', 2, 'layui-icon layui-icon-add-1', NULL,0)
+,('603178525926756355', 'Commodity(Warehouse)删除', 'Commodity(Warehouse)删除', '/CommodityWarehouseController/remove','0', '603178525926756352', 'gen:commodityWarehouse:remove', 2, 'layui-icon layui-icon-delete', NULL,0)
+,('603178525926756356', 'Commodity(Warehouse)修改', 'Commodity(Warehouse)修改', '/CommodityWarehouseController/edit','0', '603178525926756352', 'gen:commodityWarehouse:edit', 2, 'layui-icon layui-icon-edit', NULL,0);
 

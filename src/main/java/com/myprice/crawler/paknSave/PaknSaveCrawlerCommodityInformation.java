@@ -42,7 +42,7 @@ public class PaknSaveCrawlerCommodityInformation {
 			 this.cookies.put("server_nearest_store_v2", "{\"StoreId\":\"b83029b6-5dd5-449e-8056-26f3943a4e18\",\"UserLat\":\"\",\"UserLng\":\"\",\"StoreLat\":\"-41.205578\",\"StoreLng\":\"174.913149\",\"IsSuccess\":true}");
 			 
 			 this.cookies.put("AllowRestrictedItems", "true");
-			 this.cookies.put("STORE_ID_V2", "b83029b6-5dd5-449e-8056-26f3943a4e18|false");
+			 this.cookies.put("STORE_ID_V2", "076e8177-943b-41fc-a885-ba3d28297acf|False");
 			 
 			 
 			 

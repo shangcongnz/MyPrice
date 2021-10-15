@@ -1,21 +1,24 @@
 package com.myprice.service;
 
-import java.util.List;
 import java.util.Arrays;
+import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
-import cn.hutool.core.util.StrUtil;
+
 import com.fc.v2.common.base.BaseService;
 import com.fc.v2.common.support.ConvertUtil;
+import com.fc.v2.model.custom.Tablepar;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.myprice.mapper.auto.PricePaknsaveMapper;
 import com.myprice.model.auto.PricePaknsave;
 import com.myprice.model.auto.PricePaknsaveExample;
-import com.fc.v2.model.custom.Tablepar;
-import com.fc.v2.util.SnowflakeIdWorker;
-import com.fc.v2.util.StringUtils;
-import org.slf4j.*;
+
+import cn.hutool.core.util.StrUtil;
 
 /**
  * PricePaknsave PricePaknsaveService
@@ -115,12 +118,19 @@ public class PricePaknsaveService implements BaseService<PricePaknsave, PricePak
 	}
 
 	@Override
+//	@Cacheable(value="PricePaknsaveService.priceList",key ="")//value
 	public List<PricePaknsave> selectByExample(PricePaknsaveExample example) {
 		
 		return pricePaknsaveMapper.selectByExample(example);
 	}
 
-	
+ 	@Cacheable(value="PricePaknsaveService.priceList",key ="#commodityId")//value
+	public List<PricePaknsave> selectPriceListByCommodityId(Integer  commodityId) {
+		PricePaknsaveExample example = new PricePaknsaveExample ();
+		example.createCriteria().andCommodityIdEqualTo(commodityId);
+		return pricePaknsaveMapper.selectByExample(example);
+	}
+
 	@Override
 	public long countByExample(PricePaknsaveExample example) {
 		

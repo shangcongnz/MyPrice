@@ -19,38 +19,38 @@ import com.fc.v2.common.domain.ResultTable;
 import com.fc.v2.common.log.Log;
 import com.fc.v2.model.custom.Tablepar;
 import com.github.pagehelper.PageInfo;
-import com.myprice.model.auto.CategoryPaknsave;
-import com.myprice.service.CategoryPaknsaveService;
+import com.myprice.model.auto.CategoryWarehouse;
+import com.myprice.service.CategoryWarehouseService;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
 /**
- * CategoryPaknsaveController
- * @ClassName: CategoryPaknsaveController
+ * warehouse CategoryController
+ * @ClassName: CategoryWarehouseController
  * @author Cong
- * @date 2021-09-10 22:40:01
+ * @date 2021-09-29 16:29:12
  */
-@Api(value = "CategoryPaknsave")
+@Api(value = "warehouse Category")
 @Controller
-@RequestMapping("/CategoryPaknsaveController")
-public class CategoryPaknsaveController extends BaseController{
+@RequestMapping("/CategoryWarehouseController")
+public class CategoryWarehouseController extends BaseController{
 	
-	private String prefix = "gen/categoryPaknsave";
+	private String prefix = "gen/categoryWarehouse";
 	
 	@Autowired
-	private CategoryPaknsaveService categoryPaknsaveService;
+	private CategoryWarehouseService categoryWarehouseService;
 	
 	
 	/**
-	 * CategoryPaknsave display
+	 * warehouse Category display
 	 * @param model
 	 * @return String
 	 * @author Cong
 	 */
 	@ApiOperation(value = "Page Jump", notes = "Page Jump")
 	@GetMapping("/view")
-	@RequiresPermissions("gen:categoryPaknsave:view")
+	@RequiresPermissions("gen:categoryWarehouse:view")
     public String view(ModelMap model)
     {
         return prefix + "/list";
@@ -62,13 +62,13 @@ public class CategoryPaknsaveController extends BaseController{
 	 * @param searchText
 	 * @return
 	 */
-	@Log(title = "CategoryPaknsave", action = "List")
+	@Log(title = "warehouse Category", action = "List")
 	@ApiOperation(value = "Page Jump", notes = "Page Jump")
 	@GetMapping("/list")
-	@RequiresPermissions("gen:categoryPaknsave:list")
+	@RequiresPermissions("gen:categoryWarehouse:list")
 	@ResponseBody
-	public ResultTable list(Tablepar tablepar,CategoryPaknsave categoryPaknsave){
-		PageInfo<CategoryPaknsave> page=categoryPaknsaveService.list(tablepar,categoryPaknsave) ; 
+	public ResultTable list(Tablepar tablepar,CategoryWarehouse categoryWarehouse){
+		PageInfo<CategoryWarehouse> page=categoryWarehouseService.list(tablepar,categoryWarehouse) ; 
 		return pageTable(page.getList(),page.getTotal());
 	}
 	
@@ -87,13 +87,13 @@ public class CategoryPaknsaveController extends BaseController{
      * @param 
      * @return
      */
-	@Log(title = "CategoryPaknsave Add", action = "Add")
+	@Log(title = "warehouse Category Add", action = "Add")
 	@ApiOperation(value = "Add", notes = "Add")
 	@PostMapping("/add")
-	@RequiresPermissions("gen:categoryPaknsave:add")
+	@RequiresPermissions("gen:categoryWarehouse:add")
 	@ResponseBody
-	public AjaxResult add(CategoryPaknsave categoryPaknsave){
-		int b=categoryPaknsaveService.insertSelective(categoryPaknsave);
+	public AjaxResult add(CategoryWarehouse categoryWarehouse){
+		int b=categoryWarehouseService.insertSelective(categoryWarehouse);
 		if(b>0){
 			return success();
 		}else{
@@ -102,17 +102,17 @@ public class CategoryPaknsaveController extends BaseController{
 	}
 	
 	/**
-	 * CategoryPaknsaveDelete
+	 * warehouse CategoryDelete
 	 * @param ids
 	 * @return
 	 */
-	@Log(title = "CategoryPaknsaveDelete", action = "Delete")
+	@Log(title = "warehouse CategoryDelete", action = "Delete")
 	@ApiOperation(value = "Delete", notes = "Delete")
 	@DeleteMapping("/remove")
-	@RequiresPermissions("gen:categoryPaknsave:remove")
+	@RequiresPermissions("gen:categoryWarehouse:remove")
 	@ResponseBody
 	public AjaxResult remove(String ids){
-		int b=categoryPaknsaveService.deleteByPrimaryKey(ids);
+		int b=categoryWarehouseService.deleteByPrimaryKey(ids);
 		if(b>0){
 			return success();
 		}else{
@@ -131,7 +131,7 @@ public class CategoryPaknsaveController extends BaseController{
 	@GetMapping("/edit/{id}")
     public String edit(@PathVariable("id") String id, ModelMap map)
     {
-        map.put("CategoryPaknsave", categoryPaknsaveService.selectByPrimaryKey(id));
+        map.put("CategoryWarehouse", categoryWarehouseService.selectByPrimaryKey(id));
 
         return prefix + "/edit";
     }
@@ -139,17 +139,16 @@ public class CategoryPaknsaveController extends BaseController{
 	/**
      * Edit
      */
-    @Log(title = "CategoryPaknsave Edit", action = "Edit")
+    @Log(title = "warehouse Category Edit", action = "Edit")
 	@ApiOperation(value = "Edit", notes = "Edit")
-    @RequiresPermissions("gen:categoryPaknsave:edit")
+    @RequiresPermissions("gen:categoryWarehouse:edit")
     @PostMapping("/edit")
     @ResponseBody
-    public AjaxResult editSave(CategoryPaknsave categoryPaknsave)
+    public AjaxResult editSave(CategoryWarehouse categoryWarehouse)
     {
-        return toAjax(categoryPaknsaveService.updateByPrimaryKeySelective(categoryPaknsave));
+        return toAjax(categoryWarehouseService.updateByPrimaryKeySelective(categoryWarehouse));
     }
 
-    
 	/**
 	 * 修改状态
 	 * @param record
@@ -157,8 +156,8 @@ public class CategoryPaknsaveController extends BaseController{
 	 */
     @PutMapping("/updateVisible")
 	@ResponseBody
-    public AjaxResult updateVisible(@RequestBody CategoryPaknsave record){
-		int i=categoryPaknsaveService.updateByPrimaryKeySelective(record);
+    public AjaxResult updateVisible(@RequestBody CategoryWarehouse record){
+		int i=categoryWarehouseService.updateByPrimaryKeySelective(record);
 		 return toAjax(i);
 	}
      
@@ -167,15 +166,14 @@ public class CategoryPaknsaveController extends BaseController{
 	@GetMapping("/updateCategory")
 	@ResponseBody
 	public AjaxResult updateCategory(){
-		System.out.println("	@GetMapping(\"/updateCategory\")");
-		 int b=categoryPaknsaveService.updateCategoryPaknsave();
+		 int b=categoryWarehouseService.updateCategoryWarehouse();
 		if(b>0){
 			return success();
 		}else{
 			return error();
 		}
 	}
-	
+    
 
 	
 }

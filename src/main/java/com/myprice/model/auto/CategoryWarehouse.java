@@ -1,7 +1,6 @@
 package com.myprice.model.auto;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -11,12 +10,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import cn.hutool.core.date.DateUtil;
 import io.swagger.annotations.ApiModelProperty;
 
-public class CategoryPaknsave implements Serializable {
+public class CategoryWarehouse implements Serializable {
     private static final long serialVersionUID = 1L;
 
 	
-    private List<CategoryPaknsave> children =new ArrayList<CategoryPaknsave>(); 
-    
 	@ApiModelProperty(value = "ID")
 	private Integer id;
 	
@@ -29,15 +26,6 @@ public class CategoryPaknsave implements Serializable {
 	@ApiModelProperty(value = "URL")
 	private String url;
 	
-	@ApiModelProperty(value = "ItemName")
-	private String itemName;
-	
-	@ApiModelProperty(value = "IsInMobileHeader")
-	private String isInMobileHeader;
-	
-	@ApiModelProperty(value = "ItemId")
-	private String itemId;
-	
 	@ApiModelProperty(value = "Status")
 	private Integer status;
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
@@ -47,6 +35,18 @@ public class CategoryPaknsave implements Serializable {
 	@ApiModelProperty(value = "branch_id")
 	private Integer branchId;
 	
+	private List<CategoryWarehouse> children;
+	
+	 
+	
+	public List<CategoryWarehouse> getChildren() {
+		return children;
+	}
+
+	public void setChildren(List<CategoryWarehouse> children) {
+		this.children = children;
+	}
+
 	@JsonProperty("id")
 	public Integer getId() {
 		return id;
@@ -79,30 +79,6 @@ public class CategoryPaknsave implements Serializable {
 	public void setUrl(String url) {
 		this.url =  url;
 	}
-	@JsonProperty("itemName")
-	public String getItemName() {
-		return itemName;
-	}
-
-	public void setItemName(String itemName) {
-		this.itemName =  itemName;
-	}
-	@JsonProperty("isInMobileHeader")
-	public String getIsInMobileHeader() {
-		return isInMobileHeader;
-	}
-
-	public void setIsInMobileHeader(String isInMobileHeader) {
-		this.isInMobileHeader =  isInMobileHeader;
-	}
-	@JsonProperty("itemId")
-	public String getItemId() {
-		return itemId;
-	}
-
-	public void setItemId(String itemId) {
-		this.itemId =  itemId;
-	}
 	@JsonProperty("status")
 	public Integer getStatus() {
 		return status;
@@ -128,21 +104,8 @@ public class CategoryPaknsave implements Serializable {
 		this.branchId =  branchId;
 	}
 
-	
-	public List<CategoryPaknsave> getChildren() {
-		return children;
-	}
-
-	public void setChildren(List<CategoryPaknsave> children) {
-		this.children = children;
-	}
-
-	public void add(CategoryPaknsave c) {
-		this.children.add(c);
-	}
-	
-																				
-	public CategoryPaknsave(Integer id,Integer parentId,String name,String url,String itemName,String isInMobileHeader,String itemId,Integer status,Date updateDate,Integer branchId) {
+														
+	public CategoryWarehouse(Integer id,Integer parentId,String name,String url,Integer status,Date updateDate,Integer branchId) {
 				
 		this.id = id;
 				
@@ -152,12 +115,6 @@ public class CategoryPaknsave implements Serializable {
 				
 		this.url = url;
 				
-		this.itemName = itemName;
-				
-		this.isInMobileHeader = isInMobileHeader;
-				
-		this.itemId = itemId;
-				
 		this.status = status;
 				
 		this.updateDate = updateDate;
@@ -166,7 +123,7 @@ public class CategoryPaknsave implements Serializable {
 				
 	}
 
-	public CategoryPaknsave() {
+	public CategoryWarehouse() {
 	    super();
 	}
 
@@ -179,10 +136,11 @@ public class CategoryPaknsave implements Serializable {
 
 	@Override
 	public String toString() {
-		return "CategoryPaknsave [children=" + children + ", id=" + id + ", parentId=" + parentId + ", name=" + name
-				+ ", url=" + url + ", itemName=" + itemName + ", isInMobileHeader=" + isInMobileHeader + ", itemId="
-				+ itemId + ", status=" + status + ", updateDate=" + updateDate + ", branchId=" + branchId + "]";
+		return "CategoryWarehouse [id=" + id + ", parentId=" + parentId + ", name=" + name + ", url=" + url
+				+ ", status=" + status + ", updateDate=" + updateDate + ", branchId=" + branchId + ", children="
+				+ children + "]";
 	}
+	
 	
 
 }

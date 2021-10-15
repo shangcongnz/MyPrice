@@ -179,9 +179,8 @@ public class PricePaknsaveController extends BaseController{
 	@ResponseBody
 	public AjaxResult  priceListByCommodityId(PricePaknsave pricePaknsave){
 		System.out.println("pricePaknsave.getCommodityId()--------------"+pricePaknsave.getCommodityId());
-		PricePaknsaveExample example = new PricePaknsaveExample ();
-		example.createCriteria().andCommodityIdEqualTo(pricePaknsave.getCommodityId());
-		List<PricePaknsave> priceList=pricePaknsaveService.selectByExample(example) ; 
+		
+		List<PricePaknsave> priceList=pricePaknsaveService.selectPriceListByCommodityId(pricePaknsave.getCommodityId()) ; 
 		return retobject(200,priceList);
 	}
 

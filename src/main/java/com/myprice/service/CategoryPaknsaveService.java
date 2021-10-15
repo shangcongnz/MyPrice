@@ -5,6 +5,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.fc.v2.common.base.BaseService;
@@ -42,6 +43,7 @@ public class CategoryPaknsaveService implements BaseService<CategoryPaknsave, Ca
 	 * @param pageSize
 	 * @return
 	 */
+	@Cacheable(value ="CategoryListPaknsave" ) 
 	 public PageInfo<CategoryPaknsave> list(Tablepar tablepar,CategoryPaknsave categoryPaknsave){
 	        CategoryPaknsaveExample testExample=new CategoryPaknsaveExample();
 			//搜索

@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <th:block th:include="include :: header('warehouse Category列表')"/>
+</head>
+<body class="pear-container">
+<div class="layui-card">
+    <div class="layui-card-body">
+        <form class="layui-form" action="">
+            <div class="layui-form-item">
+                <label class="layui-form-label">keyword</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="searchText" placeholder="" class="layui-input">
+                </div>
+                <button class="pear-btn pear-btn-md pear-btn-primary" lay-submit lay-filter="categoryWarehouse-query">
+                    <i class="layui-icon layui-icon-search"></i>
+                   	 Search
+                </button>
+                <button type="reset" class="pear-btn pear-btn-md">
+                    <i class="layui-icon layui-icon-refresh"></i>
+					Reset
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="layui-card">
+    <div class="layui-card-body">
+        <table id="categoryWarehouse-table" lay-filter="categoryWarehouse-table"></table>
+    </div>
+</div>
+</body>
+
+<script type="text/html" id="category-enable">
+    <input type="checkbox" name="enable" value="{{d.id}}" lay-skin="switch" lay-text="ON|OFF" lay-filter="category-enable" {{ d.status== 1 ? 'checked' : '' }}>
+</script>
+<script type="text/html" id="categoryWarehouse-toolbar">
+    <button shiro:hasPermission="gen:categoryWarehouse:add" class="pear-btn pear-btn-primary pear-btn-md" lay-event="add">
+        <i class="layui-icon layui-icon-add-1"></i>
+		 New
+    </button>
+    <button shiro:hasPermission="gen:categoryWarehouse:remove" class="pear-btn pear-btn-danger pear-btn-md" lay-event="batchRemove">
+        <i class="layui-icon layui-icon-delete"></i>
+		Delete
+    </button>
+
+
+	<button   class="pear-btn pear-btn-danger pear-btn-md" lay-event="updateCategory">
+         <i class="layui-icon layui-icon-add-1"></i>
+			 Update Warehouse Category Automatically
+    </button>
+</script>
+
+<script type="text/html" id="categoryWarehouse-bar">
+    <button shiro:hasPermission="gen:categoryWarehouse:edit" class="pear-btn pear-btn-primary pear-btn-sm" lay-event="edit" title="Edit"><i class="layui-icon layui-icon-edit"></i>
+    </button>
+
+    <button shiro:hasPermission="gen:categoryWarehouse:remove" class="pear-btn pear-btn-danger pear-btn-sm" lay-event="remove" title="Delete"><i class="layui-icon layui-icon-delete"></i>
+    </button>
+</script>
+
+
+<script type="text/html" id="categoryWarehouse-type">
+    {{#if (d.dataState == '0') { }}
+    <span class="layui-badge layui-bg-orange">ON</span>
+    {{# }else if(d.dataState == '-1'){ }}
+    <span class="layui-badge layui-bg-blue">OFF</span>
+    {{# } }}
+</script>
+
+<th:block th:include="include :: footer"/>
+<script>
+    layui.use(['table', 'form', 'jquery', 'treetable'], function () {
+        let table = layui.table;
+        let form = layui.form;
+        let $ = layui.jquery;
+        let treetable = layui.treetable;
+
+        let MODULE_PATH = rootPath+"/CategoryWarehouseController/";
+        
+        window.render = function () { 
+        treetable.render({
+            treeColIndex: 1,
+            treeSpid: 0,
+            treeIdName: 'id',
+            treePidName: 'parentId',
+            skin: 'line',
+            method: 'get',
+            treeDefaultClose: true,
+            toolbar: '#categoryWarehouse-toolbar',
+            elem: '#categoryWarehouse-table',
+            url: MODULE_PATH+'list',
+            page: false,
+            cols: [
+                [
+                    {type: 'checkbox'},
+                    {title: 'ID', field: 'id', align: 'center'},
+                	
+                    {field: 'name', title: 'name' , minWidth: 200},
+                   
+                    {title: 'URL', field: 'url', align: 'center'},
+                   
+                    {field: 'updateDate', title: 'updateDate',align: 'center'},
+                    
+                    {field: 'status', title: 'status',templet: '#category-enable'},
+                 
+                    {title: 'Operation', templet: '#categoryWarehouse-bar', width: 150, align: 'center'}
+                ]
+            ]
+        });
+    }
+
+    render();
+    
+    /*     
+        let cols = [
+            [
+                {type: 'checkbox'},
+                
+	           },
+	
+				{title: 'Parent ID', field: 'parentId', align: 'center'},
+	
+				{title: 'Name', field: 'name', align: 'center'},
+	
+				{title: 'URL', field: 'url', align: 'center'},
+	
+				{title: 'Status', field: 'status', align: 'center'},
+	
+				{title: 'Last Update Date', field: 'updateDate', align: 'center'},
+	
+				{title: 'branch_id', field: 'branchId', align: 'center'},
+					
+				                
+                {title: 'Operation', toolbar: '#categoryWarehouse-bar', align: 'center'}
+            ]
+        ]
+
+        //table表单列表
+        table.render({
+            elem: '#categoryWarehouse-table',
+            url: MODULE_PATH + 'list',
+            page: true,
+            method: 'get',
+            cols: cols,
+            skin: 'line',
+            toolbar: '#categoryWarehouse-toolbar',
+            defaultToolbar: [{
+                layEvent: 'refresh',
+                icon: 'layui-icon-refresh',
+            }, 'filter', 'print', 'exports']
+        });
+*/
+
+		//swith status
+		form.on('switch(category-enable)', function (obj) {
+		    let operate;
+		
+		    if (obj.elem.checked) {
+		        operate = 1;
+		    } else {
+		        operate = 0;
+		    }
+		
+		    let loading = layer.load()
+		
+		    $.ajax({
+		        url: MODULE_PATH+'updateVisible',
+		        data: JSON.stringify({id: this.value,status:operate}),
+		        dataType: 'json',
+		        contentType: 'application/json',
+		        type: 'put',
+		        success: function (result) {
+		            layer.close(loading);
+		            if (result.code==200) {
+		                layer.msg(result.msg, {icon: 1, time: 1000}, function () {
+		                });
+		            } else {
+		                layer.msg(result.msg, {icon: 2, time: 1000});
+		            }
+		        }
+		    })
+		});
+
+
+		//table图标事件绑定
+        table.on('tool(categoryWarehouse-table)', function (obj) {
+            if (obj.event === 'remove') {
+                window.remove(obj);
+            } else if (obj.event === 'edit') {
+                window.edit(obj);
+            }
+            
+        });
+
+        //table工具栏绑定
+        table.on('toolbar(categoryWarehouse-table)', function (obj) {
+            if (obj.event === 'add') {
+                window.add();
+            } else if (obj.event === 'refresh') {
+                window.refresh();
+            } else if (obj.event === 'batchRemove') {
+                window.batchRemove(obj);
+            }else if (obj.event === 'updateCategory') {
+                window.updateCategory(obj);
+            }
+        });
+
+        //查询按钮绑定
+        form.on('submit(categoryWarehouse-query)', function (data) {
+            table.reload('categoryWarehouse-table', {where: data.field})
+            return false;
+        });
+
+
+        //添加
+        window.add = function () {
+            layer.open({
+                type: 2,
+                title: '新增',
+                shade: 0.1,
+                area: ['500px', '500px'],
+                content: MODULE_PATH + 'add'
+            });
+        }
+        //修改
+        window.edit = function (obj) {
+            layer.open({
+                type: 2,
+                title: 'edit',
+                shade: 0.1,
+                area: ['500px', '500px'],
+                content: MODULE_PATH + 'edit/' + obj.data['id']
+            });
+        }
+        //删除
+        window.remove = function (obj) {
+            layer.confirm('confirm to delete', {icon: 3, title: 'delete'}, function (index) {
+                layer.close(index);
+                let loading = layer.load();
+                $.ajax({
+                    url: MODULE_PATH + "remove?ids=" + obj.data['id'],
+                    dataType: 'json',
+                    type: 'delete',
+                    success: function (result) {
+                        layer.close(loading);
+                        if (result.code==200) {
+                            layer.msg(result.msg, {icon: 1, time: 1000}, function () {
+                                obj.del();
+                            });
+                        } else {
+                            layer.msg(result.msg, {icon: 2, time: 1000});
+                        }
+                    }
+                })
+            });
+        }
+
+        //批量删除
+        window.batchRemove = function (obj) {
+            let data = table.checkStatus(obj.config.id).data;
+            if (data.length === 0) {
+                layer.msg("Data not selected", {icon: 3, time: 1000});
+                return false;
+            }
+            let ids = "";
+            for (let i = 0; i < data.length; i++) {
+                ids += data[i].id + ",";
+            }
+            ids = ids.substr(0, ids.length - 1);
+            layer.confirm('confirm to delete', {icon: 3, title: 'delete'}, function (index) {
+                layer.close(index);
+                let loading = layer.load();
+                $.ajax({
+                    url: MODULE_PATH + "remove?ids=" + ids,
+                    dataType: 'json',
+                    type: 'delete',
+                    success: function (result) {
+                        layer.close(loading);
+                        if (result.code==200) {
+                            layer.msg(result.msg, {icon: 1, time: 1000}, function () {
+                                table.reload('categoryWarehouse-table');
+                            });
+                        } else {
+                            layer.msg(result.msg, {icon: 2, time: 1000});
+                        }
+                    }
+                })
+            });
+        }
+        //刷新按钮
+        window.refresh = function () {
+            table.reload('categoryWarehouse-table');
+        }
+        
+        //update
+        window.updateCategory = function (obj) { 
+            layer.confirm('confirm to update', {icon: 3, title: 'update'}, function (index) {
+                layer.close(index);
+                let loading = layer.load();
+                $.ajax({
+                    url: MODULE_PATH + "updateCategory",
+                    dataType: 'json',
+                    type: 'get',
+                    success: function (result) {
+                        layer.close(loading);
+                        if (result.code==200) {
+                            layer.msg(result.msg, {icon: 1, time: 1000}, function () {
+                                obj.del();
+                            });
+                        } else {
+                            layer.msg(result.msg, {icon: 2, time: 1000});
+                        }
+                    }
+                })
+            });
+        }
+        
+        
+        
+    })
+</script>
+</html>

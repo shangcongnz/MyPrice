@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="com.myprice.mapper.auto.CategoryWarehouseMapper">
+	<select id="selectLeavesByParentId"
+		parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		FROM
+		u_category_warehouse WHERE
+			id NOT IN ( SELECT parent_id FROM u_category_warehouse )
+		<if test="id != null">
+
+
+	and parent_id in (select id FROM u_category_warehouse where parent_id
+	=#{id,jdbcType=INTEGER} or id =#{id,jdbcType=INTEGER} or parent_id in
+	(select id FROM u_category_warehouse where parent_id
+	=#{id,jdbcType=INTEGER} or id =#{id,jdbcType=INTEGER}) ) order by 1
+
+		</if>
+	</select>
+
+
+</mapper>
