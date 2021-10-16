@@ -1,21 +1,21 @@
 package com.myprice.service;
 
-import java.util.List;
 import java.util.Arrays;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
-import cn.hutool.core.util.StrUtil;
+
 import com.fc.v2.common.base.BaseService;
 import com.fc.v2.common.support.ConvertUtil;
+import com.fc.v2.model.custom.Tablepar;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.myprice.mapper.auto.CommodityWarehouseMapper;
 import com.myprice.model.auto.CommodityWarehouse;
 import com.myprice.model.auto.CommodityWarehouseExample;
-import com.fc.v2.model.custom.Tablepar;
-import com.fc.v2.util.SnowflakeIdWorker;
-import com.fc.v2.util.StringUtils;
-import org.slf4j.*;
+
+import cn.hutool.core.util.StrUtil;
 
 /**
  * Commodity(Warehouse) CommodityWarehouseService
@@ -30,7 +30,7 @@ public class CommodityWarehouseService implements BaseService<CommodityWarehouse
 	@Autowired
 	private CommodityWarehouseMapper commodityWarehouseMapper;
 	
-	private static final Logger log = LoggerFactory.getLogger(CommodityWarehouseService.class);
+//	private static final Logger log = LoggerFactory.getLogger(CommodityWarehouseService.class);
 	
       	   	      	      	      	      	      	      	      	      	      	      	      	      	      	      	      	      	      	      	      	      	      	      	      	      	      	      	      	      	      	      	      	      	
 	/**

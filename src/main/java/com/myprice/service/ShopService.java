@@ -1,21 +1,23 @@
 package com.myprice.service;
 
-import java.util.List;
 import java.util.Arrays;
+import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
-import cn.hutool.core.util.StrUtil;
+
 import com.fc.v2.common.base.BaseService;
 import com.fc.v2.common.support.ConvertUtil;
+import com.fc.v2.model.custom.Tablepar;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.myprice.mapper.auto.ShopMapper;
 import com.myprice.model.auto.Shop;
 import com.myprice.model.auto.ShopExample;
-import com.fc.v2.model.custom.Tablepar;
-import com.fc.v2.util.SnowflakeIdWorker;
-import com.fc.v2.util.StringUtils;
-import org.slf4j.*;
+
+import cn.hutool.core.util.StrUtil;
 
 /**
  * Shop ShopService
@@ -40,6 +42,7 @@ public class ShopService implements BaseService<Shop, ShopExample>{
 	 * @return
 	 */
 	 public PageInfo<Shop> list(Tablepar tablepar,Shop shop){
+		 log.debug("ShopService.list");
 	        ShopExample testExample=new ShopExample();
 			//搜索
 			if(StrUtil.isNotEmpty(tablepar.getSearchText())) {//小窗体

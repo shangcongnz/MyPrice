@@ -1,7 +1,6 @@
 package com.myprice.crawler;
 
 import java.io.IOException;
-import java.util.Iterator;
 import java.util.Map;
 
 import org.jsoup.Jsoup;

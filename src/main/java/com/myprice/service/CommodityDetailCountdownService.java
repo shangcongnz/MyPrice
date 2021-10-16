@@ -1,21 +1,23 @@
 package com.myprice.service;
 
-import java.util.List;
 import java.util.Arrays;
+import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
-import cn.hutool.core.util.StrUtil;
+
 import com.fc.v2.common.base.BaseService;
 import com.fc.v2.common.support.ConvertUtil;
+import com.fc.v2.model.custom.Tablepar;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.myprice.mapper.auto.CommodityDetailCountdownMapper;
 import com.myprice.model.auto.CommodityDetailCountdown;
 import com.myprice.model.auto.CommodityDetailCountdownExample;
-import com.fc.v2.model.custom.Tablepar;
-import com.fc.v2.util.SnowflakeIdWorker;
-import com.fc.v2.util.StringUtils;
-import org.slf4j.*;
+
+import cn.hutool.core.util.StrUtil;
 
 /**
  * CountDown CommodityDetailCountdownService
@@ -40,6 +42,7 @@ public class CommodityDetailCountdownService implements BaseService<CommodityDet
 	 * @return
 	 */
 	 public PageInfo<CommodityDetailCountdown> list(Tablepar tablepar,CommodityDetailCountdown commodityDetailCountdown){
+		 log.debug("query CommodityDetailCountdownService.list");
 	        CommodityDetailCountdownExample testExample=new CommodityDetailCountdownExample();
 			//搜索
 			if(StrUtil.isNotEmpty(tablepar.getSearchText())) {//小窗体

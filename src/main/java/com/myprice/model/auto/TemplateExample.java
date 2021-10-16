@@ -1,8 +1,8 @@
 package com.myprice.model.auto;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
+
 import cn.hutool.core.util.StrUtil;
 
 /**

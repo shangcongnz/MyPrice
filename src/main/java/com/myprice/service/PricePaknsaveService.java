@@ -43,6 +43,7 @@ public class PricePaknsaveService implements BaseService<PricePaknsave, PricePak
 	 * @return
 	 */
 	 public PageInfo<PricePaknsave> list(Tablepar tablepar,PricePaknsave pricePaknsave){
+		 	log.debug("PricePaknsaveService.list");
 	        PricePaknsaveExample testExample=new PricePaknsaveExample();
 	        testExample.setOrderByClause(" date desc");
 			//搜索

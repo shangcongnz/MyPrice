@@ -1,21 +1,23 @@
 package com.myprice.service;
 
-import java.util.List;
 import java.util.Arrays;
+import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
-import cn.hutool.core.util.StrUtil;
+
 import com.fc.v2.common.base.BaseService;
 import com.fc.v2.common.support.ConvertUtil;
+import com.fc.v2.model.custom.Tablepar;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.myprice.mapper.auto.MonitorPriceMapper;
 import com.myprice.model.auto.MonitorPrice;
 import com.myprice.model.auto.MonitorPriceExample;
-import com.fc.v2.model.custom.Tablepar;
-import com.fc.v2.util.SnowflakeIdWorker;
-import com.fc.v2.util.StringUtils;
-import org.slf4j.*;
+
+import cn.hutool.core.util.StrUtil;
 
 /**
  * Price MonitorPriceService
@@ -40,6 +42,7 @@ public class MonitorPriceService implements BaseService<MonitorPrice, MonitorPri
 	 * @return
 	 */
 	 public PageInfo<MonitorPrice> list(Tablepar tablepar,MonitorPrice monitorPrice){
+		 log.debug("MonitorPriceService.list");
 	        MonitorPriceExample testExample=new MonitorPriceExample();
 			//搜索
 			if(StrUtil.isNotEmpty(tablepar.getSearchText())) {//小窗体

@@ -1,16 +1,11 @@
 package com.myprice.crawler.warehouse;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 
-import com.myprice.model.auto.CategoryWarehouse;
+import com.myprice.model.auto.CommodityWarehouse;
 
 public class WarehouseCrawlerCommodityInformation {
 
@@ -29,7 +24,7 @@ public class WarehouseCrawlerCommodityInformation {
 		}
 	}
 
-	public java.util.List warehouseCommondityCrawler(String url) throws IOException {
+	public java.util.List<CommodityWarehouse> warehouseCommondityCrawler(String url) throws IOException {
 		return null;
 	}
 

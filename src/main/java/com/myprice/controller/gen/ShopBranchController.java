@@ -20,7 +20,6 @@ import com.fc.v2.common.domain.AjaxResult;
 import com.fc.v2.common.domain.ResultTable;
 import com.fc.v2.model.custom.Tablepar;
 import com.github.pagehelper.PageInfo;
-import com.myprice.model.auto.Commodity;
 import com.myprice.model.auto.Shop;
 import com.myprice.model.auto.ShopBranch;
 import com.myprice.service.ShopBranchService;

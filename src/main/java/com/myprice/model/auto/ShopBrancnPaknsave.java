@@ -1,8 +1,6 @@
 package com.myprice.model.auto;
 
 import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Map;
 
 public class ShopBrancnPaknsave implements Serializable {
 

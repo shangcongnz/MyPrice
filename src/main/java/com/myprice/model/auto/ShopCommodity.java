@@ -1,12 +1,10 @@
 package com.myprice.model.auto;
 
 import java.io.Serializable;
-import com.fasterxml.jackson.annotation.JsonFormat;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 import io.swagger.annotations.ApiModelProperty;
-import cn.hutool.core.date.DateUtil;
-import java.util.Date;
-import java.math.BigDecimal;
 
 public class ShopCommodity implements Serializable {
     private static final long serialVersionUID = 1L;

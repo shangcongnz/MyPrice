@@ -1,15 +1,15 @@
 package com.myprice.model.auto;
 
 import java.io.Serializable;
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import io.swagger.annotations.ApiModelProperty;
-import cn.hutool.core.date.DateUtil;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.math.BigDecimal;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import cn.hutool.core.date.DateUtil;
+import io.swagger.annotations.ApiModelProperty;
 
 public class CategoryOfShops implements Serializable {
     private static final long serialVersionUID = 1L;

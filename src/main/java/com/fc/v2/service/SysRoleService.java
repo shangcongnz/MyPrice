@@ -1,6 +1,11 @@
 package com.fc.v2.service;
 
-import cn.hutool.core.util.RandomUtil;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.fc.v2.common.base.BaseService;
 import com.fc.v2.common.support.ConvertUtil;
 import com.fc.v2.mapper.auto.TsysPermissionRoleMapper;
@@ -14,11 +19,8 @@ import com.fc.v2.model.custom.Tablepar;
 import com.fc.v2.util.SnowflakeIdWorker;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
+import cn.hutool.core.util.IdUtil;
 
 @Service
 public class SysRoleService implements BaseService<TsysRole, TsysRoleExample> {
@@ -102,7 +104,9 @@ public class SysRoleService implements BaseService<TsysRole, TsysRoleExample> {
 		//添加权限
 		List<String> prems=ConvertUtil.toListStrArray(prem);
 		for (String premid : prems) {
-			TsysPermissionRole tsysPermissionRole=new TsysPermissionRole(RandomUtil.randomUUID() , roleid, premid);
+//			TsysPermissionRole tsysPermissionRole=new TsysPermissionRole(RandomUtil.randomUUID() , roleid, premid);
+			
+			TsysPermissionRole tsysPermissionRole=new TsysPermissionRole(IdUtil.randomUUID() , roleid, premid);
 			tsysPermissionRoleMapper.insertSelective(tsysPermissionRole);
 		}
 		return tsysRoleMapper.insertSelective(record);
@@ -135,11 +139,12 @@ public class SysRoleService implements BaseService<TsysRole, TsysRoleExample> {
 		List<String> prems=ConvertUtil.toListStrArray(powerIds);
 		int i=0;
 		for (String pre : prems) {
-			TsysPermissionRole permissionRole=new TsysPermissionRole(RandomUtil.randomUUID(), roleId, pre);
+//			TsysPermissionRole permissionRole=new TsysPermissionRole(RandomUtil.randomUUID(), roleId, pre);
+			TsysPermissionRole permissionRole=new TsysPermissionRole(IdUtil.randomUUID(), roleId, pre);
 			tsysPermissionRoleMapper.insertSelective(permissionRole);
 			i++;
 		}
-		
+		 
 		return i;
 	}
 	

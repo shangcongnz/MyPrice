@@ -1,16 +1,12 @@
 package com.fc.v2.common.quartz.task;
 
-import java.math.BigDecimal;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.myprice.crawler.paknSave.*;
-import com.myprice.model.auto.*;
-import com.myprice.service.*;
+import com.myprice.model.auto.CategoryWarehouse;
+import com.myprice.service.CategoryWarehouseService;
 
 /**
  
@@ -38,12 +34,9 @@ public void runCrawlerCommodities() {
  
  
 
-	public static void main(String[] args) {
-		CrawlerWarehouseCommodityTask commodityTask=new CrawlerWarehouseCommodityTask();
-		
-	 	
-	 
-	}
+//	public static void main(String[] args) {
+//		CrawlerWarehouseCommodityTask commodityTask=new CrawlerWarehouseCommodityTask();
+//	}
  
   
  

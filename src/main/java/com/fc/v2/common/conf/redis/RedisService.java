@@ -1,7 +1,6 @@
 package com.fc.v2.common.conf.redis;
 
 import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;

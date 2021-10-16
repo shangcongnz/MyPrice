@@ -19,7 +19,6 @@ import com.fc.v2.common.domain.ResultTable;
 import com.fc.v2.common.log.Log;
 import com.fc.v2.model.custom.Tablepar;
 import com.github.pagehelper.PageInfo;
-import com.myprice.model.auto.Category;
 import com.myprice.model.auto.CategoryOfShops;
 import com.myprice.service.CategoryOfShopsService;
 

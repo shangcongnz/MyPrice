@@ -21,7 +21,6 @@ import com.fc.v2.common.log.Log;
 import com.fc.v2.model.custom.Tablepar;
 import com.github.pagehelper.PageInfo;
 import com.myprice.model.auto.PricePaknsave;
-import com.myprice.model.auto.PricePaknsaveExample;
 import com.myprice.service.CommodityPaknsaveService;
 import com.myprice.service.PricePaknsaveService;
 
