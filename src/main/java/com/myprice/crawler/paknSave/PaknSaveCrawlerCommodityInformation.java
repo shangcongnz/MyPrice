@@ -96,9 +96,9 @@ public class PaknSaveCrawlerCommodityInformation {
 				
 				String productDetails=(element.getElementsByClass("js-product-card-footer fs-product-card__footer-container").get(0).attr("data-options"));
 //				System.out.println("productDetails:"+productDetails);
-				java.util.Map  productDetailMap =(Map) JSON.parse(productDetails);
+				java.util.Map<?, ?>  productDetailMap =(Map<?, ?>) JSON.parse(productDetails);
 				
-				String price =(String) ((Map)productDetailMap.get("ProductDetails")).get("PricePerItem");
+				String price =(String) ((Map<?, ?>)productDetailMap.get("ProductDetails")).get("PricePerItem");
 				
 				map.put("price", price);
 				
