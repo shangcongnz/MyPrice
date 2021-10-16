@@ -81,7 +81,10 @@ public class WarehouseCrawlerCategory {
 
 	public static void main(String age[]) throws IOException {
 		WarehouseCrawlerCategory crawler = new WarehouseCrawlerCategory();
-		crawler.warehouseCategoryCrawler();
+		List<CategoryWarehouse> list=	crawler.warehouseCategoryCrawler();
+		for (CategoryWarehouse categoryWarehouse : list) {
+			System.out.println("-------"+categoryWarehouse.toString());
+		}
 		System.out.println();
 	}
 }

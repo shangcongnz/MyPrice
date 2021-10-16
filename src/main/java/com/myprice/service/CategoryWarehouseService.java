@@ -130,25 +130,55 @@ public class CategoryWarehouseService implements BaseService<CategoryWarehouse, 
 	public List<CategoryWarehouse> selectLeavesByParentId(Integer parentId) {
 		return categoryWarehouseMapper.selectLeavesByParentId(parentId);
 	}
+	
+	
+ 	public int updateOrInsertSelective(CategoryWarehouse record) {
+ 		CategoryWarehouseExample testExample = new CategoryWarehouseExample();
+  		
+ 		System.out.println("Name:--"+record.getName());
+// 		testExample.createCriteria().andNameEqualTo(record.getName());
+ 		testExample.createCriteria().andUrlEqualTo(record.getUrl());
+  		
+ 		List<CategoryWarehouse> list=	categoryWarehouseMapper.selectByExample(testExample);
+ 		
+ 		System.out.println("----------------------------------------------------------------");
+ 		if(list!=null && list.size()>0) {
+ 			System.out.println("-----find the same category.....");
+ 			record=list.get(0);
+ 			record.setStatus(1);
+ 			updateByPrimaryKeySelective(record);
+ 		}else {
+ 			insertSelective(record);
+ 		}
+
+		return 0;
+	}
 
 	public int updateCategoryWarehouse() {
 		try {
 
 			log.debug("begin.......");
+			//1.update all status to disable.
+			CategoryWarehouse record = new CategoryWarehouse();
+			record.setStatus(0);
+			CategoryWarehouseExample para = new CategoryWarehouseExample();
+			
+			updateByExampleSelective(record, para);
+			
 			WarehouseCrawlerCategory crawler = new WarehouseCrawlerCategory();
 
 			List<CategoryWarehouse> warehouseCategoryList = crawler.warehouseCategoryCrawler();
 			for (CategoryWarehouse warehouseCategoryLevel1 : warehouseCategoryList) {
 				warehouseCategoryLevel1.setStatus(1);
 				warehouseCategoryLevel1.setUpdateDate(new java.util.Date());
-				insertSelective(warehouseCategoryLevel1);
+				updateOrInsertSelective(warehouseCategoryLevel1);
 				if (warehouseCategoryLevel1.getChildren() != null && warehouseCategoryLevel1.getChildren().size() > 0) {
 					List<CategoryWarehouse> warehouseCategoryListLevel2 = warehouseCategoryLevel1.getChildren();
 					for (CategoryWarehouse warehouseCategoryLevel2 : warehouseCategoryListLevel2) {
 						warehouseCategoryLevel2.setStatus(1);
 						warehouseCategoryLevel2.setUpdateDate(new java.util.Date());
 						warehouseCategoryLevel2.setParentId(warehouseCategoryLevel1.getId());
-						insertSelective(warehouseCategoryLevel2);
+						updateOrInsertSelective(warehouseCategoryLevel2);
 
 						if (warehouseCategoryLevel2.getChildren() != null
 								&& warehouseCategoryLevel2.getChildren().size() > 0) {
@@ -158,7 +188,7 @@ public class CategoryWarehouseService implements BaseService<CategoryWarehouse, 
 								warehouseCategoryLevel3.setStatus(1);
 								warehouseCategoryLevel3.setUpdateDate(new java.util.Date());
 								warehouseCategoryLevel3.setParentId(warehouseCategoryLevel2.getId());
-								insertSelective(warehouseCategoryLevel3);
+								updateOrInsertSelective(warehouseCategoryLevel3);
 
 							}
 						}

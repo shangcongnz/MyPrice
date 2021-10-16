@@ -29,7 +29,7 @@ public interface CategoryWarehouseMapper {
 		
     int updateByExampleSelective(@Param("record") CategoryWarehouse record, @Param("example") CategoryWarehouseExample example);
 
-    int updateByExample(@Param("record") CategoryWarehouse record, @Param("example") CategoryWarehouseExample example); 
+    int 		 updateByExample(@Param("record") CategoryWarehouse record, @Param("example") CategoryWarehouseExample example); 
 		
     int updateByPrimaryKeySelective(CategoryWarehouse record);
 
