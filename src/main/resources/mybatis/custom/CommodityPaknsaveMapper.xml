@@ -50,5 +50,72 @@
       order by ${orderByClause}
     </if>
   </select> 
+  
+  
+  
+  
+  <select id="selectLowPriceListByExampleCustom" parameterType="com.myprice.model.auto.CommodityPaknsaveExample" resultMap="BCustomResultMap">
+    SELECT
+			id,
+			title,
+			description,
+			price,
+			image,
+			unit,
+			category_id,
+			STATUS,
+			url,
+			product_id,
+			create_date,
+			creator,
+			getPankSaveCategoryName ( category_id ) AS category_name,
+			d.lowest_price 
+		FROM
+			u_commodity_paknsave c inner join 
+			(
+			SELECT
+				a.* 
+			FROM
+				(
+				SELECT
+					commodity_id,
+					max( date ) last_date,
+					min( price ) lowest_price,
+					max( price ) highest_price 
+				FROM
+					u_price_paknsave 
+				WHERE
+					date BETWEEN DATE_ADD( NOW(), INTERVAL - 7 DAY 
+					) 
+					AND now() 
+				GROUP BY
+					1 
+				) a,
+				(
+				SELECT
+					r.* 
+				FROM
+					( SELECT commodity_id, max( date ) date FROM u_price_paknsave GROUP BY 1 ) t,
+					u_price_paknsave r 
+				WHERE
+					t.commodity_id = r.commodity_id 
+					AND t.date = r.date 
+				) b 
+			WHERE
+				a.commodity_id = b.commodity_id 
+				AND a.lowest_price = b.price 
+				AND a.highest_price != b.price 
+				AND a.last_date = b.date 
+			) d 
+		 
+			on  c.id = d.commodity_id 
+			
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select> 
                                                                 
 </mapper>

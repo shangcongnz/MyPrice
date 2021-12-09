@@ -36,5 +36,7 @@ public interface CommodityPaknsaveMapper {
     int updateByPrimaryKey(CommodityPaknsave record);
     
     List<CommodityPaknsave> selectByExampleCustom(CommodityPaknsaveExample example);
+    List<CommodityPaknsave> selectLowPriceListByExampleCustom(CommodityPaknsaveExample example);
+    
   	  	
 }

@@ -69,6 +69,7 @@ public class CommodityPaknsaveController extends BaseController{
 	@ResponseBody
 	public ResultTable list(Tablepar tablepar,CommodityPaknsave commodityPaknsave){
 		PageInfo<CommodityPaknsave> page=commodityPaknsaveService.list(tablepar,commodityPaknsave) ; 
+		System.out.println("分页处理后数据为："+page.getSize());
 		return pageTable(page.getList(),page.getTotal());
 	}
 	

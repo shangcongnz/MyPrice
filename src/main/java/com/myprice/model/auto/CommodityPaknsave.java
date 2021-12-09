@@ -200,12 +200,22 @@ public class CommodityPaknsave implements Serializable {
 	
 	
 	
+	private String duration;
 	
+
+
+
 	private String categoryName;
 	private BigDecimal latestPrice;
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
 	private Date lastPriceDate;
-	
+	public String getDuration() {
+		return duration;
+	}
+
+	public void setDuration(String duration) {
+		this.duration = duration;
+	}
 	
 	public String getCategoryName() {
 		return categoryName;

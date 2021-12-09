@@ -44,20 +44,33 @@ public class CommodityPaknsaveService implements BaseService<CommodityPaknsave, 
 	 */
 	 public PageInfo<CommodityPaknsave> list(Tablepar tablepar,CommodityPaknsave commodityPaknsave){
 	        CommodityPaknsaveExample testExample=new CommodityPaknsaveExample();
+	        PageHelper.startPage(tablepar.getPage(), tablepar.getLimit());
+	        List<CommodityPaknsave> list=null;
 			//搜索
-			if(StrUtil.isNotEmpty(tablepar.getSearchText())) {//小窗体
+			if(StrUtil.isNotEmpty(tablepar.getSearchText())&&StrUtil.isNotEmpty(commodityPaknsave.getDuration())) {//小窗体
 	        	testExample.createCriteria().andLikeQuery2(tablepar.getSearchText());
+	        	 
+ 		         list= commodityPaknsaveMapper.selectLowPriceListByExampleCustom(testExample);
+ 
+		        
+	        }else if(StrUtil.isNotEmpty(commodityPaknsave.getDuration())) {
+	        	
+		         list= commodityPaknsaveMapper.selectLowPriceListByExampleCustom(testExample);
+		         
+		        
+	        }else if(StrUtil.isNotEmpty(tablepar.getSearchText())) {//小窗体
+	        	testExample.createCriteria().andLikeQuery2(tablepar.getSearchText());
+	        	 list= commodityPaknsaveMapper.selectByExampleCustom(testExample);
 	        }else {//大搜索
 	        	testExample.createCriteria().andLikeQuery(commodityPaknsave);
+	        	 list= commodityPaknsaveMapper.selectByExampleCustom(testExample);
 	        }
-			//表格排序
-			//if(StrUtil.isNotEmpty(tablepar.getOrderByColumn())) {
-	        //	testExample.setOrderByClause(StringUtils.toUnderScoreCase(tablepar.getOrderByColumn()) +" "+tablepar.getIsAsc());
-	        //}else{
-	        //	testExample.setOrderByClause("id ASC");
-	        //}
-	        PageHelper.startPage(tablepar.getPage(), tablepar.getLimit());
-	        List<CommodityPaknsave> list= commodityPaknsaveMapper.selectByExampleCustom(testExample);
+			
+		 
+	         
+	        
+	        
+	         
 	        PageInfo<CommodityPaknsave> pageInfo = new PageInfo<CommodityPaknsave>(list);
 	        return  pageInfo;
 	 }
