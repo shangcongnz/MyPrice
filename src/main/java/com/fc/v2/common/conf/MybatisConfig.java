@@ -25,7 +25,6 @@ import java.util.Map;
  * 参考文章：https://www.cnblogs.com/geekdc/p/10963476.html
  * @ClassName: MybatisConfig
  * 
- * @date 2019-12-06 21:11
  */
 @Configuration
 @MapperScan(basePackages = {"com.fc.v2.mapper","com.myprice.mapper"})
@@ -72,7 +71,6 @@ public class MybatisConfig {
      * @param dynamicDataSource
      * @return
      * 
-     * @Date 2019年12月7日 上午11:31:33
      */
     @Bean
     public PlatformTransactionManager transactionManager(DynamicDataSource dynamicDataSource){
