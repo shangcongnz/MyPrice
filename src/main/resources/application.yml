@@ -74,7 +74,7 @@ spring :
   redis:
     ssl: false
     database: 0
-    host: RHEL7
+    host: 192.168.1.36
     port: 6379
     password: 
     timeout: 1000
