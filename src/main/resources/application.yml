@@ -12,9 +12,9 @@ my-price-config:
   #邮箱发送端口
   email-port: 465
   #发送邮箱登录账号
-  email-account: shangcongvip@163.com
+  email-account: myprice.nz@outlook.com
   #发送邮箱登录密码
-  email-password: cc123321
+  email-password: tang3zang
   #实例演示开关 启动该模式删除增加修改会弹出演示模式提示框
   demo-enabled: false
   #漂亮得拖动验证码 默认false普通验证码、true滚动验证码
